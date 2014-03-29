@@ -1,0 +1,20 @@
+{
+    "modules": {
+        "bakalari": [
+            "absence", 
+            "akce", 
+            "login", 
+            "navigace", 
+            "predmety", 
+            "rozvrh", 
+            "suplovani", 
+            "ukoly", 
+            "vysvedceni", 
+            "vyuka", 
+            "znamky"
+        ],
+        "server": [
+            "map", "msg"
+        ]
+    }
+}

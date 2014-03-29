@@ -1,0 +1,633 @@
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"><html xmlns="http://www.w3.org/1999/xhtml" >
+<head><link rel="stylesheet" type="text/css" href="/bakaweb/DXR.axd?r=1_7-Hsjh7" /><link rel="stylesheet" type="text/css" href="/bakaweb/DXR.axd?r=1_8-Hsjh7" /><link rel="stylesheet" type="text/css" href="/bakaweb/DXR.axd?r=1_1-Hsjh7" /><link rel="stylesheet" type="text/css" href="/bakaweb/DXR.axd?r=1_4-Hsjh7" /><link rel="stylesheet" type="text/css" href="/bakaweb/DXR.axd?r=1_2-Hsjh7" /><link rel="stylesheet" type="text/css" href="/bakaweb/DXR.axd?r=1_6-Hsjh7" /><link rel="stylesheet" type="text/css" href="/bakaweb/DXR.axd?r=1_5-Hsjh7" /><link rel="stylesheet" type="text/css" href="/bakaweb/DXR.axd?r=1_3-Hsjh7" /><title>
+	WEB Bakaláři - Servis
+</title><meta http-equiv="X-UA-Compatible" content="IE=edge" /><meta content="Bakaláři - webová aplikace pro školy" name="description" /><meta content="Bakalari, Bakaláři, matrika, rodiče, žáci, známky, klasifikace, rozvrh, webrodiče, webučitelé, komunikace, škola" name="keywords" /><link rel="stylesheet" href="master.css" type="text/css" media="screen" /><link rel="stylesheet" href="bakastyl.css" type="text/css" media="screen" /><link rel="stylesheet" href="ptstyl.css" type="text/css" media="print" /><link rel="stylesheet" href="nasstyl.css" type="text/css" media="screen" /><link rel="stylesheet" href="bakaznam.css" type="text/css" media="screen" /><link rel="stylesheet" href="bakastyl12.css" type="text/css" media="screen" /><meta http-equiv="Expires" content="0" /><meta http-equiv="Pragma" content="no-cache" /><meta http-equiv="Cache-control" content="no-cache" /> 
+
+    <script type="text/javascript">
+
+
+        var RepWin = window.RepWin;
+
+        function OpenRWin(link, winName, wi, he) {
+            var retValue = true;
+            if (RepWin != null && !RepWin.closed) {
+                RepWin.focus();
+                RepWin.location.href = link.href;
+            }
+            else {
+                RepWin = window.open(link.href, winName, 'toolbar=no, menubar=no, location=no, directories=no, scrollbars=yes, resizable=yes, status=no, width=' + wi + ', height=' + he + '');
+                if (RepWin == null || typeof (RepWin) == "undefined")
+                    retValue = false;
+                else {
+                    link.target = winName;
+                    RepWin.focus();
+                }
+            }
+            return retValue;
+        } 
+
+</script>
+
+
+<link href="App_Themes/tyrkysTheme/tyrkysstyl.css" type="text/css" rel="stylesheet" /></head>
+<body>
+<form method="post" action="baktk2.aspx" id="formbaka">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTg2NDM4NTkyOQ9kFgJmD2QWAgIDD2QWAgIBD2QWDmYPZBYCAgEPDxYEHghJbWFnZVVybAUNaW1hZ2VzL2NzLnBuZx4HVG9vbFRpcAUNWm3Em25hIGphenlrYWRkAgEPDxYCHgRUZXh0BQp1xb5pdmF0ZWw6ZGQCAg8PFgIfAgUJb2RobMOhc2l0ZGQCAw8PFgIfAgUHam3DqW5vOmRkAgQPDxYCHgdWaXNpYmxlaGRkAgYPZBYEAgEPZBYCAgEPEGQQFQ8NxIxlc2vDvSBqYXp5aw9BbmdsaWNrw70gamF6eWsSRnJhbmNvdXpza8O9IGphenlrE09ixI1hbnNrw6EgdsO9Y2hvdmEIRMSbamVwaXMIWmVtxJtwaXMKTWF0ZW1hdGlrYQhCaW9sb2dpZQZGeXppa2EGQ2hlbWllHEluZm9ybWF0aWthIGEgdsO9cC4gdGVjaG5pa2ERSHVkZWJuw60gdsO9Y2hvdmETVsO9dHZhcm7DoSB2w71jaG92YRJUxJtsZXNuw6EgdsO9Y2hvdmEVRMSbamVwaXNuw70gc2VtaW7DocWZFQ8DxIxqAkFqAkZqAk92AUQBWgFNAkJpAkZ5AkNoA0luZgJIdgJWdgJUdgREc2VtFCsDD2dnZ2dnZ2dnZ2dnZ2dnZ2RkAgMPZBYCZg9kFgJmD2QWAmYPZBYCZg9kFgJmD2QWBAIBD2QWAgIBD2QWAmYPZBYCZg9kFgJmD2QWAmYPZBYCZg9kFgJmD2QWAmYPZBYCAgEPPCsABAEADxYEHgVWYWx1ZQUfUMWZZWhsZWQgdsO9dWt5IC0gxIxlc2vDvSBqYXp5ax4PRGF0YVNvdXJjZUJvdW5kZ2RkAgIPZBYCAgEPZBYCZg9kFgoCAQ88KwAYAwAPFgIfBWdkCjwrAAgBBxQrAAIWAh8CBRpzdHJhbmEgezB9IHogezF9ICh7Mn0gxZkuKWQVPCsABgEFFCsAAmRkZAIDDxYCHgxSZXBvcnRIZWFkZXIFH1DFmWVobGVkIHbDvXVreSAtIMSMZXNrw70gamF6eWtkAgUPEA8WBB8CBRN0w71kZW5uw60gcMWZZWhsZWR5HwNoZGRkZAIHDxAPFgYfAgUOZGVubsOtIHrDoXBpc3keB0NoZWNrZWRnHwNoZGRkZAIJDw8WAh8CBRdEYXRhIG5lanNvdSBrIGRpc3BvemljaWRkAgcPPCsACAEGPCsAEgEAFgIeCkhlYWRlclRleHQFDVptxJtuYSBqYXp5a2FkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYKBRBjdGwwMCRobGF2bmltZW51BRZjdGwwMCRjcGhtYWluJGltZ2V4Y2VsBRRjdGwwMCRjcGhtYWluJGltZ3BkZgUfY3RsMDAkY3BobWFpbiRyb3VuZHZ5dWthJHJlcGV0awUzY3RsMDAkY3BobWFpbiRyb3VuZHZ5dWthJHJlcGV0ayRjdGwwMCREWEVkaXRvcjAkREREBTljdGwwMCRjcGhtYWluJHJvdW5kdnl1a2EkcmVwZXRrJGN0bDAwJERYRWRpdG9yMCREREQkQyRGTlAFC2N0bDAwJHBvcHVwBRFjdGwwMCRwb3B1cCRpbWdjcwURY3RsMDAkcG9wdXAkaW1nZW4FEWN0bDAwJHBvcHVwJGltZ2ZyL5U/G5P3FiKM5bTMltcLD+2dwLydg7awzR/E1XmZFvw=" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['formbaka'];
+if (!theForm) {
+    theForm = document.formbaka;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/bakaweb/WebResource.axd?d=QKL5AtepL6Vy-Ne1r1nxJ2TLqy_nOh54QrYa4H4ChWLaBDs3GcBe6uYGMYDiKIWNv467vQSTLbk9nQ6Su_ET_Mq8R1d_xCaEasfKa8e0YD81&amp;t=635171454814793750" type="text/javascript"></script>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWGALQqtSZBQKy49LsCwKWjpCDBwLtjJCDBwLojJCDBwLTjICDBwLujPiCBwLEjPiCBwLRjPiCBwLsjJSDBwLojNScBwLvjJiDBwKhj6LTCwLajICDBwLYjICDBwLejICDBwLf4enNDAKXqKWEBQL+hd2cAgLsiOH2BQKu14csAvLVp5sHAuXV/+QFAvHVw9MLbvpAyVILf+85AfgFBPzs+RBuThB57lM9vUvL9d6nThc=" />
+</div>
+
+ 
+<div id="stranka"> 
+<div id="hlavicka">
+ 
+<table class="hlavickatable">
+<tr><td valign="top" >
+    
+ <div id="lang" onclick="popup.Show();"> 
+   <div id="panellang" title="Změna jazyka">
+	
+     <img id="imagelang" title="Změna jazyka" src="images/cs.png" />
+   
+</div>
+ </div>
+<div class="hlavickaleva">
+ <a href="prehled.aspx" >
+<img alt="" src="images/nilogo.gif" style="border-width:0px;"/>
+</a>
+</div> 
+</td>
+ <td valign="top">
+  <div class="hlavickaprava"> 
+    <div class="nazevskoly">Gymnázium JKT, Nové Hradiště - testovací škola</div>
+    <div class="pololetinadpis">1. pololetí šk. roku 2013/14</div>
+    <div class="globlogjmeno" >
+      <table class="logtable">
+        <tr>
+          <td>
+              <span id="labeluzivatel">uživatel:</span></td><td style="width:100%;">žák</td>
+          <td class="logout"><a id="linklogout" href="login.aspx?s=-1">odhlásit</a></td>
+        </tr>
+        <tr><td><span id="labeljmeno">jméno:</span></td><td style="width:100%;" class="logjmeno" colspan="2"> 
+          Borská Babeta, 4.</td></tr>
+      </table>
+     </div>
+   </div>
+ </td>
+</tr></table>
+</div> 
+<div id="hlavni"> 
+    <div id="panelmenu" class="pmenu">
+	
+
+    <input type="hidden" id="hlavnimenuSI" name="hlavnimenuSI" value="3i7" /><script id="dxis_2108608518" src="/bakaweb/DXR.axd?r=1_145-Hsjh7" type="text/javascript"></script><script id="dxis_1352716566" src="/bakaweb/DXR.axd?r=1_81-Hsjh7" type="text/javascript"></script><script id="dxis_1120288001" src="/bakaweb/DXR.axd?r=1_137-Hsjh7" type="text/javascript"></script><script id="dxis_1904295169" src="/bakaweb/DXR.axd?r=1_130-Hsjh7" type="text/javascript"></script><script id="dxis_841990911" src="/bakaweb/DXR.axd?r=1_135-Hsjh7" type="text/javascript"></script><script id="dxis_803823580" src="/bakaweb/DXR.axd?r=1_121-Hsjh7" type="text/javascript"></script><script id="dxis_618210578" src="/bakaweb/DXR.axd?r=1_99-Hsjh7" type="text/javascript"></script><script id="dxis_1621708774" src="/bakaweb/DXR.axd?r=1_105-Hsjh7" type="text/javascript"></script><script id="dxis_1834995990" src="/bakaweb/DXR.axd?r=1_91-Hsjh7" type="text/javascript"></script><script id="dxis_730179615" src="/bakaweb/DXR.axd?r=1_114-Hsjh7" type="text/javascript"></script><script id="dxis_856797210" src="/bakaweb/DXR.axd?r=1_106-Hsjh7" type="text/javascript"></script><script id="dxis_1392357402" src="/bakaweb/DXR.axd?r=1_102-Hsjh7" type="text/javascript"></script><script id="dxis_1639847491" src="/bakaweb/DXR.axd?r=1_98-Hsjh7" type="text/javascript"></script><script id="dxis_1742465469" src="/bakaweb/DXR.axd?r=1_78-Hsjh7" type="text/javascript"></script><script id="dxis_1572053028" src="/bakaweb/DXR.axd?r=1_128-Hsjh7" type="text/javascript"></script><script id="dxis_1665140006" src="/bakaweb/DXR.axd?r=1_85-Hsjh7" type="text/javascript"></script><script id="dxis_1908901348" src="/bakaweb/DXR.axd?r=1_93-Hsjh7" type="text/javascript"></script><script id="dxis_1139122212" src="/bakaweb/DXR.axd?r=1_126-Hsjh7" type="text/javascript"></script><script id="dxis_1182860582" src="/bakaweb/DXR.axd?r=1_95-Hsjh7" type="text/javascript"></script><div class="dxmLite dxm-ltr">
+		<div class="dxm-main dxm-horizontal phmenu" id="hlavnimenu" style="font-size:9pt;">
+			<ul class="dx dxm-image-l dxm-noImages dxm-gutter">
+				<li class="dxm-item" style="border-width:0px;"><div class="dxm-content dxm-hasText">
+					<a class="dx" href="uvod.aspx" style="font-size:9pt;">&#218;vod</a>
+				</div></li><li class="dxm-spacing"></li><li class="dxm-item" style="border-width:0px;"><div class="dxm-content dxm-hasText">
+					<a class="dx" href="osob.aspx" style="font-size:9pt;">Osobn&#237; &#250;daje</a>
+				</div></li><li class="dxm-spacing"></li><li class="dxm-item" style="border-width:0px;font-size:9pt;"><div class="dxm-content dxm-hasText">
+					Klasifikace
+				</div></li><li class="dxm-spacing"></li><li class="dxm-item" style="border-width:0px;font-size:9pt;"><div class="dxm-content dxm-hasText">
+					V&#253;uka
+				</div></li><li class="dxm-spacing"></li><li class="dxm-item" style="border-width:0px;font-size:9pt;"><div class="dxm-content dxm-hasText">
+					Absence
+				</div></li><li class="dxm-spacing"></li><li class="dxm-item" style="border-width:0px;"><div class="dxm-content dxm-hasText">
+					<a class="dx" href="prehled.aspx?s=17" style="font-size:9pt;">Pl&#225;n akc&#237;</a>
+				</div></li><li class="dxm-spacing"></li><li class="dxm-item" style="border-width:0px;font-size:9pt;"><div class="dxm-content dxm-hasText">
+					Ankety
+				</div></li><li class="dxm-spacing"></li><li class="dxm-item" style="border-width:0px;font-size:9pt;"><div class="dxm-content dxm-hasText">
+					Komens
+				</div></li><li class="dxm-spacing"></li><li class="dxm-item" style="border-width:0px;font-size:9pt;"><div class="dxm-content dxm-hasText">
+					N&#225;stroje
+				</div></li><li class="dxm-spacing"></li><li class="dxm-item" style="border-width:0px;"><div class="dxm-content dxm-hasText">
+					<a class="dx" href="prehled.aspx?s=-1" style="font-size:9pt;">Odhl&#225;sit</a>
+				</div></li>
+			</ul>
+		</div><b class="dx-clear"></b><div id="hlavnimenu_DXM1_" style="z-index:20000;display:none;">
+			<div class="dxm-shadow dxm-popup pimenu" style="font-size:9pt;">
+				<ul class="dx dxm-noImages">
+					<li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="osob.aspx" style="font-size:9pt;">Přehled osobn&#237;ch &#250;dajů</a>
+					</div><b class="dx-clear"></b></li>
+				</ul>
+			</div>
+		</div><div id="hlavnimenu_DXM2_" style="z-index:20000;display:none;">
+			<div class="dxm-shadow dxm-popup pimenu" style="font-size:9pt;">
+				<ul class="dx dxm-noImages">
+					<li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=2" style="font-size:9pt;">Průběžn&#225; klasifikace</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=4" style="font-size:9pt;">Pololetn&#237; klasifikace</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=5" style="font-size:9pt;">V&#253;chovn&#225; opatřen&#237;</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=26" style="font-size:9pt;">Opravn&#233; zkoušky</a>
+					</div><b class="dx-clear"></b></li>
+				</ul>
+			</div>
+		</div><div id="hlavnimenu_DXM3_" style="z-index:20000;display:none;">
+			<div class="dxm-shadow dxm-popup pimenu" style="font-size:9pt;">
+				<ul class="dx dxm-noImages">
+					<li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=6" style="font-size:9pt;">Rozvrh</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=601" style="font-size:9pt;">Suplov&#225;n&#237;</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=621" style="font-size:9pt;">Dom&#225;c&#237; &#250;koly</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=7" style="font-size:9pt;">Přehled předmětů</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="baktk2.aspx" style="font-size:9pt;">Přehled v&#253;uky</a>
+					</div><b class="dx-clear"></b></li>
+				</ul>
+			</div>
+		</div><div id="hlavnimenu_DXM4_" style="z-index:20000;display:none;">
+			<div class="dxm-shadow dxm-popup pimenu" style="font-size:9pt;">
+				<ul class="dx dxm-noImages">
+					<li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=3" style="font-size:9pt;">Průběžn&#225; absence</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=9" style="font-size:9pt;">Zameškanost v předmětech</a>
+					</div><b class="dx-clear"></b></li>
+				</ul>
+			</div>
+		</div><div id="hlavnimenu_DXM6_" style="z-index:20000;display:none;">
+			<div class="dxm-shadow dxm-popup pimenu" style="font-size:9pt;">
+				<ul class="dx dxm-noImages">
+					<li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="anketyo.aspx" style="font-size:9pt;">Vyplňov&#225;n&#237; anket</a>
+					</div><b class="dx-clear"></b></li>
+				</ul>
+			</div>
+		</div><div id="hlavnimenu_DXM7_" style="z-index:20000;display:none;">
+			<div class="dxm-shadow dxm-popup pimenu" style="font-size:9pt;">
+				<ul class="dx dxm-noImages">
+					<li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="nasten.aspx?l=no" style="font-size:9pt;">Poslat zpr&#225;vu</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="nasten.aspx?l=gr" style="font-size:9pt;">Přijat&#233; zpr&#225;vy</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="nasten.aspx?l=od" style="font-size:9pt;">Odeslan&#233; zpr&#225;vy</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="nasten.aspx?l=na" style="font-size:9pt;">N&#225;stěnka</a>
+					</div><b class="dx-clear"></b></li>
+				</ul>
+			</div>
+		</div><div id="hlavnimenu_DXM10_" style="z-index:20000;display:none;">
+			<div class="dxm-shadow dxm-popup pimenu" style="font-size:9pt;">
+				<ul class="dx dxm-noImages">
+					<li class="dxm-item dxm-subMenu" style="font-size:9pt;"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						Přehledy přihl&#225;šen&#237;
+					</div><div class="dxm-popOut">
+						<img class="dxWeb_mVerticalPopOut dxm-pImage" src="/bakaweb/DXR.axd?r=1_10-Hsjh7" alt=">" />
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item dxm-noSubMenu"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="servis.aspx?s=0" style="font-size:9pt;">Nastaven&#237;</a>
+					</div><b class="dx-clear"></b></li>
+				</ul>
+			</div>
+		</div><div id="hlavnimenu_DXM10i1_" style="z-index:20002;display:none;">
+			<div class="dxm-shadow dxm-popup pimenu" style="font-size:9pt;">
+				<ul class="dx dxm-noImages">
+					<li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="servis.aspx?s=10" style="font-size:9pt;">Moje přihl&#225;šen&#237;</a>
+					</div><b class="dx-clear"></b></li>
+				</ul>
+			</div>
+		</div>
+	</div><script id="dxss_1807235507" type="text/javascript">
+<!--
+aspxAddHoverItems('hlavnimenu',[[['dxm-hovered',''],['border-width:0px;',''],['DXI0_','DXI1_','DXI2_','DXI3_','DXI4_','DXI5_','DXI6_','DXI7_','DXI10_','DXI11_'],['','T'],[[''],[''],[''],[''],[''],[''],[''],[''],[''],['']],['Img','PImg']],[[''],[''],['DXME1_','DXMBC1_','DXME2_','DXMBC2_','DXME3_','DXMBC3_','DXME4_','DXMBC4_','DXME6_','DXMBC6_','DXME7_','DXMBC7_','DXME10_','DXMBC10_','DXME10i1_','DXMBC10i1_']],[['dxm-hovered',''],['','padding-left:8pt;'],['DXI1i0_','DXI2i0_','DXI2i1_','DXI2i2_','DXI2i3_','DXI3i0_','DXI3i3_','DXI3i4_','DXI3i5_','DXI3i7_','DXI4i0_','DXI4i1_','DXI6i1_','DXI7i0_','DXI7i1_','DXI7i2_','DXI7i3_','DXI10i1i0_'],['','T'],[[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],['']],['Img','PImg']],[['dxm-hovered','',''],['','padding-left:8pt;','padding-left:8pt;'],['DXI10i1_','DXI10i2_'],['','P','T'],[['',''],['','']],['Img','PImg']]]);
+aspxAddSelectedItems('hlavnimenu',[[['dxm-selected',''],['border-width:0px;',''],['DXI0_','DXI1_','DXI2_','DXI3_','DXI4_','DXI5_','DXI6_','DXI7_','DXI10_','DXI11_'],['','T'],[[''],[''],[''],[''],[''],[''],[''],[''],[''],['']],['Img','PImg']],[['dxm-selected',''],['','padding-left:8pt;'],['DXI1i0_','DXI2i0_','DXI2i1_','DXI2i2_','DXI2i3_','DXI3i0_','DXI3i3_','DXI3i4_','DXI3i5_','DXI3i7_','DXI4i0_','DXI4i1_','DXI6i1_','DXI7i0_','DXI7i1_','DXI7i2_','DXI7i3_','DXI10i1i0_'],['','T'],[[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],['']],['Img','PImg']],[['dxm-selected','',''],['','padding-left:8pt;','padding-left:8pt;'],['DXI10i1_','DXI10i2_'],['','P','T'],[['',''],['','']],['Img','PImg']]]);
+
+var dxo = new ASPxClientMenu('hlavnimenu');
+window['hlavnimenu'] = dxo;
+dxo.uniqueID = 'ctl00$hlavnimenu';
+dxo.liteRender=true;
+dxo.liteRenderData={'':[[0],[1],[2],[3],[4],[5],[6],[7],[10],[11]],'1':[[0]],'2':[[0],[1],[2],[3]],'3':[[0],[3],[4],[5],[7]],'4':[[0],[1]],'6':[[1]],'7':[[0],[1],[2],[3]],'10':[[1],[2]],'10i1':[[0]]};
+dxo.appearAfter=10;
+dxo.allowSelectItem=true;
+dxo.shadowVisible=false;
+dxo.InlineInitialize();
+
+//-->
+</script>
+        
+</div>
+
+
+
+
+
+<div id="cphmain_pravyvyuka" class="pravemenu">
+	<div class="pravemenu2">
+  <div class="cmout">
+                <div class="cminn">
+                <div class="cmcenter" >
+                                <select name="ctl00$cphmain$droppredmety" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$cphmain$droppredmety\&#39;,\&#39;\&#39;)&#39;, 0)" id="cphmain_droppredmety" class="rmlistoddo">
+		<option selected="selected" value="Čj">Česk&#253; jazyk</option>
+		<option value="Aj">Anglick&#253; jazyk</option>
+		<option value="Fj">Francouzsk&#253; jazyk</option>
+		<option value="Ov">Občansk&#225; v&#253;chova</option>
+		<option value="D">Dějepis</option>
+		<option value="Z">Zeměpis</option>
+		<option value="M">Matematika</option>
+		<option value="Bi">Biologie</option>
+		<option value="Fy">Fyzika</option>
+		<option value="Ch">Chemie</option>
+		<option value="Inf">Informatika a v&#253;p. technika</option>
+		<option value="Hv">Hudebn&#237; v&#253;chova</option>
+		<option value="Vv">V&#253;tvarn&#225; v&#253;chova</option>
+		<option value="Tv">Tělesn&#225; v&#253;chova</option>
+		<option value="Dsem">Dějepisn&#253; semin&#225;ř</option>
+
+	</select>
+                                
+                    <input type="image" name="ctl00$cphmain$imgexcel" id="cphmain_imgexcel" title="Export do XLS" class="rmlistoddo" src="images/toexcel.png" />
+                    <input type="image" name="ctl00$cphmain$imgpdf" id="cphmain_imgpdf" title="Export do PDF" class="rmlistoddo" src="images/topdf.png" />
+                    
+     </div>
+ </div>
+ </div>
+ </div>
+
+</div>
+
+
+
+ <div class="outround">
+        <table class="dxrpControl" cellspacing="0" cellpadding="0" id="cphmain_roundvyuka" style="border-collapse:collapse;border-collapse:separate;">
+	<tr>
+		<td valign="top"><table cellspacing="0" cellpadding="0" style="border-collapse:collapse;border-collapse:separate;">
+			<tr>
+				<td style="width:5px;height:5px;"><img class="dxrpCI" src="App_Themes/tyrkysTheme/TopLeftCorner.png" alt="" style="height:5px;width:5px;" /></td><td class="dxrpTE" style="background-color:#5DE7F0;border-top-color:#8B8B8B;border-top-style:Solid;border-top-width:1px;"><div style="height:1px;width:1px;overflow:hidden;">
+
+				</div></td><td style="width:5px;height:5px;"><img class="dxrpCI" src="App_Themes/tyrkysTheme/TopRightCorner.png" alt="" style="height:5px;width:5px;" /></td>
+			</tr><tr>
+				<td class="dxrpHLE" style="background-color:#5DE7F0;background-image:url(App_Themes/tyrkysTheme/HeaderLeftEdge.png);background-repeat:no-repeat;background-position:left bottom;border-left-color:#8B8B8B;border-left-style:None;border-left-width:1px;border-bottom-style:None;"><div style="height:1px;width:1px;overflow:hidden;">
+
+				</div></td><td class="dxrpHeader" style="background-color:#5DE7F0;font-weight:bold;height:1%;border-bottom-style:None;padding-left:6px;padding-right:6px;padding-top:1px;padding-bottom:5px;background-image:url(App_Themes/tyrkysTheme/HeaderContent.png);background-repeat:repeat-x;background-position:left bottom;"><table cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;border-collapse:separate;">
+					<tr>
+						<td class="dxrp" style="font-weight:bold;width:100%;">
+            <span class="dxeBase roundnadpis" id="cphmain_roundvyuka_HTC_labelnadpisvyuka_0">Přehled v&#253;uky - Česk&#253; jazyk</span><script id="dxss_1847516158" type="text/javascript">
+<!--
+aspxAddDisabledItems('cphmain_roundvyuka_HTC_labelnadpisvyuka_0',[[['dxeDisabled'],[''],['']]]);
+
+var dxo = new ASPxClientLabel('cphmain_roundvyuka_HTC_labelnadpisvyuka_0');
+window['labelnadpisvyuka'] = dxo;
+dxo.uniqueID = 'ctl00$cphmain$roundvyuka$HTC$TC$labelnadpisvyuka';
+dxo.InlineInitialize();
+
+//-->
+</script>  
+        </td>
+					</tr>
+				</table></td><td class="dxrpHRE" style="background-color:#5DE7F0;background-image:url(App_Themes/tyrkysTheme/HeaderRightEdge.png);background-repeat:no-repeat;background-position:right bottom;border-right-color:#8B8B8B;border-right-style:None;border-right-width:1px;border-bottom-style:None;"><div style="height:1px;width:1px;overflow:hidden;">
+
+				</div></td>
+			</tr><tr>
+				<td class="dxrpLE" style="background-color:WhiteSmoke;border-left-color:#8B8B8B;border-left-style:Solid;border-left-width:1px;"><div style="height:1px;width:1px;overflow:hidden;">
+
+				</div></td><td id="cphmain_roundvyuka_RPC" class="dxrp dxrpcontent" style="background-color:WhiteSmoke;padding-left:6px;padding-right:6px;padding-top:9px;padding-bottom:6px;">
+
+                 <div class="roundminvyuka"></div>
+
+
+
+
+
+
+
+ <table class="dxgvControl" cellspacing="0" cellpadding="0" id="cphmain_roundvyuka_repetk" style="border-collapse:collapse;border-collapse:separate;">
+					<tr>
+						<td><table id="cphmain_roundvyuka_repetk_DXMainTable" class="dxgvTable" cellspacing="0" cellpadding="0" onclick="aspxGVTableClick(&#39;cphmain_roundvyuka_repetk&#39;, event);" style="width:100%;border-collapse:collapse;empty-cells:show;">
+							<tr id="cphmain_roundvyuka_repetk_DXHeadersRow0">
+								<td id="cphmain_roundvyuka_repetk_col0" class="dxgvHeader" onmousedown="aspxGVHeaderMouseDown(&#39;cphmain_roundvyuka_repetk&#39;, this, event);" style="border-top-width:0px;border-left-width:0px;"><table cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;">
+									<tr>
+										<td>Datum</td><td style="text-align:right;"></td>
+									</tr>
+								</table></td><td id="cphmain_roundvyuka_repetk_col1" class="dxgvHeader" onmousedown="aspxGVHeaderMouseDown(&#39;cphmain_roundvyuka_repetk&#39;, this, event);" style="border-top-width:0px;border-left-width:0px;"><table cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;">
+									<tr>
+										<td>Hodina</td><td style="text-align:right;"></td>
+									</tr>
+								</table></td><td id="cphmain_roundvyuka_repetk_col2" class="dxgvHeader" onmousedown="aspxGVHeaderMouseDown(&#39;cphmain_roundvyuka_repetk&#39;, this, event);" style="width:500px;border-top-width:0px;border-left-width:0px;"><table cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;">
+									<tr>
+										<td>Téma</td><td style="text-align:right;"></td>
+									</tr>
+								</table></td><td id="cphmain_roundvyuka_repetk_col3" class="dxgvHeader" onmousedown="aspxGVHeaderMouseDown(&#39;cphmain_roundvyuka_repetk&#39;, this, event);" style="width:200px;border-top-width:0px;border-left-width:0px;"><table cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;">
+									<tr>
+										<td>Poznámka</td><td style="text-align:right;"></td>
+									</tr>
+								</table></td><td id="cphmain_roundvyuka_repetk_col4" class="dxgvHeader" onmousedown="aspxGVHeaderMouseDown(&#39;cphmain_roundvyuka_repetk&#39;, this, event);" style="border-top-width:0px;border-left-width:0px;border-right-width:0px;"><table cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;">
+									<tr>
+										<td>Č.</td><td style="text-align:right;"></td>
+									</tr>
+								</table></td>
+							</tr><tr id="cphmain_roundvyuka_repetk_DXDataRow0" class="dxgvDataRow">
+								<td class="dxgv" style="vertical-align:Top;white-space:nowrap;">23.1.</td><td class="dxgv" style="vertical-align:Top;white-space:nowrap;">2. hod</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;padding-left:5px;padding-right:5px;padding-top:5px;padding-bottom:5px;">Dikt&#225;t, skladba</td><td class="dxgv" style="font-size:8pt;font-weight:normal;vertical-align:Top;">Mluvnice</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;border-right-width:0px;">71</td>
+							</tr><tr id="cphmain_roundvyuka_repetk_DXDataRow1" class="dxgvDataRow">
+								<td class="dxgv" style="vertical-align:Top;white-space:nowrap;">22.1.</td><td class="dxgv" style="vertical-align:Top;white-space:nowrap;">4. hod</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;padding-left:5px;padding-right:5px;padding-top:5px;padding-bottom:5px;">V&#253;klad</td><td class="dxgv" style="font-size:8pt;font-weight:normal;vertical-align:Top;">Sloh</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;border-right-width:0px;">70</td>
+							</tr><tr id="cphmain_roundvyuka_repetk_DXDataRow2" class="dxgvDataRow">
+								<td class="dxgv" style="vertical-align:Top;white-space:nowrap;">21.1.</td><td class="dxgv" style="vertical-align:Top;white-space:nowrap;">6. hod</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;padding-left:5px;padding-right:5px;padding-top:5px;padding-bottom:5px;">Uzavřen&#237; klasifikace</td><td class="dxgv" style="font-size:8pt;font-weight:normal;vertical-align:Top;">&nbsp;</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;border-right-width:0px;">69</td>
+							</tr><tr id="cphmain_roundvyuka_repetk_DXDataRow3" class="dxgvDataRow">
+								<td class="dxgv" style="vertical-align:Top;white-space:nowrap;">20.1.</td><td class="dxgv" style="vertical-align:Top;white-space:nowrap;">2. hod</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;padding-left:5px;padding-right:5px;padding-top:5px;padding-bottom:5px;">Uzav&#237;r&#225;n&#237; klasifikace</td><td class="dxgv" style="font-size:8pt;font-weight:normal;vertical-align:Top;">&nbsp;</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;border-right-width:0px;">68</td>
+							</tr><tr id="cphmain_roundvyuka_repetk_DXDataRow4" class="dxgvDataRow">
+								<td class="dxgv" style="vertical-align:Top;white-space:nowrap;">16.1.</td><td class="dxgv" style="vertical-align:Top;white-space:nowrap;">2. hod</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;padding-left:5px;padding-right:5px;padding-top:5px;padding-bottom:5px;">Pravidla n a nn</td><td class="dxgv" style="font-size:8pt;font-weight:normal;vertical-align:Top;">&nbsp;</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;border-right-width:0px;">67</td>
+							</tr><tr id="cphmain_roundvyuka_repetk_DXDataRow5" class="dxgvDataRow">
+								<td class="dxgv" style="vertical-align:Top;white-space:nowrap;">15.1.</td><td class="dxgv" style="vertical-align:Top;white-space:nowrap;">4. hod</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;padding-left:5px;padding-right:5px;padding-top:5px;padding-bottom:5px;">Pravidla bje/bě, pje/pě, mě</td><td class="dxgv" style="font-size:8pt;font-weight:normal;vertical-align:Top;">&nbsp;</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;border-right-width:0px;">66</td>
+							</tr><tr id="cphmain_roundvyuka_repetk_DXDataRow6" class="dxgvDataRow">
+								<td class="dxgv" style="vertical-align:Top;white-space:nowrap;">14.1.</td><td class="dxgv" style="vertical-align:Top;white-space:nowrap;">6. hod</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;padding-left:5px;padding-right:5px;padding-top:5px;padding-bottom:5px;">Pravidla s,z,vz</td><td class="dxgv" style="font-size:8pt;font-weight:normal;vertical-align:Top;">&nbsp;</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;border-right-width:0px;">65</td>
+							</tr><tr id="cphmain_roundvyuka_repetk_DXDataRow7" class="dxgvDataRow">
+								<td class="dxgv" style="vertical-align:Top;white-space:nowrap;">13.1.</td><td class="dxgv" style="vertical-align:Top;white-space:nowrap;">2. hod</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;padding-left:5px;padding-right:5px;padding-top:5px;padding-bottom:5px;">Pololetn&#237; prověrka</td><td class="dxgv" style="font-size:8pt;font-weight:normal;vertical-align:Top;">&nbsp;</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;border-right-width:0px;">64</td>
+							</tr><tr id="cphmain_roundvyuka_repetk_DXDataRow8" class="dxgvDataRow">
+								<td class="dxgv" style="vertical-align:Top;white-space:nowrap;">9.1.</td><td class="dxgv" style="vertical-align:Top;white-space:nowrap;">2. hod</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;padding-left:5px;padding-right:5px;padding-top:5px;padding-bottom:5px;">Opakov&#225;n&#237;</td><td class="dxgv" style="font-size:8pt;font-weight:normal;vertical-align:Top;">&nbsp;</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;border-right-width:0px;">&nbsp;</td>
+							</tr><tr id="cphmain_roundvyuka_repetk_DXDataRow9" class="dxgvDataRow">
+								<td class="dxgv" style="vertical-align:Top;white-space:nowrap;">5.11.</td><td class="dxgv" style="vertical-align:Top;white-space:nowrap;">6. hod</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;padding-left:5px;padding-right:5px;padding-top:5px;padding-bottom:5px;">Administrativn&#237; styl - dokončen&#237;</td><td class="dxgv" style="font-size:8pt;font-weight:normal;vertical-align:Top;">&nbsp;</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;border-right-width:0px;">34</td>
+							</tr><tr id="cphmain_roundvyuka_repetk_DXDataRow10" class="dxgvDataRow">
+								<td class="dxgv" style="vertical-align:Top;white-space:nowrap;">4.11.</td><td class="dxgv" style="vertical-align:Top;white-space:nowrap;">2. hod</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;padding-left:5px;padding-right:5px;padding-top:5px;padding-bottom:5px;">Administrativn&#237; styl</td><td class="dxgv" style="font-size:8pt;font-weight:normal;vertical-align:Top;">&#250;vod</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;border-right-width:0px;">33</td>
+							</tr><tr id="cphmain_roundvyuka_repetk_DXDataRow11" class="dxgvDataRow">
+								<td class="dxgv" style="vertical-align:Top;white-space:nowrap;">31.10.</td><td class="dxgv" style="vertical-align:Top;white-space:nowrap;">2. hod</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;padding-left:5px;padding-right:5px;padding-top:5px;padding-bottom:5px;">př&#237;davn&#225; jm&#233;na a jejich druhy</td><td class="dxgv" style="font-size:8pt;font-weight:normal;vertical-align:Top;">ozn&#225;men test na 5.11.</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;border-right-width:0px;">32</td>
+							</tr><tr id="cphmain_roundvyuka_repetk_DXDataRow12" class="dxgvDataRow">
+								<td class="dxgv" style="vertical-align:Top;white-space:nowrap;">24.10.</td><td class="dxgv" style="vertical-align:Top;white-space:nowrap;">2. hod</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;padding-left:5px;padding-right:5px;padding-top:5px;padding-bottom:5px;">skl&#225;d&#225;n&#237; a zkracov&#225;n&#237; slov: kořen, př&#237;pona, předpona a koncovka slova</td><td class="dxgv" style="font-size:8pt;font-weight:normal;vertical-align:Top;">&nbsp;</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;border-right-width:0px;">31</td>
+							</tr><tr id="cphmain_roundvyuka_repetk_DXDataRow13" class="dxgvDataRow">
+								<td class="dxgv" style="vertical-align:Top;white-space:nowrap;">23.10.</td><td class="dxgv" style="vertical-align:Top;white-space:nowrap;">4. hod</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;padding-left:5px;padding-right:5px;padding-top:5px;padding-bottom:5px;">stavba slova, odvozov&#225;n&#237;, skl&#225;d&#225;n&#237; a zkracov&#225;n&#237; slov: kořen, př&#237;pona, předpona a koncovka slova</td><td class="dxgv" style="font-size:8pt;font-weight:normal;vertical-align:Top;">&nbsp;</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;border-right-width:0px;">30</td>
+							</tr><tr id="cphmain_roundvyuka_repetk_DXDataRow14" class="dxgvDataRow">
+								<td class="dxgv" style="vertical-align:Top;white-space:nowrap;">22.10.</td><td class="dxgv" style="vertical-align:Top;white-space:nowrap;">6. hod</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;padding-left:5px;padding-right:5px;padding-top:5px;padding-bottom:5px;">stavba slova, odvozov&#225;n&#237;</td><td class="dxgv" style="font-size:8pt;font-weight:normal;vertical-align:Top;">&nbsp;</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;border-right-width:0px;">29</td>
+							</tr><tr id="cphmain_roundvyuka_repetk_DXDataRow15" class="dxgvDataRow">
+								<td class="dxgv" style="vertical-align:Top;white-space:nowrap;">21.10.</td><td class="dxgv" style="vertical-align:Top;white-space:nowrap;">2. hod</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;padding-left:5px;padding-right:5px;padding-top:5px;padding-bottom:5px;">slova dom&#225;c&#237;, mezin&#225;rodn&#237;</td><td class="dxgv" style="font-size:8pt;font-weight:normal;vertical-align:Top;">&nbsp;</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;border-right-width:0px;">28</td>
+							</tr><tr id="cphmain_roundvyuka_repetk_DXDataRow16" class="dxgvDataRow">
+								<td class="dxgv" style="vertical-align:Top;white-space:nowrap;">17.10.</td><td class="dxgv" style="vertical-align:Top;white-space:nowrap;">2. hod</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;padding-left:5px;padding-right:5px;padding-top:5px;padding-bottom:5px;">v&#253;znam z&#225;kladu, druhotn&#253;, obrazn&#253;</td><td class="dxgv" style="font-size:8pt;font-weight:normal;vertical-align:Top;">&nbsp;</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;border-right-width:0px;">27</td>
+							</tr><tr id="cphmain_roundvyuka_repetk_DXDataRow17" class="dxgvDataRow">
+								<td class="dxgv" style="vertical-align:Top;white-space:nowrap;">16.10.</td><td class="dxgv" style="vertical-align:Top;white-space:nowrap;">4. hod</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;padding-left:5px;padding-right:5px;padding-top:5px;padding-bottom:5px;">v&#253;znam slova - synonyma, homonyma, antonyma</td><td class="dxgv" style="font-size:8pt;font-weight:normal;vertical-align:Top;">&nbsp;</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;border-right-width:0px;">26</td>
+							</tr><tr id="cphmain_roundvyuka_repetk_DXDataRow18" class="dxgvDataRow">
+								<td class="dxgv" style="vertical-align:Top;white-space:nowrap;">15.10.</td><td class="dxgv" style="vertical-align:Top;white-space:nowrap;">4. hod</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;padding-left:5px;padding-right:5px;padding-top:5px;padding-bottom:5px;">v&#253;znam slova</td><td class="dxgv" style="font-size:8pt;font-weight:normal;vertical-align:Top;">&nbsp;</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;border-right-width:0px;">25</td>
+							</tr><tr id="cphmain_roundvyuka_repetk_DXDataRow19" class="dxgvDataRow">
+								<td class="dxgv" style="vertical-align:Top;white-space:nowrap;">14.10.</td><td class="dxgv" style="vertical-align:Top;white-space:nowrap;">2. hod</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;padding-left:5px;padding-right:5px;padding-top:5px;padding-bottom:5px;">odborn&#233; n&#225;zvy</td><td class="dxgv" style="font-size:8pt;font-weight:normal;vertical-align:Top;">&nbsp;</td><td class="dxgv" style="font-weight:bold;vertical-align:Top;border-right-width:0px;">24</td>
+							</tr>
+						</table><img id="cphmain_roundvyuka_repetk_IADD" class="dxGridView_gvDragAndDropArrowDown" src="/bakaweb/DXR.axd?r=1_10-Hsjh7" alt="|" style="position:absolute;visibility:hidden;top:-100px;" /><img id="cphmain_roundvyuka_repetk_IADU" class="dxGridView_gvDragAndDropArrowUp" src="/bakaweb/DXR.axd?r=1_10-Hsjh7" alt="|" style="position:absolute;visibility:hidden;top:-100px;" /><img id="cphmain_roundvyuka_repetk_IDHF" class="dxGridView_gvDragAndDropHideColumn" src="/bakaweb/DXR.axd?r=1_10-Hsjh7" alt="Hide" style="position:absolute;visibility:hidden;top:-100px;" /><div class="dxgvPagerBottomPanel">
+							<div class="dxpLite" id="cphmain_roundvyuka_repetk_DXPagerBottom">
+								<b class="dxp-lead dxp-summary">strana 1 z 3 (43 ř.)</b><b class="dxp-button dxp-disabledButton"><img class="dxWeb_pPrevDisabled" src="/bakaweb/DXR.axd?r=1_10-Hsjh7" alt="Prev" /></b><b class="dxp-num dxp-current">[1]</b><a class="dxp-num" onclick="aspxGVPagerOnClick(&#39;cphmain_roundvyuka_repetk&#39;,&#39;PN1&#39;);">2</a><a class="dxp-num" onclick="aspxGVPagerOnClick(&#39;cphmain_roundvyuka_repetk&#39;,&#39;PN2&#39;);">3</a><b class="dxp-button" onclick="aspxGVPagerOnClick(&#39;cphmain_roundvyuka_repetk&#39;,&#39;PBN&#39;);"><img class="dxWeb_pNext" src="/bakaweb/DXR.axd?r=1_10-Hsjh7" alt="Next" /></b>
+							</div><b class="dx-clear"></b><script id="dxss_2117934570" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientPager('cphmain_roundvyuka_repetk_DXPagerBottom');
+window['cphmain_roundvyuka_repetk_DXPagerBottom'] = dxo;
+dxo.uniqueID = 'ctl00$cphmain$roundvyuka$repetk$DXPagerBottom';
+dxo.liteRender=true;
+dxo.hasOwnerControl=true;
+dxo.pageSizeItems = [{'text':'10','value':'10'},{'text':'20','value':'20'},{'text':'50','value':'50'},{'text':'100','value':'100'},{'text':'200','value':'200'}];
+dxo.pageSizeSelectedItem = ({'text':'20','value':20});
+dxo.pageSizeChangedHandler.AddHandler(function(s, e) { aspxGVPagerOnClick('cphmain_roundvyuka_repetk',e.value); });
+dxo.InlineInitialize();
+
+//-->
+</script>
+						</div><table id="cphmain_roundvyuka_repetk_LP" class="dxgvLoadingPanel" cellspacing="0" cellpadding="0" style="border-collapse:collapse;left:0px;top:0px;z-index:30000;display:none;">
+							<tr>
+								<td class="dx"><img src="/bakaweb/DXR.axd?r=1_43-Hsjh7" alt="" align="middle" /></td><td class="dx" style="padding-left:0px;"><span id="cphmain_roundvyuka_repetk_TL">Loading&hellip;</span></td>
+							</tr>
+						</table><div id="cphmain_roundvyuka_repetk_LD" class="dxgvLoadingDiv" style="display:none;z-index:29999;position:absolute;">
+
+						</div><input type="hidden" name="ctl00$cphmain$roundvyuka$repetk$DXSelInput" id="cphmain_roundvyuka_repetk_DXSelInput" /><input type="hidden" name="ctl00$cphmain$roundvyuka$repetk$DXKVInput" id="cphmain_roundvyuka_repetk_DXKVInput" value="[]" /><table id="cphmain_roundvyuka_repetk_DXStyleTable" style="display:none;">
+							<tr>
+								<td></td>
+							</tr><tr class="dxgvEditingErrorRow">
+								<td class="dxgv" colspan="5" style="border-right-width:0px;"></td>
+							</tr><tr class="dxgvSelectedRow">
+								<td></td>
+							</tr><tr class="dxgvFocusedRow">
+								<td></td>
+							</tr><tr class="dxgvFocusedGroupRow">
+								<td></td>
+							</tr><tr class="dxgvDataRow">
+								<td></td>
+							</tr><tr class="dxgvDataRow">
+								<td></td>
+							</tr><tr class="dxgvDataRow">
+								<td></td>
+							</tr><tr class="dxgvDataRow">
+								<td></td>
+							</tr><tr class="dxgvDataRow">
+								<td></td>
+							</tr><tr class="dxgvDataRow">
+								<td></td>
+							</tr><tr class="dxgvDataRow">
+								<td></td>
+							</tr><tr class="dxgvDataRow">
+								<td></td>
+							</tr><tr class="dxgvDataRow">
+								<td></td>
+							</tr><tr class="dxgvDataRow">
+								<td></td>
+							</tr><tr class="dxgvDataRow">
+								<td></td>
+							</tr><tr class="dxgvDataRow">
+								<td></td>
+							</tr><tr class="dxgvDataRow">
+								<td></td>
+							</tr><tr class="dxgvDataRow">
+								<td></td>
+							</tr><tr class="dxgvDataRow">
+								<td></td>
+							</tr><tr class="dxgvDataRow">
+								<td></td>
+							</tr><tr class="dxgvDataRow">
+								<td></td>
+							</tr><tr class="dxgvDataRow">
+								<td></td>
+							</tr><tr class="dxgvDataRow">
+								<td></td>
+							</tr><tr class="dxgvDataRow">
+								<td></td>
+							</tr>
+						</table><input type="hidden" name="ctl00$cphmain$roundvyuka$repetk$CallbackState" id="cphmain_roundvyuka_repetk_CallbackState" value="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" /></td>
+					</tr>
+				</table><script id="dxss_2011877722" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientGridView('cphmain_roundvyuka_repetk');
+window['cphmain_roundvyuka_repetk'] = dxo;
+dxo.callBack = function(arg) { WebForm_DoCallback('ctl00$cphmain$roundvyuka$repetk',arg,aspxCallback,'cphmain_roundvyuka_repetk',aspxCallbackError,true); };
+dxo.uniqueID = 'ctl00$cphmain$roundvyuka$repetk';
+dxo.callBacksEnabled=true;
+dxo.pageRowCount=20;
+dxo.pageRowSize=20;
+dxo.pageIndex=0;
+dxo.pageCount=3;
+dxo.selectedWithoutPageRowCount=0;
+dxo.visibleStartIndex=0;
+dxo.focusedRowIndex=-1;
+dxo.allowFocusedRow=false;
+dxo.allowSelectByRowClick=false;
+dxo.allowSelectSingleRowOnly=false;
+dxo.isDefaultLoadingPanelMode=true;
+dxo.indentColumnCount=0;
+dxo.callbackOnFocusedRowChanged=false;
+dxo.callbackOnSelectionChanged=false;
+dxo.autoFilterDelay='1200';
+dxo.columns = [new ASPxClientGridViewColumn('',0,-1,'cas',1,'',0,1,1,1,0,0,0),
+new ASPxClientGridViewColumn('',1,-1,'nadpis',1,'',0,1,1,1,0,0,0),
+new ASPxClientGridViewColumn('',2,-1,'tema',1,'',0,1,1,1,0,0,0),
+new ASPxClientGridViewColumn('',3,-1,'poznamka',1,'',0,1,1,1,0,0,0),
+new ASPxClientGridViewColumn('',4,-1,'cislo_hod',1,'',0,1,1,1,0,0,0)];
+dxo.editState=0;
+dxo.editMode=2;
+dxo.InlineInitialize();
+
+//-->
+</script>
+
+
+    
+    &nbsp;
+
+        
+
+
+                      </td><td class="dxrpRE" style="background-color:WhiteSmoke;border-right-color:#8B8B8B;border-right-style:Solid;border-right-width:1px;"><div style="height:1px;width:1px;overflow:hidden;">
+
+				</div></td>
+			</tr><tr>
+				<td style="width:5px;height:5px;"><img class="dxrpCI" src="App_Themes/tyrkysTheme/BottomLeftCorner.png" alt="" style="height:5px;width:5px;" /></td><td class="dxrpBE" style="background-color:WhiteSmoke;border-bottom-color:#8B8B8B;border-bottom-style:Solid;border-bottom-width:1px;"><div style="height:1px;width:1px;overflow:hidden;">
+
+				</div></td><td style="width:5px;height:5px;"><img class="dxrpCI" src="App_Themes/tyrkysTheme/BottomRightCorner.png" alt="" style="height:5px;width:5px;" /></td>
+			</tr>
+		</table></td>
+	</tr>
+</table>
+            
+        </div>
+
+
+   
+</div> 
+</div>
+
+<input type="hidden" id="popupWS" name="popupWS" value="0:0:-1:-10000:-10000:0:200px:100px:1:0:0:0" /><div id="popup_PW-1" style="position:absolute;left:0px;top:0px;z-index:10000;visibility:hidden;display:none;">
+	<table id="popup_PWST-1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border-collapse:separate;position:relative;">
+		<tr>
+			<td tabindex="900" class="dxpcControl" onmousedown="aspxPWMDown(event,&#39;popup&#39;,-1,false)" style="background-color:Silver;height:100px;width:200px;cursor:default;"><table id="popup_CLW-1" cellspacing="0" cellpadding="0" style="height:100px;width:200px;border-collapse:collapse;border-collapse:separate;">
+				<tr>
+					<td id="popup_PWH-1" class="dxpcHeader" onmousedown="aspxPWDGMDown(event,&#39;popup&#39;,-1)" style="cursor:move;padding-left:12px;padding-right:2px;padding-top:2px;padding-bottom:2px;-khtml-user-select:none;"><table cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;border-collapse:separate;">
+						<tr>
+							<td id="popup_PWH-1T" class="dxpc" style="width:100%;">Změna jazyka</td><td class="dxpcHBCell dxpcHBCellSys"><table cellspacing="0" cellpadding="0" style="border-collapse:collapse;border-collapse:separate;">
+								<tr>
+									<td id="popup_HCB-1" class="dxpcCloseButton" onclick="aspxPWCBClick(event, &#39;popup&#39;,-1)" onmousedown="return aspxPWHMDown(event);" style="cursor:pointer;"><img id="popup_HCB-1Img" class="dxWeb_pcCloseButton" src="/bakaweb/DXR.axd?r=1_10-Hsjh7" alt="[Close]" /></td>
+								</tr>
+							</table></td>
+						</tr>
+					</table></td>
+				</tr><tr>
+					<td id="popup_PWC-1" class="dxpcContent" style="height:100%;border-top-width:0px;"><div id="popup_CSD-1" class="dxpcContentPaddings">
+						
+            <table cellspacing="12" cellpadding="12">
+            <tr>
+            <td>
+                <input type="image" name="ctl00$popup$imgcs" id="popup_imgcs" tabindex="991" class="imglang" src="images/cs.png" /> 
+            </td>
+            <td>
+                <input type="image" name="ctl00$popup$imgen" id="popup_imgen" tabindex="992" class="imglang" src="images/en.png" /> 
+            </td>
+            <td>
+                <input type="image" name="ctl00$popup$imgfr" id="popup_imgfr" tabindex="993" class="imglang" src="images/fr.png" /> 
+            </td>
+            </tr>
+            </table>
+            <br />
+            <table class="dxeBase" cellspacing="0" cellpadding="0" id="popup_checklexpredmety" style="height:15px;border-collapse:collapse;">
+							<tr>
+								<td style="padding-left:3px;padding-right:3px;padding-top:3px;padding-bottom:3px;"><span class="dxWeb_edtCheckBoxUnchecked dxICheckBox"><span class="dxKBSW"><input id="popup_checklexpredmety_S" name="ctl00$popup$checklexpredmety" value="U" type="text" readonly="readonly" style="width:1px;height:1px;position:relative;background-color:transparent;display:block;opacity:0;margin:0;padding:0;border-width:0;font-size:0pt;" /></span></span></td><td style="padding-left:0px;padding-right:0px;padding-top:0px;padding-bottom:1px;"><label style="margin-left:2px;">překl&#225;dat n&#225;zvy předmětů</label></td>
+							</tr>
+						</table><script id="dxss_1486261995" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientCheckBox('popup_checklexpredmety');
+window['popup_checklexpredmety'] = dxo;
+dxo.autoPostBack = true;
+dxo.uniqueID = 'ctl00$popup$checklexpredmety';
+dxo.imageProperties = {'4':['dxWeb_edtCheckBoxChecked','dxWeb_edtCheckBoxUnchecked'],'8':['dxWeb_edtCheckBoxCheckedDisabled','dxWeb_edtCheckBoxUncheckedDisabled']};
+dxo.icbFocusedStyle = ['dxICBFocused',''];
+dxo.InlineInitialize();
+
+//-->
+</script>
+            
+					</div></td>
+				</tr>
+			</table></td><td style="background:url('/bakaweb/DXR.axd?r=1_65-Hsjh7') no-repeat left top;"></td>
+		</tr><tr>
+			<td style="background:url('/bakaweb/DXR.axd?r=1_64-Hsjh7') no-repeat left top;"></td><td style="background:url('/bakaweb/DXR.axd?r=1_66-Hsjh7') no-repeat left top;"><div style="height:5px;width:5px;">
+
+			</div></td>
+		</tr>
+	</table>
+</div><table id="popup_LP" class="dxpcLoadingPanel" cellspacing="0" cellpadding="0" style="border-collapse:collapse;left:0px;top:0px;z-index:30000;display:none;">
+	<tr>
+		<td class="dx" style="padding-right:8px;"><img src="/bakaweb/DXR.axd?r=1_51-Hsjh7" alt="" align="middle" /></td><td class="dx" style="padding-left:0px;"><span id="popup_TL">Loading&hellip;</span></td>
+	</tr>
+</table><div id="popup_LD" class="dxpcLoadingDiv" style="left:0px;top:0px;z-index:29999;display:none;position:absolute;">
+
+</div><script id="dxss_646712574" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientPopupControl('popup');
+window['popup'] = dxo;
+dxo.callBack = function(arg) { WebForm_DoCallback('ctl00$popup',arg,aspxCallback,'popup',aspxCallbackError,true); };
+dxo.uniqueID = 'ctl00$popup';
+dxo.appearAfter=0;
+dxo.popupAnimationType='fade';
+dxo.popupHorizontalAlign='OutsideRight';
+dxo.popupVerticalAlign='Below';
+dxo.isPopupPositionCorrectionOn=false;
+dxo.allowDragging=true;
+dxo.width=200;
+dxo.height=100;
+dxo.InlineInitialize();
+
+//-->
+</script>
+
+
+
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+WebForm_InitCallback();//]]>
+</script>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Reorganizér</title>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+		<script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="jquery.zclip.min.js"></script>
+		
+		<script>
+		$(document).ready(function() {
+			
+			var options = {
+				center: new google.maps.LatLng(49.817492,15.472962),
+				zoom: 8
+			}, address, maps, marker, coords, zoom = 16;
+			
+			$('#control span').hide();
+			
+			$('#search').click(function() {
+				$(this).focus();
+				$(this).select();
+				
+			});
+			
+			map = new google.maps.Map($("#map")[0], options);
+			
+			$('#control').submit(function(e) {
+				address = $("#search").val();
+				
+				geocoder = new google.maps.Geocoder();
+				
+				if (geocoder) {
+					geocoder.geocode({
+						'address': address
+					}, function(results, status) {
+						if (status == google.maps.GeocoderStatus.OK) {
+							if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+								coords = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+								setMap();
+								
+								$('#before').text(address);
+								$('#control span').show();
+							} else {
+								coords = new google.maps.LatLng(30.0, -40.0);
+								zoom = 3;
+								setMap();
+								$('#control span').hide();
+							}
+						} else {
+							coords = new google.maps.LatLng(30.0, -40.0);
+							zoom = 3;
+							setMap();
+							$('#control span').hide();
+						}
+					});
+				}
+				e.preventDefault();
+			});
+			
+			function reverse_geocoding() {
+				var geocoder = new google.maps.Geocoder();
+				geocoder.geocode({
+					'latLng': coords
+				}, function(results, status) {
+					if (status == google.maps.GeocoderStatus.OK) {
+						if (results[0]) {
+							$('#address').text(results[0].formatted_address);
+							$('#coords').text(String(coords.toUrlValue()));
+							reset_zclip();
+							
+							if (map.getZoom() < 17) {
+								map.setZoom(17);
+							}
+						}
+					}
+				});
+			}
+			
+			function setMap() {
+				if(typeof marker !== "undefined") {
+					marker.setMap(null);
+					marker = "";
+				}
+				
+				marker = new google.maps.Marker({
+					map: map,
+					draggable:true,
+					position: coords
+				});
+				
+				google.maps.event.addListener(marker, "dragend", function() {
+					coords = marker.getPosition();
+					map.setCenter(coords);
+					reverse_geocoding();
+				});
+				
+				map.setTilt(0);
+				map.setCenter(coords);
+				reverse_geocoding();
+			}
+			
+			function reset_zclip() {
+				$(".zclip").remove();
+				
+				$('#address').zclip({
+					path:"library.swf",
+					copy: $("#address").text(),
+					afterCopy:function(){}
+				});
+				
+				$('#coords').zclip({
+					path:"library.swf",
+					copy: $("#coords").text(),
+					afterCopy:function(){}
+				});
+			}
+		});
+		</script>
+		<style>
+			#map {
+				position: absolute;
+				top: 0px; left: 0px; right: 0px; bottom: 0px;
+				width: 100%; 
+				height: 100%;
+			}
+			
+			#control {
+				width: 400px;
+				max-height: 300px;
+				background: white;
+				position: absolute;
+				left: 95px;
+				border-radius: 2px;
+				border: 1px solid #ccc;
+				box-shadow: 0px 2px 2px rgba(0,0,0,0.1);
+				top: 20px;
+				z-index: 999;
+				padding: 10px;
+				
+				padding: 10px 11px 10px 13px;
+				font-family: Roboto;
+				font-size: 15px;
+				font-weight: 300;
+				text-overflow: ellipsis;
+			}
+			
+			#control input {
+				outline: none;
+				border: 1px solid #ccc;
+				border-radius: 2px;
+				box-shadow: inset 0px 1px 1px rgba(0,0,0,0.1);
+				padding: 0px 10px;
+			}
+			
+			#control input:focus {
+				border-color: #4d90fe;
+				outline: none;
+			}
+			
+			#control #search {
+				width: 85%;
+				height: 30px;
+				float: left;
+				box-sizing: border-box;
+				border-radius: 2px 0px 0px 2px;
+				
+			}
+			
+			#control #search:focus {
+				border-right: none;
+			}
+			
+			#control #button {
+				width: 15%;
+				float: left;
+				height: 30px;
+				box-sizing: border-box;
+				
+				background-color: #4d90fe;
+				border: 1px solid #3079ed;
+				color: white;
+				border-radius: 0px 2px 2px 0px; 
+				background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4d90fe), color-stop(100%, #4787ed)) !important;
+				background-image: -webkit-linear-gradient(top, #4d90fe,#4787ed) !important;
+				-webkit-transition: all,0.218s;
+				outline: none;
+				cursor: pointer;
+				
+			}
+			
+			#control .clear {
+				content: "";
+				clear: both;
+			}
+			
+			#control span {
+				display: block;
+				margin-top: 10px;
+				border: 1px solid #eee;
+				border-radius: 2px;
+				box-shadow: 0px 1px 1px rgba(0,0,0,0.05);
+				padding: 5px;
+				background-image: -webkit-linear-gradient(top, transparent, rgba(0,0,0,0.005))
+			}
+
+		</style>
+	</head>
+	<body>
+		
+		<form id="control">
+			<input type="text" id="search"></input><button id="button"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAAN1wAADdcBQiibeAAAAAd0SU1FB9sIDxMyJ4ok4egAAADYSURBVDjL7dSxSkNhDIbhnAqdhF6GLgW7uLp1EBcXwcFZN6+lF6AgdBQcC+6iS0fRjk6CughaaBEflx9bSw94zpGC0G8KCXkDyUcilvrfQoYD3GCIV/SwVQV4aqIHPKX4E8dloEcJcIvmVH4bL/jAZlHoAGOszantpYHdIsDV1NTPqdcxwiCPUatwy9GvoVmWvUXEfUQ0sT6nZzci6hHRL7rTw7SCO2xM5XfSoaBVxlInM5Z69lNnWCljrX1c4R2PuEAb15XAOcMaiwB3/vI/NHCJ8+W3/NYXeOweQdHz2rUAAAAASUVORK5CYII=" alt="Search"></button>
+			<div class="clear"></div>
+			<span id="before"></span>
+			<span id="address"></span>
+			<span id="coords"></span>
+		</form>
+		<div id="map"></div>
+	</body>
+</html>

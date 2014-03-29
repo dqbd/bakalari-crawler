@@ -1,0 +1,6 @@
+{
+    "require": {
+		"dg/dibi": "dev-master",
+		"guzzle/guzzle": "3.8.*@dev"
+    }
+}

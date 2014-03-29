@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chyba za běhu</title>
+        <meta name="viewport" content="width=device-width" />
+        <style>
+         body {font-family:"Verdana";font-weight:normal;font-size: .7em;color:black;} 
+         p {font-family:"Verdana";font-weight:normal;color:black;margin-top: -5px}
+         b {font-family:"Verdana";font-weight:bold;color:black;margin-top: -5px}
+         H1 { font-family:"Verdana";font-weight:normal;font-size:18pt;color:red }
+         H2 { font-family:"Verdana";font-weight:normal;font-size:14pt;color:maroon }
+         pre {font-family:"Consolas","Lucida Console",Monospace;font-size:11pt;margin:0;padding:0.5em;line-height:14pt}
+         .marker {font-weight: bold; color: black;text-decoration: none;}
+         .version {color: gray;}
+         .error {margin-bottom: 10px;}
+         .expandable { text-decoration:underline; font-weight:bold; color:navy; cursor:hand; }
+         @media screen and (max-width: 639px) {
+          pre { width: 440px; overflow: auto; white-space: pre-wrap; word-wrap: break-word; }
+         }
+         @media screen and (max-width: 479px) {
+          pre { width: 280px; }
+         }
+        </style>
+    </head>
+
+    <body bgcolor="white">
+
+            <span><H1>V aplikaci /bakaweb došlo k chybě serveru.<hr width=100% size=1 color=silver></H1>
+
+            <h2> <i>Chyba za běhu</i> </h2></span>
+
+            <font face="Arial, Helvetica, Geneva, SunSans-Regular, sans-serif ">
+
+            <b> Popis: </b>Na serveru došlo k chybě aplikace. Aktuální vlastní nastavení chyb pro tuto aplikaci neumožňuje vzdálené zobrazení podrobností o chybě aplikace (z důvodu zabezpečení). Můžete je však zobrazit pomocí prohlížečů spuštěných na místním serveru.
+            <br><br>
+
+            <b>Podrobnosti:</b> Chcete-li povolit zobrazen&#237; podrobnost&#237; o určit&#233; chybov&#233; zpr&#225;vě ve vzd&#225;len&#253;ch poč&#237;tač&#237;ch, vytvořte značku &lt;customErrors&gt; v konfiguračn&#237;m souboru web.config, kter&#253; je um&#237;stěn v kořenov&#233;m adres&#225;ři aktu&#225;ln&#237; webov&#233; aplikace. Atribut mode t&#233;to značky &lt;customErrors&gt; by pak měl b&#253;t nastaven na hodnotu Off.<br><br>
+
+            <table width=100% bgcolor="#ffffcc">
+               <tr>
+                  <td>
+                      <code><pre>
+
+&lt;!-- Konfiguračn&#237; soubor Web.Config --&gt;
+
+&lt;configuration&gt;
+    &lt;system.web&gt;
+        &lt;customErrors mode=&quot;Off&quot;/&gt;
+    &lt;/system.web&gt;
+&lt;/configuration&gt;</pre></code>
+
+                  </td>
+               </tr>
+            </table>
+
+            <br>
+
+            <b>Poznámky:</b> Aktu&#225;lně prohl&#237;ženou chybovou str&#225;nku lze nahradit vlastn&#237; chybovou str&#225;nkou. Stač&#237; upravit atribut defaultRedirect konfiguračn&#237; značky &lt;customErrors&gt; aplikace tak, aby odkazoval na adresu URL vlastn&#237; chybov&#233; str&#225;nky.<br><br>
+
+            <table width=100% bgcolor="#ffffcc">
+               <tr>
+                  <td>
+                      <code><pre>
+
+&lt;!-- Konfiguračn&#237; soubor Web.Config --&gt;
+
+&lt;configuration&gt;
+    &lt;system.web&gt;
+        &lt;customErrors mode=&quot;RemoteOnly&quot; defaultRedirect=&quot;mycustompage.htm&quot;/&gt;
+    &lt;/system.web&gt;
+&lt;/configuration&gt;</pre></code>
+
+                  </td>
+               </tr>
+            </table>
+
+            <br>
+
+    </body>
+</html>

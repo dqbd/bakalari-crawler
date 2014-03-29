@@ -1,0 +1,11 @@
+**/vendor
+**/composer.lock
+
+/dashboard
+/cache
+/nbproject
+
+/tools/sql-backup
+/vendor/
+/tools/bakaupdates/vendor/
+/tools/pingchecker/vendor/

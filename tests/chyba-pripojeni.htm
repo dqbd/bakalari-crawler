@@ -1,0 +1,277 @@
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"><html xmlns="http://www.w3.org/1999/xhtml" >
+<head><link rel="stylesheet" type="text/css" href="/DXR.axd?r=1_7-Hsjh7" /><link rel="stylesheet" type="text/css" href="/DXR.axd?r=1_8-Hsjh7" /><link rel="stylesheet" type="text/css" href="/DXR.axd?r=1_1-Hsjh7" /><link rel="stylesheet" type="text/css" href="/DXR.axd?r=1_3-Hsjh7" /><link rel="stylesheet" type="text/css" href="/DXR.axd?r=1_4-Hsjh7" /><link rel="stylesheet" type="text/css" href="/DXR.axd?r=1_2-Hsjh7" /><title>
+	Bakaláři - přihlášení
+</title><meta http-equiv="X-UA-Compatible" content="IE=edge" /><meta content="Bakaláři - webová aplikace pro školy" name="description" /><meta content="Bakalari, Bakaláři, matrika, rodiče, žáci, známky, klasifikace, rozvrh, webrodiče, webučitelé, komunikace, škola" name="keywords" /><link rel="stylesheet" href="master.css" type="text/css" media="screen" /><link rel="stylesheet" href="bakastyl.css" type="text/css" media="screen" /><link rel="stylesheet" href="ptstyl.css" type="text/css" media="print" /><link rel="stylesheet" href="nasstyl.css" type="text/css" media="screen" /><link rel="stylesheet" href="bakaznam.css" type="text/css" media="screen" /><link rel="stylesheet" href="bakastyl12.css" type="text/css" media="screen" /><meta http-equiv="Expires" content="0" /><meta http-equiv="Pragma" content="no-cache" /><meta http-equiv="Cache-control" content="no-cache" /> 
+
+    <script type="text/javascript">
+
+
+        var RepWin = window.RepWin;
+
+        function OpenRWin(link, winName, wi, he) {
+            var retValue = true;
+            if (RepWin != null && !RepWin.closed) {
+                RepWin.focus();
+                RepWin.location.href = link.href;
+            }
+            else {
+                RepWin = window.open(link.href, winName, 'toolbar=no, menubar=no, location=no, directories=no, scrollbars=yes, resizable=yes, status=no, width=' + wi + ', height=' + he + '');
+                if (RepWin == null || typeof (RepWin) == "undefined")
+                    retValue = false;
+                else {
+                    link.target = winName;
+                    RepWin.focus();
+                }
+            }
+            return retValue;
+        } 
+
+</script>
+
+
+<link href="App_Themes/tyrkysTheme/tyrkysstyl.css" type="text/css" rel="stylesheet" /></head>
+<body>
+<form method="post" action="login.aspx" id="formbaka">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['formbaka'];
+if (!theForm) {
+    theForm = document.formbaka;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=unaCifTYifqFpGvASvi99Jqqd-W2wndg9h_P4gU2Fr4zsD0qXXHD29Jx7cSUnj-dq9dHLhovS2A-DFjMhzbIQxPcPXbG_bJIlY5PIUBo8Tw1&amp;t=635168845516076145" type="text/javascript"></script>
+
+
+ 
+<div id="stranka"> 
+<div id="hlavicka">
+ 
+<table class="hlavickatable">
+<tr><td valign="top" >
+    
+ <div id="lang" onclick="popup.Show();"> 
+   <div id="panellang" title="Změna jazyka">
+	
+     <img id="imagelang" title="Změna jazyka" src="images/cs.png" />
+   
+</div>
+ </div>
+<div class="hlavickaleva">
+ <a href="prehled.aspx" >
+<img alt="" src="images/nilogo.gif" style="border-width:0px;"/>
+</a>
+</div> 
+</td>
+ <td valign="top">
+  <div class="hlavickaprava"> 
+    <div class="nazevskoly"></div>
+    <div class="pololetinadpis"></div>
+    <div class="globlogjmeno" >
+      <table class="logtable">
+        <tr>
+          <td>
+              <span id="labeluzivatel">uživatel:</span></td><td style="width:100%;"></td>
+          <td class="logout"><a id="linklogout" href="login.aspx?s=-1">odhlásit</a></td>
+        </tr>
+        <tr><td><span id="labeljmeno">jméno:</span></td><td style="width:100%;" class="logjmeno" colspan="2"> 
+          nepřihlášen</td></tr>
+      </table>
+     </div>
+   </div>
+ </td>
+</tr></table>
+</div> 
+<div id="hlavni"> 
+    <div id="panelmenu" class="pmenu">
+	
+
+    
+        
+</div>
+
+
+
+   
+<div class="loginmain">
+       <div>
+            
+        </div>
+        <h2 class="loginnadpis"><span id="cphmain_labelnadpislogin">Přihlášení</span></h2>
+        <p>
+        </p>
+        <div>
+            <table class="svetla2 logintable" >
+                <tbody>
+                    <tr>
+                        <td>
+                            </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            
+                        
+                        
+                        </td>
+                        <td valign="top">
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            </td>
+                        <td>
+                            
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                         <td colspan="2">
+                         <div>
+                             
+                          </div>
+                          <div>
+                          <div class="logbuttpod">
+                            <span id="cphmain_LabelChyba" title="Při vytváření připojení k serveru SQL Server došlo k chybě související se sítí nebo s instancí. Server nebyl nalezen nebo nebyl přístupný. Ověřte, zda je název instance správný a zda je SQL Server nakofigurován, aby povoloval vzdálená připojení. (provider: TCP Provider, error: 0 - Pokus o připojení selhal, protože připojená strana v časovém intervalu řádně neodpověděla, nebo vytvořené připojení selhalo, protože neodpověděl připojený hostitel.)" class="lberr">Objevila se chyba v načítání dat z Bakalářů. Text chyby zobrazíte přesunutím myši na tento text.<br />Chybu pravděpodobně způsobuje nesprávné nastavení cesty nebo uživatelských práv k adresáři s daty. Problém může odstranit správce školní síte v Parametrech webové aplikace (dle nápovědy).</span>
+                            <br />
+                            
+                            <br />
+                              <input id="cphmain_checkstale" type="checkbox" name="ctl00$cphmain$checkstale" tabindex="5" /><label for="cphmain_checkstale">Zůstat přihlášen(a)</label>
+                           </div>
+                           </div>
+
+                           
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
+        <div class="lbver">2.9.2013</div>
+      </div> 
+   
+        
+
+</div> 
+</div>
+
+<input type="hidden" id="popupWS" name="popupWS" value="0:0:-1:-10000:-10000:0:200px:100px:1:0:0:0" /><script id="dxis_1594193491" src="/DXR.axd?r=1_145-Hsjh7" type="text/javascript"></script><script id="dxis_1766229232" src="/DXR.axd?r=1_81-Hsjh7" type="text/javascript"></script><script id="dxis_810682712" src="/DXR.axd?r=1_137-Hsjh7" type="text/javascript"></script><script id="dxis_1216310910" src="/DXR.axd?r=1_78-Hsjh7" type="text/javascript"></script><script id="dxis_1326909784" src="/DXR.axd?r=1_130-Hsjh7" type="text/javascript"></script><script id="dxis_1633223005" src="/DXR.axd?r=1_128-Hsjh7" type="text/javascript"></script><script id="dxis_2059795304" src="/DXR.axd?r=1_99-Hsjh7" type="text/javascript"></script><script id="dxis_1078306012" src="/DXR.axd?r=1_95-Hsjh7" type="text/javascript"></script><div id="popup_PW-1" style="position:absolute;left:0px;top:0px;z-index:10000;visibility:hidden;display:none;">
+	<table id="popup_PWST-1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border-collapse:separate;position:relative;">
+		<tr>
+			<td tabindex="900" class="dxpcControl" onmousedown="aspxPWMDown(event,&#39;popup&#39;,-1,false)" style="background-color:Silver;height:100px;width:200px;cursor:default;"><table id="popup_CLW-1" cellspacing="0" cellpadding="0" style="height:100px;width:200px;border-collapse:collapse;border-collapse:separate;">
+				<tr>
+					<td id="popup_PWH-1" class="dxpcHeader" onmousedown="aspxPWDGMDown(event,&#39;popup&#39;,-1)" style="cursor:move;padding-left:12px;padding-right:2px;padding-top:2px;padding-bottom:2px;-khtml-user-select:none;"><table cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;border-collapse:separate;">
+						<tr>
+							<td id="popup_PWH-1T" class="dxpc" style="width:100%;">Změna jazyka</td><td class="dxpcHBCell dxpcHBCellSys"><table cellspacing="0" cellpadding="0" style="border-collapse:collapse;border-collapse:separate;">
+								<tr>
+									<td id="popup_HCB-1" class="dxpcCloseButton" onclick="aspxPWCBClick(event, &#39;popup&#39;,-1)" onmousedown="return aspxPWHMDown(event);" style="cursor:pointer;"><img id="popup_HCB-1Img" class="dxWeb_pcCloseButton" src="/DXR.axd?r=1_10-Hsjh7" alt="[Close]" /></td>
+								</tr>
+							</table></td>
+						</tr>
+					</table></td>
+				</tr><tr>
+					<td id="popup_PWC-1" class="dxpcContent" style="height:100%;border-top-width:0px;"><div id="popup_CSD-1" class="dxpcContentPaddings">
+						
+            <table cellspacing="12" cellpadding="12">
+            <tr>
+            <td>
+                <input type="image" name="ctl00$popup$imgcs" id="popup_imgcs" tabindex="991" class="imglang" src="images/cs.png" /> 
+            </td>
+            <td>
+                <input type="image" name="ctl00$popup$imgen" id="popup_imgen" tabindex="992" class="imglang" src="images/en.png" /> 
+            </td>
+            <td>
+                <input type="image" name="ctl00$popup$imgfr" id="popup_imgfr" tabindex="993" class="imglang" src="images/fr.png" /> 
+            </td>
+            </tr>
+            </table>
+            <br />
+            <table class="dxeBase" cellspacing="0" cellpadding="0" id="popup_checklexpredmety" style="height:15px;border-collapse:collapse;">
+							<tr>
+								<td style="padding-left:3px;padding-right:3px;padding-top:3px;padding-bottom:3px;"><span class="dxWeb_edtCheckBoxUnchecked dxICheckBox"><span class="dxKBSW"><input id="popup_checklexpredmety_S" name="ctl00$popup$checklexpredmety" value="U" type="text" readonly="readonly" style="width:1px;height:1px;position:relative;background-color:transparent;display:block;opacity:0;margin:0;padding:0;border-width:0;font-size:0pt;" /></span></span></td><td style="padding-left:0px;padding-right:0px;padding-top:0px;padding-bottom:1px;"><label style="margin-left:2px;">překl&#225;dat n&#225;zvy předmětů</label></td>
+							</tr>
+						</table><script id="dxss_1486261995" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientCheckBox('popup_checklexpredmety');
+window['popup_checklexpredmety'] = dxo;
+dxo.autoPostBack = true;
+dxo.uniqueID = 'ctl00$popup$checklexpredmety';
+dxo.imageProperties = {'4':['dxWeb_edtCheckBoxChecked','dxWeb_edtCheckBoxUnchecked'],'8':['dxWeb_edtCheckBoxCheckedDisabled','dxWeb_edtCheckBoxUncheckedDisabled']};
+dxo.icbFocusedStyle = ['dxICBFocused',''];
+dxo.InlineInitialize();
+
+//-->
+</script>
+            
+					</div></td>
+				</tr>
+			</table></td><td style="background:url('/DXR.axd?r=1_65-Hsjh7') no-repeat left top;"></td>
+		</tr><tr>
+			<td style="background:url('/DXR.axd?r=1_64-Hsjh7') no-repeat left top;"></td><td style="background:url('/DXR.axd?r=1_66-Hsjh7') no-repeat left top;"><div style="height:5px;width:5px;">
+
+			</div></td>
+		</tr>
+	</table>
+</div><table id="popup_LP" class="dxpcLoadingPanel" cellspacing="0" cellpadding="0" style="border-collapse:collapse;left:0px;top:0px;z-index:30000;display:none;">
+	<tr>
+		<td class="dx" style="padding-right:8px;"><img src="/DXR.axd?r=1_51-Hsjh7" alt="" align="middle" /></td><td class="dx" style="padding-left:0px;"><span id="popup_TL">Loading&hellip;</span></td>
+	</tr>
+</table><div id="popup_LD" class="dxpcLoadingDiv" style="left:0px;top:0px;z-index:29999;display:none;position:absolute;">
+
+</div><script id="dxss_646712574" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientPopupControl('popup');
+window['popup'] = dxo;
+dxo.callBack = function(arg) { WebForm_DoCallback('ctl00$popup',arg,aspxCallback,'popup',aspxCallbackError,true); };
+dxo.uniqueID = 'ctl00$popup';
+dxo.appearAfter=0;
+dxo.popupAnimationType='fade';
+dxo.popupHorizontalAlign='OutsideRight';
+dxo.popupVerticalAlign='Below';
+dxo.isPopupPositionCorrectionOn=false;
+dxo.allowDragging=true;
+dxo.width=200;
+dxo.height=100;
+dxo.InlineInitialize();
+
+//-->
+</script>
+
+
+
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+WebForm_InitCallback();//]]>
+</script>
+</form>
+
+</body>
+</html>

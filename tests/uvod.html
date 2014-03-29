@@ -1,0 +1,1247 @@
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"><html xmlns="http://www.w3.org/1999/xhtml" >
+<head><link rel="stylesheet" type="text/css" href="/bakaweb/DXR.axd?r=1_7-Hsjh7" /><link rel="stylesheet" type="text/css" href="/bakaweb/DXR.axd?r=1_8-Hsjh7" /><link rel="stylesheet" type="text/css" href="/bakaweb/DXR.axd?r=1_1-Hsjh7" /><link rel="stylesheet" type="text/css" href="/bakaweb/DXR.axd?r=1_3-Hsjh7" /><link rel="stylesheet" type="text/css" href="/bakaweb/DXR.axd?r=1_4-Hsjh7" /><link rel="stylesheet" type="text/css" href="/bakaweb/DXR.axd?r=1_2-Hsjh7" /><title>
+	Bakaláři - webová aplikace
+</title><meta http-equiv="X-UA-Compatible" content="IE=edge" /><meta content="Bakaláři - webová aplikace pro školy" name="description" /><meta content="Bakalari, Bakaláři, matrika, rodiče, žáci, známky, klasifikace, rozvrh, webrodiče, webučitelé, komunikace, škola" name="keywords" /><link rel="stylesheet" href="master.css" type="text/css" media="screen" /><link rel="stylesheet" href="bakastyl.css" type="text/css" media="screen" /><link rel="stylesheet" href="ptstyl.css" type="text/css" media="print" /><link rel="stylesheet" href="nasstyl.css" type="text/css" media="screen" /><link rel="stylesheet" href="bakaznam.css" type="text/css" media="screen" /><link rel="stylesheet" href="bakastyl12.css" type="text/css" media="screen" /><meta http-equiv="Expires" content="0" /><meta http-equiv="Pragma" content="no-cache" /><meta http-equiv="Cache-control" content="no-cache" /> 
+
+    <script type="text/javascript">
+
+
+        var RepWin = window.RepWin;
+
+        function OpenRWin(link, winName, wi, he) {
+            var retValue = true;
+            if (RepWin != null && !RepWin.closed) {
+                RepWin.focus();
+                RepWin.location.href = link.href;
+            }
+            else {
+                RepWin = window.open(link.href, winName, 'toolbar=no, menubar=no, location=no, directories=no, scrollbars=yes, resizable=yes, status=no, width=' + wi + ', height=' + he + '');
+                if (RepWin == null || typeof (RepWin) == "undefined")
+                    retValue = false;
+                else {
+                    link.target = winName;
+                    RepWin.focus();
+                }
+            }
+            return retValue;
+        } 
+
+</script>
+
+
+<link href="App_Themes/tyrkysTheme/tyrkysstyl.css" type="text/css" rel="stylesheet" /></head>
+<body>
+<form method="post" action="uvod.aspx" id="formbaka">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTE1NTMxNTIzNDkPZBYCZg9kFgICAw9kFgICAQ9kFg5mD2QWAgIBDw8WBB4ISW1hZ2VVcmwFDWltYWdlcy9jcy5wbmceB1Rvb2xUaXAFDVptxJtuYSBqYXp5a2FkZAIBDw8WAh4EVGV4dAUKdcW+aXZhdGVsOmRkAgIPDxYCHwIFCW9kaGzDoXNpdGRkAgMPDxYCHwIFB2ptw6lubzpkZAIEDw8WAh4HVmlzaWJsZWhkZAIGD2QWFgIFDxQrAAkPFgQeDFZpc2libGVJbmRleAIBHghEb2NrTW9kZQsphQFEZXZFeHByZXNzLldlYi5BU1B4RG9ja2luZy5BbGxvd2VkRG9ja1N0YXRlLCBEZXZFeHByZXNzLldlYi52MTMuMSwgVmVyc2lvbj0xMy4xLjYuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iODhkMTc1NGQ3MDBlNDlhAGQ8KwAMAQAWBh4FV2lkdGgbAAAAAAAAAAABAAAAHgZIZWlnaHQbAAAAAAAAAAABAAAAHgRfIVNCAoADZGRkZDwrABIBABYIHgpIZWFkZXJUZXh0BQxVcG96b3JuxJtuw60eDlNob3dPblBhZ2VMb2FkZx4ETGVmdGYeA1RvcGZkZGQCBw8UKwAJDxYEHwQCAh8FCysEAGQ8KwAMAQAWBh8GGwAAAAAAAAAAAQAAAB8HGwAAAAAAAAAAAQAAAB8IAoADZGRkZDwrABIBABYKHwkFBlJvenZyaB4RSGVhZGVyTmF2aWdhdGVVcmwFE3ByZWhsZWQuYXNweD9zPTIyNTIfCmcfC2YfDGZkZGQCCQ8UKwAJDxYEHwQCAx8FCysEAGQ8KwAMAQAWBh8GGwAAAAAAAAAAAQAAAB8HGwAAAAAAAAAAAQAAAB8IAoADZGRkZDwrABIBABYIHwkFC1N1cGxvdsOhbsOtHwpnHwtmHwxmZGRkAgsPFCsACQ8WBB8EAgQfBQsrBABkPCsADAEAFgYfBhsAAAAAAAAAAAEAAAAfBxsAAAAAAAAAAAEAAAAfCAKAA2RkZGQ8KwASAQAWCB8JBRFOZWpibGnFvsWhw60gYWtjZR8KZx8LZh8MZmRkZAINDxQrAAkPFgQfBAIFHwULKwQAZDwrAAwBABYGHwYbAAAAAAAAAAABAAAAHwcbAAAAAAAAAAABAAAAHwgCgANkZGRkPCsAEgEAFggfCQUKS2FsZW5kw6HFmR8KZx8LZh8MZmRkFgJmD2QWAmYPZBYCZg9kFgICAQ9kFgJmD2QWAgIBD2QWAgIBDzwrAAUBBBQrAQBkAg8PFCsACQ8WBB8EAgYfBQsrBABkPCsADAEAFgYfBhsAAAAAAAAAAAEAAAAfBxsAAAAAAAAAAAEAAAAfCAKAA2RkZGQ8KwASAQAWCB8JBQhLb250YWt0eR8KZx8LZh8MZmRkZAIRDxQrAAkPFgQfBAIHHwULKwQAZDwrAAwBABYGHwYbAAAAAAAAAAABAAAAHwcbAAAAAAAAAAABAAAAHwgCgANkZGRkPCsAEgEAFggfCQUYUG9zbGVkbsOtIHDFmWlobMOhxaFlbsOtHwpnHwtmHwxmZGQWAmYPZBYCZg9kFgJmD2QWAgIBD2QWAmYPZBYCAgEPZBYCAgEPDxYCHwIFEjI0LjMuMjAxNCAyMDozMzozMWRkAhMPFCsACQ8WBB8EAggfBQsrBABkPCsADAEAFgYfBhsAAAAAAAAAAAEAAAAfBxsAAAAAAAAAAAEAAAAfCAKAA2RkZGQ8KwASAQAWCB8JBRBSeWNobMOhIG5hdmlnYWNlHwpnHwtmHwxmZGQWAmYPZBYCZg9kFgJmD2QWAgIBD2QWAmYPZBYCAgEPZBYMAgEPPCsABgEADxYCHwIFBlJvenZyaGRkAgMPPCsABgEADxYCHwIFC1N1cGxvdsOhbsOtZGQCBQ88KwAGAQAPFgQfAgUPVMWZw61kbsOtIGtuaWhhHwNoZGQCBw88KwAGAQAPFgIfAgULS2xhc2lmaWthY2VkZAIJDzwrAAYBAA8WAh8CBQtQbMOhbiBha2PDrWRkAgsPPCsABgEADxYCHwIFBktvbWVuc2RkAhUPFCsACQ8WBB8EAgofBQsrBABkPCsADAEAFgYfBhsAAAAAAMCCQAEAAAAfBxsAAAAAAAAAAAEAAAAfCAKAA2RkZGQ8KwASAQAWCB8JBQ1Eb2Jyw70gdmXEjWVyHwpnHwtmHwxmZGRkAhcPPCsACQIADxYCHwNoZAY8KwASAQAWAh8JBQlBa3R1YWxpdHlkAhkPFCsACQ8WBB8EAgwfBQsrBABkPCsADAEAFgYfBhsAAAAAAAAAAAEAAAAfBxsAAAAAAAAAAAEAAAAfCAKAA2RkZGQ8KwASAQAWCB8JBQ9Eb23DoWPDrSDDumtvbHkfCmcfC2YfDGZkZGQCBw88KwAIAQY8KwASAQAWAh8JBQ1abcSbbmEgamF6eWthZBgBBR5fX0NvbnRyb2xzUmVxdWlyZVBvc3RCYWNrS2V5X18WFwUQY3RsMDAkaGxhdm5pbWVudQUXY3RsMDAkY3BobWFpbiRwb3B1cGluZm8FHGN0bDAwJGNwaG1haW4kZG9ja3Vwb3pvcm5lbmkFGGN0bDAwJGNwaG1haW4kZG9ja3JvenZyaAUbY3RsMDAkY3BobWFpbiRkb2Nrc3VwbG92YW5pBRZjdGwwMCRjcGhtYWluJGRvY2twbGFuBRpjdGwwMCRjcGhtYWluJGRvY2trYWxlbmRhcgUnY3RsMDAkY3BobWFpbiRkb2Nra2FsZW5kYXIka2FsZW5kYXIkRk5QBRpjdGwwMCRjcGhtYWluJGRvY2trb250YWt0eQUcY3RsMDAkY3BobWFpbiRkb2NrcHJpaGxhc2VuaQUaY3RsMDAkY3BobWFpbiRkb2NrbmF2aWdhY2UFJGN0bDAwJGNwaG1haW4kZG9ja25hdmlnYWNlJGJ0bnJvenZyaAUiY3RsMDAkY3BobWFpbiRkb2NrbmF2aWdhY2UkYnRuc3VwbAUiY3RsMDAkY3BobWFpbiRkb2NrbmF2aWdhY2UkYnRua2xhcwUiY3RsMDAkY3BobWFpbiRkb2NrbmF2aWdhY2UkYnRucGxhbgUkY3RsMDAkY3BobWFpbiRkb2NrbmF2aWdhY2UkYnRua29tZW5zBR5jdGwwMCRjcGhtYWluJGRvY2t1dm9kbml6cHJhdmEFF2N0bDAwJGNwaG1haW4kZG9ja3Vrb2x5BR9jdGwwMCRjcGhtYWluJEFTUHhQb3B1cENvbnRyb2wxBQtjdGwwMCRwb3B1cAURY3RsMDAkcG9wdXAkaW1nY3MFEWN0bDAwJHBvcHVwJGltZ2VuBRFjdGwwMCRwb3B1cCRpbWdmckS+Jzrg8Lyt8hr6gc8aXdi46IoMtdM+CIdL1bF1M7lF" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['formbaka'];
+if (!theForm) {
+    theForm = document.formbaka;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/bakaweb/WebResource.axd?d=bL-cX8b5Qfw-twMQT8fdreOtKhrVckGGNdKK3jpfpnlSCQwuwvAjf4DcYWWjggpIpFgEBAXdbbUrLkze_Ao65rFzImn2fsBrKYT6Hw6Y6ag1&amp;t=635195661120000000" type="text/javascript"></script>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdABUjokA4QhXRAMkGNRBCp+5MdH/fc2UD7HoUKTJ7aNmTIdNG5o2b4j2n2d1YIO+hP9wvUVwR/VqR43dw9Y0ZMf14WJ2I+xxhIVKu800SyydqAVmEJU2t7VfnzCxmvgfLDTj4Hu0EmWRxT8z73PvI9iIgTvgJN8PTTxbvUHRus0gFKPVAYnlnEUwWAJdkOkOAbpVqaLvP6fszid2jwJ7Fw65+nBdc84iDqLSKrl0WYziSy+ckix78hmp82RAXNQ3B3+gtauVg6BDQo4XGB4HO0CCRO/vBi+3Ugs0ygjVqx1pF1OzKG6+78ZZgRs+qSWowI2IEuqwt/QlJkXONJewh2zFSQC90pr4SKSl8JHbaviNbW+vmUbyszx5n0e67EQ0UUU8um1SPedfokRGLMVfaJVhPosNYOyQ0Vv25tRjW1l4+yWTPuUXKwUB2t/KLyyWbFh2S4qC2LhOFhp91za30rhQbJ9JIqORuy86l8JVCrAYkxw==" />
+</div>
+
+ 
+<div id="stranka"> 
+<div id="hlavicka">
+ 
+<table class="hlavickatable">
+<tr><td valign="top" >
+    
+ <div id="lang" onclick="popup.Show();"> 
+   <div id="panellang" title="Změna jazyka">
+	
+     <img id="imagelang" title="Změna jazyka" src="images/cs.png" />
+   
+</div>
+ </div>
+<div class="hlavickaleva">
+ <a href="prehled.aspx" >
+<img alt="" src="images/nilogo.gif" style="border-width:0px;"/>
+</a>
+</div> 
+</td>
+ <td valign="top">
+  <div class="hlavickaprava"> 
+    <div class="nazevskoly">Gymnázium JKT, Nové Hradiště - testovací škola</div>
+    <div class="pololetinadpis">2. pololetí šk. roku 2013/14</div>
+    <div class="globlogjmeno" >
+      <table class="logtable">
+        <tr>
+          <td>
+              <span id="labeluzivatel">uživatel:</span></td><td style="width:100%;">žák</td>
+          <td class="logout"><a id="linklogout" href="login.aspx?s=-1">odhlásit</a></td>
+        </tr>
+        <tr><td><span id="labeljmeno">jméno:</span></td><td style="width:100%;" class="logjmeno" colspan="2"> 
+          Borská Babeta, 4.</td></tr>
+      </table>
+     </div>
+   </div>
+ </td>
+</tr></table>
+</div> 
+<div id="hlavni"> 
+    <div id="panelmenu" class="pmenu">
+	
+
+    <input type="hidden" id="hlavnimenuSI" name="hlavnimenuSI" value="0" /><script id="dxis_2108608518" src="/bakaweb/DXR.axd?r=1_145-Hsjh7" type="text/javascript"></script><script id="dxis_1352716566" src="/bakaweb/DXR.axd?r=1_81-Hsjh7" type="text/javascript"></script><script id="dxis_1120288001" src="/bakaweb/DXR.axd?r=1_137-Hsjh7" type="text/javascript"></script><script id="dxis_1904295169" src="/bakaweb/DXR.axd?r=1_130-Hsjh7" type="text/javascript"></script><script id="dxis_841990911" src="/bakaweb/DXR.axd?r=1_135-Hsjh7" type="text/javascript"></script><script id="dxis_803823580" src="/bakaweb/DXR.axd?r=1_121-Hsjh7" type="text/javascript"></script><script id="dxis_1572053028" src="/bakaweb/DXR.axd?r=1_128-Hsjh7" type="text/javascript"></script><script id="dxis_2122126915" src="/bakaweb/DXR.axd?r=1_88-Hsjh7" type="text/javascript"></script><script id="dxis_1742465469" src="/bakaweb/DXR.axd?r=1_78-Hsjh7" type="text/javascript"></script><script id="dxis_813359077" src="/bakaweb/DXR.axd?r=1_90-Hsjh7" type="text/javascript"></script><script id="dxis_1100490002" src="/bakaweb/DXR.axd?r=1_89-Hsjh7" type="text/javascript"></script><script id="dxis_618210578" src="/bakaweb/DXR.axd?r=1_99-Hsjh7" type="text/javascript"></script><script id="dxis_1665140006" src="/bakaweb/DXR.axd?r=1_85-Hsjh7" type="text/javascript"></script><script id="dxis_1908901348" src="/bakaweb/DXR.axd?r=1_93-Hsjh7" type="text/javascript"></script><script id="dxis_531034075" src="/bakaweb/DXR.axd?r=1_92-Hsjh7" type="text/javascript"></script><script id="dxis_1530864914" src="/bakaweb/DXR.axd?r=1_79-Hsjh7" type="text/javascript"></script><script id="dxis_1182860582" src="/bakaweb/DXR.axd?r=1_95-Hsjh7" type="text/javascript"></script><div class="dxmLite dxm-ltr">
+		<div class="dxm-main dxm-horizontal phmenu" id="hlavnimenu" style="font-size:9pt;">
+			<ul class="dx dxm-image-l dxm-noImages dxm-gutter">
+				<li class="dxm-item" style="border-width:0px;"><div class="dxm-content dxm-hasText">
+					<a class="dx" href="uvod.aspx" style="font-size:9pt;">&#218;vod</a>
+				</div></li><li class="dxm-spacing"></li><li class="dxm-item" style="border-width:0px;"><div class="dxm-content dxm-hasText">
+					<a class="dx" href="osob.aspx" style="font-size:9pt;">Osobn&#237; &#250;daje</a>
+				</div></li><li class="dxm-spacing"></li><li class="dxm-item" style="border-width:0px;font-size:9pt;"><div class="dxm-content dxm-hasText">
+					Klasifikace
+				</div></li><li class="dxm-spacing"></li><li class="dxm-item" style="border-width:0px;font-size:9pt;"><div class="dxm-content dxm-hasText">
+					V&#253;uka
+				</div></li><li class="dxm-spacing"></li><li class="dxm-item" style="border-width:0px;font-size:9pt;"><div class="dxm-content dxm-hasText">
+					Absence
+				</div></li><li class="dxm-spacing"></li><li class="dxm-item" style="border-width:0px;"><div class="dxm-content dxm-hasText">
+					<a class="dx" href="prehled.aspx?s=17" style="font-size:9pt;">Pl&#225;n akc&#237;</a>
+				</div></li><li class="dxm-spacing"></li><li class="dxm-item" style="border-width:0px;font-size:9pt;"><div class="dxm-content dxm-hasText">
+					Ankety
+				</div></li><li class="dxm-spacing"></li><li class="dxm-item" style="border-width:0px;font-size:9pt;"><div class="dxm-content dxm-hasText">
+					Komens
+				</div></li><li class="dxm-spacing"></li><li class="dxm-item" style="border-width:0px;font-size:9pt;"><div class="dxm-content dxm-hasText">
+					N&#225;stroje
+				</div></li><li class="dxm-spacing"></li><li class="dxm-item" style="border-width:0px;"><div class="dxm-content dxm-hasText">
+					<a class="dx" href="prehled.aspx?s=-1" style="font-size:9pt;">Odhl&#225;sit</a>
+				</div></li>
+			</ul>
+		</div><b class="dx-clear"></b><div id="hlavnimenu_DXM1_" style="z-index:20000;display:none;">
+			<div class="dxm-shadow dxm-popup pimenu" style="font-size:9pt;">
+				<ul class="dx dxm-noImages">
+					<li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="osob.aspx" style="font-size:9pt;">Přehled osobn&#237;ch &#250;dajů</a>
+					</div><b class="dx-clear"></b></li>
+				</ul>
+			</div>
+		</div><div id="hlavnimenu_DXM2_" style="z-index:20000;display:none;">
+			<div class="dxm-shadow dxm-popup pimenu" style="font-size:9pt;">
+				<ul class="dx dxm-noImages">
+					<li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=1252" style="font-size:9pt;">Průběžn&#225; klasifikace</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=4" style="font-size:9pt;">Pololetn&#237; klasifikace</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=5" style="font-size:9pt;">V&#253;chovn&#225; opatřen&#237;</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=26" style="font-size:9pt;">Opravn&#233; zkoušky</a>
+					</div><b class="dx-clear"></b></li>
+				</ul>
+			</div>
+		</div><div id="hlavnimenu_DXM3_" style="z-index:20000;display:none;">
+			<div class="dxm-shadow dxm-popup pimenu" style="font-size:9pt;">
+				<ul class="dx dxm-noImages">
+					<li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=2252" style="font-size:9pt;">Rozvrh</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=601" style="font-size:9pt;">Suplov&#225;n&#237;</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=621" style="font-size:9pt;">Dom&#225;c&#237; &#250;koly</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=7" style="font-size:9pt;">Přehled předmětů</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="baktk2.aspx" style="font-size:9pt;">Přehled v&#253;uky</a>
+					</div><b class="dx-clear"></b></li>
+				</ul>
+			</div>
+		</div><div id="hlavnimenu_DXM4_" style="z-index:20000;display:none;">
+			<div class="dxm-shadow dxm-popup pimenu" style="font-size:9pt;">
+				<ul class="dx dxm-noImages">
+					<li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=3" style="font-size:9pt;">Průběžn&#225; absence</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=9" style="font-size:9pt;">Zameškanost v předmětech</a>
+					</div><b class="dx-clear"></b></li>
+				</ul>
+			</div>
+		</div><div id="hlavnimenu_DXM6_" style="z-index:20000;display:none;">
+			<div class="dxm-shadow dxm-popup pimenu" style="font-size:9pt;">
+				<ul class="dx dxm-noImages">
+					<li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="anketyo.aspx" style="font-size:9pt;">Vyplňov&#225;n&#237; anket</a>
+					</div><b class="dx-clear"></b></li>
+				</ul>
+			</div>
+		</div><div id="hlavnimenu_DXM7_" style="z-index:20000;display:none;">
+			<div class="dxm-shadow dxm-popup pimenu" style="font-size:9pt;">
+				<ul class="dx dxm-noImages">
+					<li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="nasten.aspx?l=no" style="font-size:9pt;">Poslat zpr&#225;vu</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="nasten.aspx?l=gr" style="font-size:9pt;">Přijat&#233; zpr&#225;vy</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="nasten.aspx?l=od" style="font-size:9pt;">Odeslan&#233; zpr&#225;vy</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="nasten.aspx?l=na" style="font-size:9pt;">N&#225;stěnka</a>
+					</div><b class="dx-clear"></b></li>
+				</ul>
+			</div>
+		</div><div id="hlavnimenu_DXM10_" style="z-index:20000;display:none;">
+			<div class="dxm-shadow dxm-popup pimenu" style="font-size:9pt;">
+				<ul class="dx dxm-noImages">
+					<li class="dxm-item dxm-subMenu" style="font-size:9pt;"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						Přehledy přihl&#225;šen&#237;
+					</div><div class="dxm-popOut">
+						<img class="dxWeb_mVerticalPopOut dxm-pImage" src="/bakaweb/DXR.axd?r=1_10-Hsjh7" alt=">" />
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item dxm-noSubMenu"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="servis.aspx?s=0" style="font-size:9pt;">Nastaven&#237;</a>
+					</div><b class="dx-clear"></b></li>
+				</ul>
+			</div>
+		</div><div id="hlavnimenu_DXM10i1_" style="z-index:20002;display:none;">
+			<div class="dxm-shadow dxm-popup pimenu" style="font-size:9pt;">
+				<ul class="dx dxm-noImages">
+					<li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="servis.aspx?s=10" style="font-size:9pt;">Moje přihl&#225;šen&#237;</a>
+					</div><b class="dx-clear"></b></li>
+				</ul>
+			</div>
+		</div>
+	</div><script id="dxss_1807235507" type="text/javascript">
+<!--
+aspxAddHoverItems('hlavnimenu',[[['dxm-hovered',''],['border-width:0px;',''],['DXI0_','DXI1_','DXI2_','DXI3_','DXI4_','DXI5_','DXI6_','DXI7_','DXI10_','DXI11_'],['','T'],[[''],[''],[''],[''],[''],[''],[''],[''],[''],['']],['Img','PImg']],[[''],[''],['DXME1_','DXMBC1_','DXME2_','DXMBC2_','DXME3_','DXMBC3_','DXME4_','DXMBC4_','DXME6_','DXMBC6_','DXME7_','DXMBC7_','DXME10_','DXMBC10_','DXME10i1_','DXMBC10i1_']],[['dxm-hovered',''],['','padding-left:8pt;'],['DXI1i0_','DXI2i0_','DXI2i1_','DXI2i2_','DXI2i3_','DXI3i0_','DXI3i3_','DXI3i4_','DXI3i5_','DXI3i7_','DXI4i0_','DXI4i1_','DXI6i1_','DXI7i0_','DXI7i1_','DXI7i2_','DXI7i3_','DXI10i1i0_'],['','T'],[[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],['']],['Img','PImg']],[['dxm-hovered','',''],['','padding-left:8pt;','padding-left:8pt;'],['DXI10i1_','DXI10i2_'],['','P','T'],[['',''],['','']],['Img','PImg']]]);
+aspxAddSelectedItems('hlavnimenu',[[['dxm-selected',''],['border-width:0px;',''],['DXI0_','DXI1_','DXI2_','DXI3_','DXI4_','DXI5_','DXI6_','DXI7_','DXI10_','DXI11_'],['','T'],[[''],[''],[''],[''],[''],[''],[''],[''],[''],['']],['Img','PImg']],[['dxm-selected',''],['','padding-left:8pt;'],['DXI1i0_','DXI2i0_','DXI2i1_','DXI2i2_','DXI2i3_','DXI3i0_','DXI3i3_','DXI3i4_','DXI3i5_','DXI3i7_','DXI4i0_','DXI4i1_','DXI6i1_','DXI7i0_','DXI7i1_','DXI7i2_','DXI7i3_','DXI10i1i0_'],['','T'],[[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],['']],['Img','PImg']],[['dxm-selected','',''],['','padding-left:8pt;','padding-left:8pt;'],['DXI10i1_','DXI10i2_'],['','P','T'],[['',''],['','']],['Img','PImg']]]);
+
+var dxo = new ASPxClientMenu('hlavnimenu');
+window['hlavnimenu'] = dxo;
+dxo.uniqueID = 'ctl00$hlavnimenu';
+dxo.liteRender=true;
+dxo.liteRenderData={'':[[0],[1],[2],[3],[4],[5],[6],[7],[10],[11]],'1':[[0]],'2':[[0],[1],[2],[3]],'3':[[0],[3],[4],[5],[7]],'4':[[0],[1]],'6':[[1]],'7':[[0],[1],[2],[3]],'10':[[1],[2]],'10i1':[[0]]};
+dxo.appearAfter=10;
+dxo.allowSelectItem=true;
+dxo.shadowVisible=false;
+dxo.InlineInitialize();
+
+//-->
+</script>
+        
+</div>
+
+
+
+<script type="text/javascript">
+    // <![CDATA[
+    function ShowNotes(dateString) {
+        ClientPopup.Hide();
+        ClientCallback.PerformCallback(dateString);
+    }
+    function ClientCallback_CallbackComplete(s, e) {
+        var parts = e.result.split("|");
+        ClientPopup.SetHeaderText(parts[0]);
+        ClientPopup.SetContentHTML(parts[1]);
+        ClientPopup.Show();
+    }
+    // ]]> 
+    </script>
+
+  <div class="uvodmain">
+
+  
+ <input type="hidden" id="cphmain_popupinfoWS" name="cphmain_popupinfoWS" value="0:0:-1:-10000:-10000:0:420px:110px:1:0:0:0" /><table id="cphmain_popupinfo_PW-1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border-collapse:separate;position:absolute;left:0px;top:0px;z-index:10000;visibility:hidden;display:none;">
+	<tr>
+		<td class="dxpcControl" onmousedown="aspxPWMDown(event,&#39;cphmain_popupinfo&#39;,-1,false)" style="height:110px;width:420px;cursor:default;"><table id="cphmain_popupinfo_CLW-1" cellspacing="0" cellpadding="0" style="height:110px;width:420px;border-collapse:collapse;border-collapse:separate;">
+			<tr>
+				<td id="cphmain_popupinfo_PWH-1" class="dxpcHeader" onmousedown="aspxPWDGMDown(event,&#39;cphmain_popupinfo&#39;,-1)" style="cursor:move;padding-left:12px;padding-right:2px;padding-top:2px;padding-bottom:2px;-khtml-user-select:none;"><table cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;border-collapse:separate;">
+					<tr>
+						<td id="cphmain_popupinfo_PWH-1T" class="dxpc" style="width:100%;">Chybn&#233; pokusy o přihl&#225;šen&#237;</td><td class="dxpcHBCell dxpcHBCellSys"><table cellspacing="0" cellpadding="0" style="border-collapse:collapse;border-collapse:separate;">
+							<tr>
+								<td id="cphmain_popupinfo_HCB-1" class="dxpcCloseButton" onclick="aspxPWCBClick(event, &#39;cphmain_popupinfo&#39;,-1)" onmousedown="return aspxPWHMDown(event);" style="cursor:pointer;"><img id="cphmain_popupinfo_HCB-1Img" class="dxWeb_pcCloseButton" src="/bakaweb/DXR.axd?r=1_10-Hsjh7" alt="[Close]" /></td>
+							</tr>
+						</table></td>
+					</tr>
+				</table></td>
+			</tr><tr>
+				<td id="cphmain_popupinfo_PWC-1" class="dxpcContent" style="height:100%;border-top-width:0px;"><div id="cphmain_popupinfo_CSD-1" class="dxpcContentPaddings">
+					
+               <span id="cphmain_popupinfo_labelpopupchyba" style="color:Red;font-weight:normal;">vyskytla se chyba</span>
+               <br />
+               <br />
+               <div style="width:400px;text-align:center;">
+                  <input type="submit" name="ctl00$cphmain$popupinfo$buttonpopupchyba" value="Ok" onclick="popupinfo.Hide();return false;" id="cphmain_popupinfo_buttonpopupchyba" />
+               </div>
+            
+				</div></td>
+			</tr>
+		</table></td><td style="background:url('/bakaweb/DXR.axd?r=1_65-Hsjh7') no-repeat left top;"></td>
+	</tr><tr>
+		<td style="background:url('/bakaweb/DXR.axd?r=1_64-Hsjh7') no-repeat left top;"></td><td style="background:url('/bakaweb/DXR.axd?r=1_66-Hsjh7') no-repeat left top;"><div style="height:5px;width:5px;">
+
+		</div></td>
+	</tr>
+</table><div id="cphmain_popupinfo_DXPWMB-1" class="dxpcModalBackground" style="position:absolute;visibility:hidden;left:0px;top:0px;z-index:9999;">
+
+</div><table id="cphmain_popupinfo_LP" class="dxpcLoadingPanel" cellspacing="0" cellpadding="0" style="border-collapse:collapse;left:0px;top:0px;z-index:30000;display:none;">
+	<tr>
+		<td class="dx" style="padding-right:8px;"><img src="/bakaweb/DXR.axd?r=1_51-Hsjh7" alt="" align="middle" /></td><td class="dx" style="padding-left:0px;"><span id="cphmain_popupinfo_TL">Loading&hellip;</span></td>
+	</tr>
+</table><div id="cphmain_popupinfo_LD" class="dxpcLoadingDiv" style="left:0px;top:0px;z-index:29999;display:none;position:absolute;">
+
+</div><script id="dxss_1993962979" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientPopupControl('cphmain_popupinfo');
+window['popupinfo'] = dxo;
+dxo.callBack = function(arg) { WebForm_DoCallback('ctl00$cphmain$popupinfo',arg,aspxCallback,'cphmain_popupinfo',aspxCallbackError,true); };
+dxo.uniqueID = 'ctl00$cphmain$popupinfo';
+dxo.appearAfter=0;
+dxo.enableAnimation=false;
+dxo.popupHorizontalAlign='WindowCenter';
+dxo.popupVerticalAlign='WindowCenter';
+dxo.isPopupPositionCorrectionOn=false;
+dxo.allowDragging=true;
+dxo.width=420;
+dxo.height=110;
+dxo.autoUpdatePosition = true;
+dxo.InlineInitialize();
+
+//-->
+</script>
+
+
+
+<input type="hidden" id="FakeHiddenField" name="FakeHiddenField" value="FakeHiddenFieldValue" /><script id="dxss_620791418" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientDockManager('cphmain_uvodManager');
+window['dockManager'] = dxo;
+dxo.callBack = function(arg) { WebForm_DoCallback('ctl00$cphmain$uvodManager',arg,aspxCallback,'cphmain_uvodManager',aspxCallbackError,true); };
+dxo.uniqueID = 'ctl00$cphmain$uvodManager';
+dxo.cookieName = 'bakauvod';
+dxo.clientLayoutState={"upozorneni":[true,"All","LeftZone","0","0",0,0,1],"Rozvrh":[true,"All","LeftZone","0","0",0,0,2],"suplovani":[true,"All","LeftZone","0","0",0,0,3],"planakci":[true,"All","LeftZone","0","0",0,0,4],"DateTime":[true,"All","LeftZone","0","0",0,0,5],"kontakty":[true,"All","LeftZone","0","0",0,0,6],"prihlaseni":[true,"All","LeftZone","0","0",0,0,7],"navigace":[true,"All","LeftZone","0","0",0,0,8],"uvodnizprava":[true,"All","RightZone","600","0",0,0,10],"domaciukolyzprava":[true,"All","RightZone","0","0",0,0,12]};
+dxo.InlineInitialize();
+
+//-->
+</script>
+
+   <input type="hidden" id="cphmain_dockupozorneniWS" name="cphmain_dockupozorneniWS" value="1:0:-1:-10000:-10000:0:0px:0px:1:0:0:0" /><input type="hidden" id="cphmain_dockupozorneni_SHF" name="cphmain_dockupozorneni_SHF" value="[&#39;LeftZone&#39;,1,&#39;&#39;,0,0,0]" /><div id="cphmain_dockupozorneni_PW-1" class="dxdpLite dxpclW" style="height:0px;width:270px;z-index:10000;display:none;">
+	<div class="dxpc-mainDiv dxpc-shadow" style="cursor:default;">
+		<div class="dxpc-header" style="cursor:move;-khtml-user-select:none;">
+			<div class="dxpc-headerContent">
+				<span class="dxpc-headerText">Upozorněn&#237;</span>
+			</div><b class="dx-clear"></b>
+		</div><div class="dxpc-contentWrapper">
+			<div class="dxpc-content">
+				
+                <div class="uvodinfo"><table class="uvodinfot"><tr><td>nové známky:</td><td>0</td></tr><tr><td>nové zprávy:</td><td>0</td></tr><tr><td>nevyplněné ankety:</td><td>0</td></tr><tr class="uvodalarm"><td><a href="prehled.aspx?s=621">domácí úkoly:</a></td><td><a href="prehled.aspx?s=621">2</a></td></tr></table></div>
+          
+			</div>
+		</div>
+	</div>
+</div><table id="cphmain_dockupozorneni_LP" class="dxdpLoadingPanel" cellspacing="0" cellpadding="0" style="border-collapse:collapse;left:0px;top:0px;z-index:30000;display:none;">
+	<tr>
+		<td class="dx" style="padding-right:8px;"><img src="/bakaweb/DXR.axd?r=1_51-Hsjh7" alt="" align="middle" /></td><td class="dx" style="padding-left:0px;"><span id="cphmain_dockupozorneni_TL">Loading&hellip;</span></td>
+	</tr>
+</table><div id="cphmain_dockupozorneni_LD" class="dxdpLoadingDiv" style="left:0px;top:0px;z-index:29999;display:none;position:absolute;">
+
+</div><script id="dxss_1534412732" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientDockPanel('cphmain_dockupozorneni');
+window['UpozorneniPanel'] = dxo;
+dxo.callBack = function(arg) { WebForm_DoCallback('ctl00$cphmain$dockupozorneni',arg,aspxCallback,'cphmain_dockupozorneni',aspxCallbackError,true); };
+dxo.uniqueID = 'ctl00$cphmain$dockupozorneni';
+dxo.popupAnimationType='slide';
+dxo.closeAction='CloseButton';
+dxo.isPopupPositionCorrectionOn=false;
+dxo.liteRender=true;
+dxo.allowDragging=true;
+dxo.minWidth=270;
+dxo.showOnPageLoad=true;
+dxo.panelUID='upozorneni';
+dxo.InlineInitialize();
+
+//-->
+</script>
+
+    <input type="hidden" id="cphmain_dockrozvrhWS" name="cphmain_dockrozvrhWS" value="1:0:-1:-10000:-10000:0:0px:0px:1:0:0:0" /><input type="hidden" id="cphmain_dockrozvrh_SHF" name="cphmain_dockrozvrh_SHF" value="[&#39;LeftZone&#39;,2,&#39;&#39;,0,0,0]" /><div id="cphmain_dockrozvrh_PW-1" class="dxdpLite dxpclW" style="height:0px;width:270px;z-index:10000;display:none;">
+	<div class="dxpc-mainDiv dxpc-shadow" style="cursor:default;">
+		<div class="dxpc-header" style="cursor:move;-khtml-user-select:none;">
+			<div class="dxpc-headerContent">
+				<a class="dxpc-link" href="prehled.aspx?s=2252"><span class="dxpc-headerText">Rozvrh</span></a>
+			</div><b class="dx-clear"></b>
+		</div><div class="dxpc-contentWrapper">
+			<div class="dxpc-content">
+				
+                <table cellspacing="0" cellpadding="0" class="urtable"><tbody><tr class="hodiny"><td>&nbsp</td><td class="hodina"><div class="uroznumhod">0</div></td><td class="hodina"><div class="uroznumhod">1</div></td><td class="hodina"><div class="uroznumhod">2</div></td><td class="hodina"><div class="uroznumhod">3</div></td><td class="hodina"><div class="uroznumhod">4</div></td><td class="hodina"><div class="uroznumhod">5a</div></td><td class="hodina"><div class="uroznumhod">5b</div></td><td class="hodina"><div class="uroznumhod">6</div></td><td class="hodina"><div class="uroznumhod">7</div></td><td class="hodina"><div class="uroznumhod">8</div></td></tr><tr><td class="den"><div class="urozden">Po</div></td><td class="urozpredmetprazdny"></td><td class="urozpredmet1" title="Matematika" >M</td><td class="urozpredmet1" title="Český jazyk" >Čj</td><td class="urozpredmet1" title="Fyzika" >Fy</td><td class="urozpredmet1" title="Francouzský jazyk" >Fj</td><td class="urozpredmetprazdny">&nbsp;</td><td class="urozpredmet1" title="Anglický jazyk" >Aj</td><td class="urozpredmet1" title="Dějepis" >D</td><td class="urozpredmetprazdny">&nbsp;</td><td class="urozpredmetprazdny">&nbsp;</td></tr><tr><td class="den"><div class="urozden">Út</div></td><td class="urozpredmetprazdny"></td><td class="urozpredmet1" title="Matematika" >M</td><td class="urozpredmet1" title="Biologie" >Bi</td><td class="urozpredmet1" title="Občanská výchova" >Ov</td><td class="urozpredmet1" title="Chemie" >Ch</td><td class="urozpredmet1" title="Francouzský jazyk" >Fj</td><td class="urozpredmetprazdny">&nbsp;</td><td class="urozpredmet1" title="Český jazyk" >Čj</td><td class="urozpredmet1" title="Zeměpis" >Z</td><td class="urozpredmetprazdny">&nbsp;</td></tr><tr><td class="den"><div class="urozden">St</div></td><td class="urozpredmetprazdny"></td><td class="urozpredmet1" title="Výtvarná výchova" >Vv</td><td class="urozpredmet1" title="Výtvarná výchova" >Vv</td><td class="urozpredmet1" title="Anglický jazyk" >Aj</td><td class="urozpredmet1" title="Český jazyk" >Čj</td><td class="urozpredmetprazdny">&nbsp;</td><td class="urozpredmet1" title="Matematika" >M</td><td class="urozpredmet1" title="Fyzika" >Fy</td><td class="urozpredmet1" title="Dějepisný seminář" >Dsem</td><td class="urozpredmetprazdny">&nbsp;</td></tr><tr><td class="den"><div class="urozden">Čt</div></td><td class="urozpredmetprazdny"></td><td class="urozpredmet1" title="Francouzský jazyk" >Fj</td><td class="urozpredmet1" title="Český jazyk" >Čj</td><td class="urozpredmet1" title="Dějepis" >D</td><td class="urozpredmet1" title="Zeměpis" >Z</td><td class="urozpredmetprazdny">&nbsp;</td><td class="urozpredmet1" title="Informatika a výp. technika" >Inf</td><td class="urozpredmetprazdny">&nbsp;</td><td class="urozpredmetprazdny">&nbsp;</td><td class="urozpredmetprazdny">&nbsp;</td></tr><tr><td class="den"><div class="urozden">Pá</div></td><td class="urozpredmetprazdny">ředitelské volno</td><td class="urozpredmetprazdny">&nbsp;</td><td class="urozpredmetprazdny">&nbsp;</td><td class="urozpredmetprazdny">&nbsp;</td><td class="urozpredmetprazdny">&nbsp;</td><td class="urozpredmetprazdny">&nbsp;</td><td class="urozpredmetprazdny">&nbsp;</td><td class="urozpredmetprazdny">&nbsp;</td><td class="urozpredmetprazdny">&nbsp;</td><td class="urozpredmetprazdny">&nbsp;</td></tr></tbody></table>
+          
+			</div>
+		</div>
+	</div>
+</div><table id="cphmain_dockrozvrh_LP" class="dxdpLoadingPanel" cellspacing="0" cellpadding="0" style="border-collapse:collapse;left:0px;top:0px;z-index:30000;display:none;">
+	<tr>
+		<td class="dx" style="padding-right:8px;"><img src="/bakaweb/DXR.axd?r=1_51-Hsjh7" alt="" align="middle" /></td><td class="dx" style="padding-left:0px;"><span id="cphmain_dockrozvrh_TL">Loading&hellip;</span></td>
+	</tr>
+</table><div id="cphmain_dockrozvrh_LD" class="dxdpLoadingDiv" style="left:0px;top:0px;z-index:29999;display:none;position:absolute;">
+
+</div><script id="dxss_2006802196" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientDockPanel('cphmain_dockrozvrh');
+window['rozvrhPanel'] = dxo;
+dxo.callBack = function(arg) { WebForm_DoCallback('ctl00$cphmain$dockrozvrh',arg,aspxCallback,'cphmain_dockrozvrh',aspxCallbackError,true); };
+dxo.uniqueID = 'ctl00$cphmain$dockrozvrh';
+dxo.popupAnimationType='slide';
+dxo.closeAction='CloseButton';
+dxo.isPopupPositionCorrectionOn=false;
+dxo.liteRender=true;
+dxo.allowDragging=true;
+dxo.minWidth=270;
+dxo.showOnPageLoad=true;
+dxo.panelUID='Rozvrh';
+dxo.InlineInitialize();
+
+//-->
+</script>
+
+     <input type="hidden" id="cphmain_docksuplovaniWS" name="cphmain_docksuplovaniWS" value="1:0:-1:-10000:-10000:0:0px:0px:1:0:0:0" /><input type="hidden" id="cphmain_docksuplovani_SHF" name="cphmain_docksuplovani_SHF" value="[&#39;LeftZone&#39;,3,&#39;&#39;,0,0,0]" /><div id="cphmain_docksuplovani_PW-1" class="dxdpLite dxpclW" style="height:0px;width:270px;z-index:10000;display:none;">
+	<div class="dxpc-mainDiv dxpc-shadow" style="cursor:default;">
+		<div class="dxpc-header" style="cursor:move;-khtml-user-select:none;">
+			<div class="dxpc-headerContent">
+				<a class="dxpc-link" href="prehled.aspx?s=601"><span class="dxpc-headerText">Suplov&#225;n&#237;</span></a>
+			</div><b class="dx-clear"></b>
+		</div><div class="dxpc-contentWrapper">
+			<div class="dxpc-content">
+				
+                <div class="ustable"><div class="usden">Žádné změny.</div></div>
+          
+			</div>
+		</div>
+	</div>
+</div><table id="cphmain_docksuplovani_LP" class="dxdpLoadingPanel" cellspacing="0" cellpadding="0" style="border-collapse:collapse;left:0px;top:0px;z-index:30000;display:none;">
+	<tr>
+		<td class="dx" style="padding-right:8px;"><img src="/bakaweb/DXR.axd?r=1_51-Hsjh7" alt="" align="middle" /></td><td class="dx" style="padding-left:0px;"><span id="cphmain_docksuplovani_TL">Loading&hellip;</span></td>
+	</tr>
+</table><div id="cphmain_docksuplovani_LD" class="dxdpLoadingDiv" style="left:0px;top:0px;z-index:29999;display:none;position:absolute;">
+
+</div><script id="dxss_1305912320" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientDockPanel('cphmain_docksuplovani');
+window['SuplovaniPanel'] = dxo;
+dxo.callBack = function(arg) { WebForm_DoCallback('ctl00$cphmain$docksuplovani',arg,aspxCallback,'cphmain_docksuplovani',aspxCallbackError,true); };
+dxo.uniqueID = 'ctl00$cphmain$docksuplovani';
+dxo.popupAnimationType='slide';
+dxo.closeAction='CloseButton';
+dxo.isPopupPositionCorrectionOn=false;
+dxo.liteRender=true;
+dxo.allowDragging=true;
+dxo.minWidth=270;
+dxo.showOnPageLoad=true;
+dxo.panelUID='suplovani';
+dxo.InlineInitialize();
+
+//-->
+</script>
+
+
+    <input type="hidden" id="cphmain_dockplanWS" name="cphmain_dockplanWS" value="1:0:-1:-10000:-10000:0:0px:0px:1:0:0:0" /><input type="hidden" id="cphmain_dockplan_SHF" name="cphmain_dockplan_SHF" value="[&#39;LeftZone&#39;,4,&#39;&#39;,0,0,0]" /><div id="cphmain_dockplan_PW-1" class="dxdpLite dxpclW" style="height:0px;width:270px;z-index:10000;display:none;">
+	<div class="dxpc-mainDiv dxpc-shadow" style="cursor:default;">
+		<div class="dxpc-header" style="cursor:move;-khtml-user-select:none;">
+			<div class="dxpc-headerContent">
+				<a class="dxpc-link" href="prehled.aspx?s=17"><span class="dxpc-headerText">Nejbližš&#237; akce</span></a>
+			</div><b class="dx-clear"></b>
+		</div><div class="dxpc-contentWrapper">
+			<div class="dxpc-content">
+				
+                <i>Žádný záznam v plánu akcí</i>
+          
+			</div>
+		</div>
+	</div>
+</div><table id="cphmain_dockplan_LP" class="dxdpLoadingPanel" cellspacing="0" cellpadding="0" style="border-collapse:collapse;left:0px;top:0px;z-index:30000;display:none;">
+	<tr>
+		<td class="dx" style="padding-right:8px;"><img src="/bakaweb/DXR.axd?r=1_51-Hsjh7" alt="" align="middle" /></td><td class="dx" style="padding-left:0px;"><span id="cphmain_dockplan_TL">Loading&hellip;</span></td>
+	</tr>
+</table><div id="cphmain_dockplan_LD" class="dxdpLoadingDiv" style="left:0px;top:0px;z-index:29999;display:none;position:absolute;">
+
+</div><script id="dxss_1837097993" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientDockPanel('cphmain_dockplan');
+window['PlanakciPanel'] = dxo;
+dxo.callBack = function(arg) { WebForm_DoCallback('ctl00$cphmain$dockplan',arg,aspxCallback,'cphmain_dockplan',aspxCallbackError,true); };
+dxo.uniqueID = 'ctl00$cphmain$dockplan';
+dxo.popupAnimationType='slide';
+dxo.closeAction='CloseButton';
+dxo.isPopupPositionCorrectionOn=false;
+dxo.liteRender=true;
+dxo.allowDragging=true;
+dxo.minWidth=270;
+dxo.showOnPageLoad=true;
+dxo.panelUID='planakci';
+dxo.InlineInitialize();
+
+//-->
+</script>
+
+
+   <input type="hidden" id="cphmain_dockkalendarWS" name="cphmain_dockkalendarWS" value="1:0:-1:-10000:-10000:0:0px:0px:1:0:0:0" /><input type="hidden" id="cphmain_dockkalendar_SHF" name="cphmain_dockkalendar_SHF" value="[&#39;LeftZone&#39;,5,&#39;&#39;,0,0,0]" /><div id="cphmain_dockkalendar_PW-1" class="dxdpLite dxpclW" style="height:0px;width:0px;z-index:10000;display:none;">
+	<div class="dxpc-mainDiv dxpc-shadow" style="cursor:default;">
+		<div class="dxpc-header" style="cursor:move;-khtml-user-select:none;">
+			<div class="dxpc-headerContent">
+				<span class="dxpc-headerText">Kalend&#225;ř</span>
+			</div><b class="dx-clear"></b>
+		</div><div class="dxpc-contentWrapper">
+			<div class="dxpc-content">
+				
+         <div style="float:left;width:98%;">
+        <script id="dxss_38005611" type="text/javascript">
+<!--
+(function(){var a = ({'currency':'Kč','shortDate':'d.M.yyyy','abbrMonthNames':['1','2','3','4','5','6','7','8','9','10','11','12',''],'numNegInf':'-nekonečno','yearMonth':'MMMM yyyy','currGroupSeparator':' ','am':'dop.','currPosPattern':3,'longDate':'d. MMMM yyyy','genMonthNames':['ledna','února','března','dubna','května','června','července','srpna','září','října','listopadu','prosince',''],'numNan':'Není číslo','numPosInf':'+nekonečno','abbrDayNames':['ne','po','út','st','čt','pá','so'],'numDecimalPoint':',','currNegPattern':8,'monthNames':['leden','únor','březen','duben','květen','červen','červenec','srpen','září','říjen','listopad','prosinec',''],'monthDay':'dd MMMM','shortTime':'H:mm','pm':'odp.','numGroupSeparator':' ','longTime':'H:mm:ss','ds':'.','currDecimalPoint':',','percentPattern':1,'dayNames':['neděle','pondělí','úterý','středa','čtvrtek','pátek','sobota']});for(var b in a) __aspxCultureInfo[b] = a[b];})();
+//-->
+</script><table id="cphmain_dockkalendar_kalendar_LP" class="dxeLoadingPanelWithContent" cellspacing="0" cellpadding="0" style="border-collapse:collapse;left:0px;top:0px;z-index:30000;display:none;">
+					<tr>
+						<td class="dx"><img src="/bakaweb/DXR.axd?r=1_33-Hsjh7" alt="" align="middle" /></td><td class="dx" style="padding-left:0px;"><span id="cphmain_dockkalendar_kalendar_TL">Loading&hellip;</span></td>
+					</tr>
+				</table><div id="cphmain_dockkalendar_kalendar_LD" class="dxeLoadingDivWithContent" style="left:0px;top:0px;z-index:29999;display:none;position:absolute;">
+
+				</div><table style="display:none;">
+					<tr>
+						<td id="cphmain_dockkalendar_kalendar_EC_D" class="dxeCalendarDay"></td><td id="cphmain_dockkalendar_kalendar_EC_DS" class="dxeCalendarSelected"></td><td id="cphmain_dockkalendar_kalendar_EC_DA" class="dxeCalendarOtherMonth"></td><td id="cphmain_dockkalendar_kalendar_EC_DW" class="dxeCalendarWeekend"></td><td id="cphmain_dockkalendar_kalendar_EC_DO" class="dxeCalendarOutOfRange"></td><td id="cphmain_dockkalendar_kalendar_EC_DT"></td><td id="cphmain_dockkalendar_kalendar_EC_DD" class="dxeDisabled"></td><td id="cphmain_dockkalendar_kalendar_EC_FNM" class="dxeCalendarFastNavMonth"></td><td id="cphmain_dockkalendar_kalendar_EC_FNMS" class="dxeCalendarFastNavMonthSelected"></td><td id="cphmain_dockkalendar_kalendar_EC_FNY" class="dxeCalendarFastNavYear"></td><td id="cphmain_dockkalendar_kalendar_EC_FNYS" class="dxeCalendarFastNavYearSelected"></td>
+					</tr>
+				</table><table class="dxeCalendar dxeReadOnly" cellspacing="0" cellpadding="0" id="cphmain_dockkalendar_kalendar" style="border-style:None;width:100%;border-collapse:collapse;">
+					<tr>
+						<td valign="top"><table cellpadding="0" style="width:100%;border-collapse:collapse;">
+							<tr>
+								<td class="dxeCalendarHeader" style="border-top:0;"><table cellpadding="0" style="width:100%;border-collapse:collapse;">
+									<tr>
+										<td id="cphmain_dockkalendar_kalendar_PMC" class="dxe" onclick="aspxCalShiftMonth(&#39;cphmain_dockkalendar_kalendar&#39;, -1);"><img id="cphmain_dockkalendar_kalendar_PMCImg" class="dxEditors_edtCalendarPrevMonth" src="/bakaweb/DXR.axd?r=1_10-Hsjh7" alt="&lt;" /></td><td id="cphmain_dockkalendar_kalendar_TC" class="dxe" style="width:100%;cursor:default;"><span id="cphmain_dockkalendar_kalendar_T" onclick="aspxCalTitleClick(&#39;cphmain_dockkalendar_kalendar&#39;, 0, 0)" style="cursor:pointer;">březen 2014</span></td><td id="cphmain_dockkalendar_kalendar_NMC" class="dxe" onclick="aspxCalShiftMonth(&#39;cphmain_dockkalendar_kalendar&#39;, 1);"><img id="cphmain_dockkalendar_kalendar_NMCImg" class="dxEditors_edtCalendarNextMonth" src="/bakaweb/DXR.axd?r=1_10-Hsjh7" alt=">" /></td>
+									</tr>
+								</table></td>
+							</tr><tr>
+								<td id="cphmain_dockkalendar_kalendar_mc" class="dxMonthGrid" style="-khtml-user-select:none;"><table id="cphmain_dockkalendar_kalendar_mt" cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;border-collapse:separate;">
+									<tr align="center">
+										<td class="dxeCalendarDayHeader">po</td><td class="dxeCalendarDayHeader">út</td><td class="dxeCalendarDayHeader">st</td><td class="dxeCalendarDayHeader">čt</td><td class="dxeCalendarDayHeader">pá</td><td class="dxeCalendarDayHeader">so</td><td class="dxeCalendarDayHeader">ne</td>
+									</tr><tr>
+										<td class="dxeCalendarDay dxeCalendarWeekend dxeCalendarOtherMonth">24</td><td class="dxeCalendarDay dxeCalendarWeekend dxeCalendarOtherMonth">25</td><td class="dxeCalendarDay dxeCalendarWeekend dxeCalendarOtherMonth">26</td><td class="dxeCalendarDay dxeCalendarWeekend dxeCalendarOtherMonth">27</td><td class="dxeCalendarDay dxeCalendarWeekend dxeCalendarOtherMonth">28</td><td class="dxeCalendarDay dxeCalendarWeekend">1</td><td class="dxeCalendarDay dxeCalendarWeekend">2</td>
+									</tr><tr>
+										<td class="dxeCalendarDay dxeCalendarWeekend">3</td><td class="dxeCalendarDay"><a title="divadlo" href="javascript:ShowNotes(&#39;3/4/2014&#39;)" style="color:Black;background-color:Gold;font-weight:bold;padding:2pt;;margin:0pt;;">4</a></td><td class="dxeCalendarDay dxeCalendarWeekend">5</td><td class="dxeCalendarDay dxeCalendarWeekend">6</td><td class="dxeCalendarDay dxeCalendarWeekend">7</td><td class="dxeCalendarDay dxeCalendarWeekend">8</td><td class="dxeCalendarDay dxeCalendarWeekend">9</td>
+									</tr><tr>
+										<td class="dxeCalendarDay dxeCalendarWeekend">10</td><td class="dxeCalendarDay dxeCalendarWeekend">11</td><td class="dxeCalendarDay dxeCalendarWeekend">12</td><td class="dxeCalendarDay dxeCalendarWeekend">13</td><td class="dxeCalendarDay dxeCalendarWeekend">14</td><td class="dxeCalendarDay dxeCalendarWeekend">15</td><td class="dxeCalendarDay dxeCalendarWeekend">16</td>
+									</tr><tr>
+										<td class="dxeCalendarDay dxeCalendarWeekend">17</td><td class="dxeCalendarDay dxeCalendarWeekend">18</td><td class="dxeCalendarDay dxeCalendarWeekend">19</td><td class="dxeCalendarDay dxeCalendarWeekend">20</td><td class="dxeCalendarDay dxeCalendarWeekend">21</td><td class="dxeCalendarDay dxeCalendarWeekend">22</td><td class="dxeCalendarDay dxeCalendarWeekend">23</td>
+									</tr><tr>
+										<td class="dxeCalendarDay dxeCalendarWeekend">24</td><td class="dxeCalendarDay dxeCalendarWeekend">25</td><td class="dxeCalendarDay dxeCalendarWeekend">26</td><td class="dxeCalendarDay dxeCalendarWeekend">27</td><td class="dxeCalendarDay dxeCalendarWeekend">28</td><td class="dxeCalendarDay dxeCalendarWeekend">29</td><td class="dxeCalendarDay dxeCalendarWeekend">30</td>
+									</tr><tr>
+										<td class="dxeCalendarDay dxeCalendarWeekend">31</td><td class="dxeCalendarDay dxeCalendarWeekend dxeCalendarOtherMonth">1</td><td class="dxeCalendarDay dxeCalendarWeekend dxeCalendarOtherMonth">2</td><td class="dxeCalendarDay dxeCalendarWeekend dxeCalendarOtherMonth">3</td><td class="dxeCalendarDay dxeCalendarWeekend dxeCalendarOtherMonth">4</td><td class="dxeCalendarDay dxeCalendarWeekend dxeCalendarOtherMonth">5</td><td class="dxeCalendarDay dxeCalendarWeekend dxeCalendarOtherMonth">6</td>
+									</tr>
+								</table></td>
+							</tr>
+						</table><div class="dxKBSW">
+							<input id="cphmain_dockkalendar_kalendar_KBS" type="text" readonly="readonly" style="opacity:0;width:1px;height:1px;position:relative;background-color:transparent;display:block;margin:0;padding:0;border-width:0;font-size:0pt;" />
+						</div></td>
+					</tr>
+				</table><input type="hidden" id="cphmain_dockkalendar_kalendar_FNPWS" name="cphmain_dockkalendar_kalendar_FNPWS" value="0:0:-1:-10000:-10000:0:0px:-10000:1:0:0:0" /><div id="cphmain_dockkalendar_kalendar_FNP_PW-1" class="dxpclW" style="width:0px;z-index:10000;display:none;">
+					<div class="dxpc-mainDiv dxpc-shadow" style="cursor:default;">
+						<div class="dxpc-contentWrapper">
+							<div class="dxpc-content">
+								<div class="dxeCalendarFastNav">
+									<div class="dxeCalendarFastNavMonthArea">
+										<table id="cphmain_dockkalendar_kalendar_FNP_m" cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;border-collapse:separate;">
+											<tr>
+												<td class="dxeCalendarFastNavMonth">1</td><td class="dxeCalendarFastNavMonth">2</td><td class="dxeCalendarFastNavMonth">3</td><td class="dxeCalendarFastNavMonth">4</td>
+											</tr><tr>
+												<td class="dxeCalendarFastNavMonth">5</td><td class="dxeCalendarFastNavMonth">6</td><td class="dxeCalendarFastNavMonth">7</td><td class="dxeCalendarFastNavMonth">8</td>
+											</tr><tr>
+												<td class="dxeCalendarFastNavMonth">9</td><td class="dxeCalendarFastNavMonth">10</td><td class="dxeCalendarFastNavMonth">11</td><td class="dxeCalendarFastNavMonth">12</td>
+											</tr>
+										</table>
+									</div>
+								</div><div class="dxeCalendarFastNavFooter" align="center">
+									<table cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+										<tr>
+											<td id="cphmain_dockkalendar_kalendar_FNP_BO" class="dxeCalendarButton" onclick="aspxCalFNBClick(&#39;cphmain_dockkalendar_kalendar&#39;, &#39;ok&#39;)" style="width:37px;"><table class="dxbebt" cellspacing="0" cellpadding="0" style="width:37px;border-collapse:collapse;border-collapse:separate;">
+												<tr>
+													<td class="dx" style="width:100%;">OK</td>
+												</tr>
+											</table></td><td><div style="width:11px;">
+
+											</div></td><td id="cphmain_dockkalendar_kalendar_FNP_BC" class="dxeCalendarButton" onclick="aspxCalFNBClick(&#39;cphmain_dockkalendar_kalendar&#39;, &#39;cancel&#39;)" style="width:37px;"><table class="dxbebt" cellspacing="0" cellpadding="0" style="width:37px;border-collapse:collapse;border-collapse:separate;">
+												<tr>
+													<td class="dx" style="width:100%;">Cancel</td>
+												</tr>
+											</table></td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div><script id="dxss_1378743665" type="text/javascript">
+<!--
+aspxAddHoverItems('cphmain_dockkalendar_kalendar_FNP',[[['dxpc-closeBtnHover'],[''],['HCB-1'],,[['']],['Img']]]);
+
+var dxo = new ASPxClientPopupControl('cphmain_dockkalendar_kalendar_FNP');
+window['cphmain_dockkalendar_kalendar_FNP'] = dxo;
+dxo.uniqueID = 'ctl00$cphmain$dockkalendar$kalendar$FNP';
+dxo.adjustInnerControlsSizeOnShow=false;
+dxo.popupAnimationType='fade';
+dxo.isPopupPositionCorrectionOn=false;
+dxo.liteRender=true;
+dxo.height=0;
+dxo.InlineInitialize();
+
+//-->
+</script><input id="cphmain_dockkalendar_kalendar_STATE" name="ctl00$cphmain$dockkalendar$kalendar" type="hidden" /><script id="dxss_1183927886" type="text/javascript">
+<!--
+aspxAddHoverItems('cphmain_dockkalendar_kalendar',[[['dxeCalendarButtonHover'],[''],['FNP_BO','FNP_BC']],[['dxeCalendarFastNavMonthHover'],[''],['FNP_M0','FNP_M1','FNP_M2','FNP_M3','FNP_M4','FNP_M5','FNP_M6','FNP_M7','FNP_M8','FNP_M9','FNP_M10','FNP_M11']],[['dxeCalendarFastNavYearHover'],[''],['FNP_Y0','FNP_Y1','FNP_Y2','FNP_Y3','FNP_Y4','FNP_Y5','FNP_Y6','FNP_Y7','FNP_Y8','FNP_Y9']]]);
+
+var dxo = new ASPxClientCalendar('cphmain_dockkalendar_kalendar');
+window['cphmain_dockkalendar_kalendar'] = dxo;
+dxo.callBack = function(arg) { WebForm_DoCallback('ctl00$cphmain$dockkalendar$kalendar',arg,aspxCallback,'cphmain_dockkalendar_kalendar',aspxCallbackError,true); };
+dxo.uniqueID = 'ctl00$cphmain$dockkalendar$kalendar';
+dxo.readOnly=true;
+dxo.RequireStyleDecoration();
+dxo.styleDecoration.AddStyle('F','dxeFocused','');
+dxo.currentDate=new Date(2014,2,24);
+dxo.visibleDate = new Date(2014,2,24);
+dxo.firstDayOfWeek = 1;
+dxo.customDraw = true;
+dxo.showWeekNumbers = false;
+dxo.InlineInitialize();
+
+//-->
+</script>
+   </div>
+   <div id="popupAnchor" style="float: left; margin-left: 5px">
+    </div>
+
+          
+			</div>
+		</div>
+	</div>
+</div><table id="cphmain_dockkalendar_LP" class="dxdpLoadingPanel" cellspacing="0" cellpadding="0" style="border-collapse:collapse;left:0px;top:0px;z-index:30000;display:none;">
+	<tr>
+		<td class="dx" style="padding-right:8px;"><img src="/bakaweb/DXR.axd?r=1_51-Hsjh7" alt="" align="middle" /></td><td class="dx" style="padding-left:0px;"><span id="cphmain_dockkalendar_TL">Loading&hellip;</span></td>
+	</tr>
+</table><div id="cphmain_dockkalendar_LD" class="dxdpLoadingDiv" style="left:0px;top:0px;z-index:29999;display:none;position:absolute;">
+
+</div><script id="dxss_992423187" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientDockPanel('cphmain_dockkalendar');
+window['dateTimePanel'] = dxo;
+dxo.callBack = function(arg) { WebForm_DoCallback('ctl00$cphmain$dockkalendar',arg,aspxCallback,'cphmain_dockkalendar',aspxCallbackError,true); };
+dxo.uniqueID = 'ctl00$cphmain$dockkalendar';
+dxo.popupAnimationType='slide';
+dxo.closeAction='CloseButton';
+dxo.isPopupPositionCorrectionOn=false;
+dxo.liteRender=true;
+dxo.allowDragging=true;
+dxo.showOnPageLoad=true;
+dxo.panelUID='DateTime';
+dxo.InlineInitialize();
+
+//-->
+</script>
+
+
+    <input type="hidden" id="cphmain_dockkontaktyWS" name="cphmain_dockkontaktyWS" value="1:0:-1:-10000:-10000:0:0px:0px:1:0:0:0" /><input type="hidden" id="cphmain_dockkontakty_SHF" name="cphmain_dockkontakty_SHF" value="[&#39;LeftZone&#39;,6,&#39;&#39;,0,0,0]" /><div id="cphmain_dockkontakty_PW-1" class="dxdpLite dxpclW" style="height:0px;width:270px;z-index:10000;display:none;">
+	<div class="dxpc-mainDiv dxpc-shadow" style="cursor:default;">
+		<div class="dxpc-header" style="cursor:move;-khtml-user-select:none;">
+			<div class="dxpc-headerContent">
+				<span class="dxpc-headerText">Kontakty</span>
+			</div><b class="dx-clear"></b>
+		</div><div class="dxpc-contentWrapper">
+			<div class="dxpc-content">
+				
+                                <div class="utridni">třídní učitel: Mgr. Dana Třídová </div>
+
+          
+			</div>
+		</div>
+	</div>
+</div><table id="cphmain_dockkontakty_LP" class="dxdpLoadingPanel" cellspacing="0" cellpadding="0" style="border-collapse:collapse;left:0px;top:0px;z-index:30000;display:none;">
+	<tr>
+		<td class="dx" style="padding-right:8px;"><img src="/bakaweb/DXR.axd?r=1_51-Hsjh7" alt="" align="middle" /></td><td class="dx" style="padding-left:0px;"><span id="cphmain_dockkontakty_TL">Loading&hellip;</span></td>
+	</tr>
+</table><div id="cphmain_dockkontakty_LD" class="dxdpLoadingDiv" style="left:0px;top:0px;z-index:29999;display:none;position:absolute;">
+
+</div><script id="dxss_1599583325" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientDockPanel('cphmain_dockkontakty');
+window['KontaktyPanel'] = dxo;
+dxo.callBack = function(arg) { WebForm_DoCallback('ctl00$cphmain$dockkontakty',arg,aspxCallback,'cphmain_dockkontakty',aspxCallbackError,true); };
+dxo.uniqueID = 'ctl00$cphmain$dockkontakty';
+dxo.popupAnimationType='slide';
+dxo.closeAction='CloseButton';
+dxo.isPopupPositionCorrectionOn=false;
+dxo.liteRender=true;
+dxo.allowDragging=true;
+dxo.minWidth=270;
+dxo.showOnPageLoad=true;
+dxo.panelUID='kontakty';
+dxo.InlineInitialize();
+
+//-->
+</script>
+
+ 
+       <input type="hidden" id="cphmain_dockprihlaseniWS" name="cphmain_dockprihlaseniWS" value="1:0:-1:-10000:-10000:0:0px:0px:1:0:0:0" /><input type="hidden" id="cphmain_dockprihlaseni_SHF" name="cphmain_dockprihlaseni_SHF" value="[&#39;LeftZone&#39;,7,&#39;&#39;,0,0,0]" /><div id="cphmain_dockprihlaseni_PW-1" class="dxdpLite dxpclW" style="height:0px;width:270px;z-index:10000;display:none;">
+	<div class="dxpc-mainDiv dxpc-shadow" style="cursor:default;">
+		<div class="dxpc-header" style="cursor:move;-khtml-user-select:none;">
+			<div class="dxpc-headerContent">
+				<a class="dxpc-link" href="servis.aspx?s=10"><span class="dxpc-headerText">Posledn&#237; přihl&#225;šen&#237;</span></a>
+			</div><b class="dx-clear"></b>
+		</div><div class="dxpc-contentWrapper">
+			<div class="dxpc-content">
+				
+                <span id="cphmain_dockprihlaseni_labelposledniprihlaseni">24.3.2014 20:33:31</span>
+          
+			</div>
+		</div>
+	</div>
+</div><table id="cphmain_dockprihlaseni_LP" class="dxdpLoadingPanel" cellspacing="0" cellpadding="0" style="border-collapse:collapse;left:0px;top:0px;z-index:30000;display:none;">
+	<tr>
+		<td class="dx" style="padding-right:8px;"><img src="/bakaweb/DXR.axd?r=1_51-Hsjh7" alt="" align="middle" /></td><td class="dx" style="padding-left:0px;"><span id="cphmain_dockprihlaseni_TL">Loading&hellip;</span></td>
+	</tr>
+</table><div id="cphmain_dockprihlaseni_LD" class="dxdpLoadingDiv" style="left:0px;top:0px;z-index:29999;display:none;position:absolute;">
+
+</div><script id="dxss_81452851" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientDockPanel('cphmain_dockprihlaseni');
+window['PrihlaseniPanel'] = dxo;
+dxo.callBack = function(arg) { WebForm_DoCallback('ctl00$cphmain$dockprihlaseni',arg,aspxCallback,'cphmain_dockprihlaseni',aspxCallbackError,true); };
+dxo.uniqueID = 'ctl00$cphmain$dockprihlaseni';
+dxo.popupAnimationType='slide';
+dxo.closeAction='CloseButton';
+dxo.isPopupPositionCorrectionOn=false;
+dxo.liteRender=true;
+dxo.allowDragging=true;
+dxo.minWidth=270;
+dxo.showOnPageLoad=true;
+dxo.panelUID='prihlaseni';
+dxo.InlineInitialize();
+
+//-->
+</script>
+
+
+       <input type="hidden" id="cphmain_docknavigaceWS" name="cphmain_docknavigaceWS" value="1:0:-1:-10000:-10000:0:0px:0px:1:0:0:0" /><input type="hidden" id="cphmain_docknavigace_SHF" name="cphmain_docknavigace_SHF" value="[&#39;LeftZone&#39;,8,&#39;&#39;,0,0,0]" /><div id="cphmain_docknavigace_PW-1" class="dxdpLite dxpclW" style="height:0px;width:0px;z-index:10000;display:none;">
+	<div class="dxpc-mainDiv dxpc-shadow" style="cursor:default;">
+		<div class="dxpc-header" style="cursor:move;-khtml-user-select:none;">
+			<div class="dxpc-headerContent">
+				<span class="dxpc-headerText">Rychl&#225; navigace</span>
+			</div><b class="dx-clear"></b>
+		</div><div class="dxpc-contentWrapper">
+			<div class="dxpc-content">
+				
+            
+<div class="rbut">
+<div class="rychlar"> 
+    <table cellspacing="0" cellpadding="0" id="cphmain_docknavigace_btnrozvrh" style="height:60pt;width:100%;border-collapse:collapse;border-collapse:separate;-khtml-user-select:none;">
+					<tr>
+						<td id="cphmain_docknavigace_btnrozvrh_B" align="center" style="color:Silver;background-color:White;border-color:Silver;border-width:2px;border-style:solid;font-size:11pt;font-weight:bold;text-align:Left;padding-left:10pt;"><div style="border-width:0;width:0;height:0;opacity:0;padding:0;margin:0;overflow:hidden;">
+							<input value="" onfocus="aspxBGotFocus(&#39;cphmain_docknavigace_btnrozvrh&#39;)" type="submit" name="ctl00$cphmain$docknavigace$btnrozvrh" readonly="readonly" style="border-width:0px;height:0px;width:0px;padding:0;border-width:0;width:1px;height:1px;opacity:0;margin:0;position:relative;" />
+						</div><div id="cphmain_docknavigace_btnrozvrh_CD" class="dxb">
+							<table cellspacing="0" cellpadding="0" style="border-collapse:collapse;border-collapse:separate;margin-rigth:auto;">
+								<tr>
+									<td style="padding-right:4px;"><img id="cphmain_docknavigace_btnrozvrh_BImg" src="images/buttrozvrh.jpg" alt="" /></td><td id="cphmain_docknavigace_btnrozvrh_BTC" class="dxb" style="color:Silver;font-size:11pt;font-weight:bold;"><span>Rozvrh</span></td>
+								</tr>
+							</table>
+						</div></td>
+					</tr>
+				</table><script id="dxss_1974823102" type="text/javascript">
+<!--
+aspxAddHoverItems('cphmain_docknavigace_btnrozvrh',[[[''],['padding-left:10pt;color:Black;border-color:Black;'],['B'],['','TC'],[['images/buttrozvrh.jpg']],['Img']]]);
+
+var dxo = new ASPxClientButton('cphmain_docknavigace_btnrozvrh');
+window['cphmain_docknavigace_btnrozvrh'] = dxo;
+dxo.autoPostBack = true;
+dxo.uniqueID = 'ctl00$cphmain$docknavigace$btnrozvrh';
+dxo.RegisterServerEventAssigned(['Click']);
+aspxAddSelectedItems('cphmain_docknavigace_btnrozvrh',[[['dxbf'],[''],['CD']]]);
+dxo.InlineInitialize();
+
+//-->
+</script>
+                      </div>                     
+<div class="rychlar">    <table cellspacing="0" cellpadding="0" id="cphmain_docknavigace_btnsupl" style="height:60pt;width:100%;border-collapse:collapse;border-collapse:separate;-khtml-user-select:none;">
+					<tr>
+						<td id="cphmain_docknavigace_btnsupl_B" align="center" style="color:Silver;background-color:White;border-color:Silver;border-width:2px;border-style:solid;font-size:11pt;font-weight:bold;text-align:Left;padding-left:10pt;"><div style="border-width:0;width:0;height:0;opacity:0;padding:0;margin:0;overflow:hidden;">
+							<input value="" onfocus="aspxBGotFocus(&#39;cphmain_docknavigace_btnsupl&#39;)" type="submit" name="ctl00$cphmain$docknavigace$btnsupl" readonly="readonly" style="border-width:0px;height:0px;width:0px;padding:0;border-width:0;width:1px;height:1px;opacity:0;margin:0;position:relative;" />
+						</div><div id="cphmain_docknavigace_btnsupl_CD" class="dxb">
+							<table cellspacing="0" cellpadding="0" style="border-collapse:collapse;border-collapse:separate;margin-rigth:auto;">
+								<tr>
+									<td style="padding-right:4px;"><img id="cphmain_docknavigace_btnsupl_BImg" src="images/buttsupl.gif" alt="" /></td><td id="cphmain_docknavigace_btnsupl_BTC" class="dxb" style="color:Silver;font-size:11pt;font-weight:bold;"><span>Suplov&#225;n&#237;</span></td>
+								</tr>
+							</table>
+						</div></td>
+					</tr>
+				</table><script id="dxss_2030870230" type="text/javascript">
+<!--
+aspxAddHoverItems('cphmain_docknavigace_btnsupl',[[[''],['padding-left:10pt;color:Black;border-color:Black;'],['B'],['','TC'],[['images/buttsupl.gif']],['Img']]]);
+
+var dxo = new ASPxClientButton('cphmain_docknavigace_btnsupl');
+window['cphmain_docknavigace_btnsupl'] = dxo;
+dxo.autoPostBack = true;
+dxo.uniqueID = 'ctl00$cphmain$docknavigace$btnsupl';
+dxo.RegisterServerEventAssigned(['Click']);
+aspxAddSelectedItems('cphmain_docknavigace_btnsupl',[[['dxbf'],[''],['CD']]]);
+dxo.InlineInitialize();
+
+//-->
+</script>
+     </div>
+
+<div class="rychlar">    
+     </div>
+     
+<div class="rychlar">    <table cellspacing="0" cellpadding="0" id="cphmain_docknavigace_btnklas" style="height:60pt;width:100%;border-collapse:collapse;border-collapse:separate;-khtml-user-select:none;">
+					<tr>
+						<td id="cphmain_docknavigace_btnklas_B" align="center" style="color:Silver;background-color:White;border-color:Silver;border-width:2px;border-style:solid;font-size:11pt;font-weight:bold;text-align:Left;padding-left:10pt;"><div style="border-width:0;width:0;height:0;opacity:0;padding:0;margin:0;overflow:hidden;">
+							<input value="" onfocus="aspxBGotFocus(&#39;cphmain_docknavigace_btnklas&#39;)" type="submit" name="ctl00$cphmain$docknavigace$btnklas" readonly="readonly" style="border-width:0px;height:0px;width:0px;padding:0;border-width:0;width:1px;height:1px;opacity:0;margin:0;position:relative;" />
+						</div><div id="cphmain_docknavigace_btnklas_CD" class="dxb">
+							<table cellspacing="0" cellpadding="0" style="border-collapse:collapse;border-collapse:separate;margin-rigth:auto;">
+								<tr>
+									<td style="padding-right:4px;"><img id="cphmain_docknavigace_btnklas_BImg" src="images/buttklas.jpg" alt="" /></td><td id="cphmain_docknavigace_btnklas_BTC" class="dxb" style="color:Silver;font-size:11pt;font-weight:bold;"><span>Klasifikace</span></td>
+								</tr>
+							</table>
+						</div></td>
+					</tr>
+				</table><script id="dxss_220079528" type="text/javascript">
+<!--
+aspxAddHoverItems('cphmain_docknavigace_btnklas',[[[''],['padding-left:10pt;color:Black;border-color:Black;'],['B'],['','TC'],[['images/buttklas.jpg']],['Img']]]);
+
+var dxo = new ASPxClientButton('cphmain_docknavigace_btnklas');
+window['cphmain_docknavigace_btnklas'] = dxo;
+dxo.autoPostBack = true;
+dxo.uniqueID = 'ctl00$cphmain$docknavigace$btnklas';
+dxo.RegisterServerEventAssigned(['Click']);
+aspxAddSelectedItems('cphmain_docknavigace_btnklas',[[['dxbf'],[''],['CD']]]);
+dxo.InlineInitialize();
+
+//-->
+</script>
+     </div>
+
+<div class="rychlar">    <table cellspacing="0" cellpadding="0" id="cphmain_docknavigace_btnplan" style="height:60pt;width:100%;border-collapse:collapse;border-collapse:separate;-khtml-user-select:none;">
+					<tr>
+						<td id="cphmain_docknavigace_btnplan_B" align="center" style="color:Silver;background-color:White;border-color:Silver;border-width:2px;border-style:solid;font-size:11pt;font-weight:bold;text-align:Left;padding-left:10pt;"><div style="border-width:0;width:0;height:0;opacity:0;padding:0;margin:0;overflow:hidden;">
+							<input value="" onfocus="aspxBGotFocus(&#39;cphmain_docknavigace_btnplan&#39;)" type="submit" name="ctl00$cphmain$docknavigace$btnplan" readonly="readonly" style="border-width:0px;height:0px;width:0px;padding:0;border-width:0;width:1px;height:1px;opacity:0;margin:0;position:relative;" />
+						</div><div id="cphmain_docknavigace_btnplan_CD" class="dxb">
+							<table cellspacing="0" cellpadding="0" style="border-collapse:collapse;border-collapse:separate;margin-rigth:auto;">
+								<tr>
+									<td style="padding-right:4px;"><img id="cphmain_docknavigace_btnplan_BImg" src="images/buttplan.jpg" alt="" /></td><td id="cphmain_docknavigace_btnplan_BTC" class="dxb" style="color:Silver;font-size:11pt;font-weight:bold;"><span>Pl&#225;n akc&#237;</span></td>
+								</tr>
+							</table>
+						</div></td>
+					</tr>
+				</table><script id="dxss_770463093" type="text/javascript">
+<!--
+aspxAddHoverItems('cphmain_docknavigace_btnplan',[[[''],['padding-left:10pt;color:Black;border-color:Black;'],['B'],['','TC'],[['images/buttplan.jpg']],['Img']]]);
+
+var dxo = new ASPxClientButton('cphmain_docknavigace_btnplan');
+window['cphmain_docknavigace_btnplan'] = dxo;
+dxo.autoPostBack = true;
+dxo.uniqueID = 'ctl00$cphmain$docknavigace$btnplan';
+dxo.RegisterServerEventAssigned(['Click']);
+aspxAddSelectedItems('cphmain_docknavigace_btnplan',[[['dxbf'],[''],['CD']]]);
+dxo.InlineInitialize();
+
+//-->
+</script>
+     </div>
+
+<div class="rychlar">    <table cellspacing="0" cellpadding="0" id="cphmain_docknavigace_btnkomens" style="height:60pt;width:100%;border-collapse:collapse;border-collapse:separate;-khtml-user-select:none;">
+					<tr>
+						<td id="cphmain_docknavigace_btnkomens_B" align="center" style="color:Silver;background-color:White;border-color:Silver;border-width:2px;border-style:solid;font-size:11pt;font-weight:bold;text-align:Left;padding-left:10pt;"><div style="border-width:0;width:0;height:0;opacity:0;padding:0;margin:0;overflow:hidden;">
+							<input value="" onfocus="aspxBGotFocus(&#39;cphmain_docknavigace_btnkomens&#39;)" type="submit" name="ctl00$cphmain$docknavigace$btnkomens" readonly="readonly" style="border-width:0px;height:0px;width:0px;padding:0;border-width:0;width:1px;height:1px;opacity:0;margin:0;position:relative;" />
+						</div><div id="cphmain_docknavigace_btnkomens_CD" class="dxb">
+							<table cellspacing="0" cellpadding="0" style="border-collapse:collapse;border-collapse:separate;margin-rigth:auto;">
+								<tr>
+									<td style="padding-right:4px;"><img id="cphmain_docknavigace_btnkomens_BImg" src="images/buttkomens.jpg" alt="" /></td><td id="cphmain_docknavigace_btnkomens_BTC" class="dxb" style="color:Silver;font-size:11pt;font-weight:bold;"><span>Komens</span></td>
+								</tr>
+							</table>
+						</div></td>
+					</tr>
+				</table><script id="dxss_1828097950" type="text/javascript">
+<!--
+aspxAddHoverItems('cphmain_docknavigace_btnkomens',[[[''],['padding-left:10pt;color:Black;border-color:Black;'],['B'],['','TC'],[['images/buttkomens.jpg']],['Img']]]);
+
+var dxo = new ASPxClientButton('cphmain_docknavigace_btnkomens');
+window['cphmain_docknavigace_btnkomens'] = dxo;
+dxo.autoPostBack = true;
+dxo.uniqueID = 'ctl00$cphmain$docknavigace$btnkomens';
+dxo.RegisterServerEventAssigned(['Click']);
+aspxAddSelectedItems('cphmain_docknavigace_btnkomens',[[['dxbf'],[''],['CD']]]);
+dxo.InlineInitialize();
+
+//-->
+</script>
+     </div>
+
+     </div>
+          
+			</div>
+		</div>
+	</div>
+</div><table id="cphmain_docknavigace_LP" class="dxdpLoadingPanel" cellspacing="0" cellpadding="0" style="border-collapse:collapse;left:0px;top:0px;z-index:30000;display:none;">
+	<tr>
+		<td class="dx" style="padding-right:8px;"><img src="/bakaweb/DXR.axd?r=1_51-Hsjh7" alt="" align="middle" /></td><td class="dx" style="padding-left:0px;"><span id="cphmain_docknavigace_TL">Loading&hellip;</span></td>
+	</tr>
+</table><div id="cphmain_docknavigace_LD" class="dxdpLoadingDiv" style="left:0px;top:0px;z-index:29999;display:none;position:absolute;">
+
+</div><script id="dxss_392326119" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientDockPanel('cphmain_docknavigace');
+window['NavigacePanel'] = dxo;
+dxo.callBack = function(arg) { WebForm_DoCallback('ctl00$cphmain$docknavigace',arg,aspxCallback,'cphmain_docknavigace',aspxCallbackError,true); };
+dxo.uniqueID = 'ctl00$cphmain$docknavigace';
+dxo.popupAnimationType='slide';
+dxo.closeAction='CloseButton';
+dxo.isPopupPositionCorrectionOn=false;
+dxo.liteRender=true;
+dxo.allowDragging=true;
+dxo.showOnPageLoad=true;
+dxo.panelUID='navigace';
+dxo.InlineInitialize();
+
+//-->
+</script>
+
+
+
+   <input type="hidden" id="cphmain_dockuvodnizpravaWS" name="cphmain_dockuvodnizpravaWS" value="1:0:-1:-10000:-10000:0:600px:0px:1:0:0:0" /><input type="hidden" id="cphmain_dockuvodnizprava_SHF" name="cphmain_dockuvodnizprava_SHF" value="[&#39;RightZone&#39;,10,&#39;&#39;,0,0,0]" /><div id="cphmain_dockuvodnizprava_PW-1" class="dxdpLite dxpclW" style="height:0px;width:600px;z-index:10000;display:none;">
+	<div class="dxpc-mainDiv dxpc-shadow" style="cursor:default;">
+		<div class="dxpc-header" style="cursor:move;-khtml-user-select:none;">
+			<div class="dxpc-headerContent">
+				<span class="dxpc-headerText">Dobr&#253; večer</span>
+			</div><b class="dx-clear"></b>
+		</div><div class="dxpc-contentWrapper">
+			<div class="dxpc-content">
+				
+            <div style="height:auto;"> 
+                
+
+
+
+
+
+                </div>
+          
+			</div>
+		</div>
+	</div>
+</div><table id="cphmain_dockuvodnizprava_LP" class="dxdpLoadingPanel" cellspacing="0" cellpadding="0" style="border-collapse:collapse;left:0px;top:0px;z-index:30000;display:none;">
+	<tr>
+		<td class="dx" style="padding-right:8px;"><img src="/bakaweb/DXR.axd?r=1_51-Hsjh7" alt="" align="middle" /></td><td class="dx" style="padding-left:0px;"><span id="cphmain_dockuvodnizprava_TL">Loading&hellip;</span></td>
+	</tr>
+</table><div id="cphmain_dockuvodnizprava_LD" class="dxdpLoadingDiv" style="left:0px;top:0px;z-index:29999;display:none;position:absolute;">
+
+</div><script id="dxss_2124338001" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientDockPanel('cphmain_dockuvodnizprava');
+window['uvodnizpravaPanel'] = dxo;
+dxo.callBack = function(arg) { WebForm_DoCallback('ctl00$cphmain$dockuvodnizprava',arg,aspxCallback,'cphmain_dockuvodnizprava',aspxCallbackError,true); };
+dxo.uniqueID = 'ctl00$cphmain$dockuvodnizprava';
+dxo.popupAnimationType='slide';
+dxo.closeAction='CloseButton';
+dxo.isPopupPositionCorrectionOn=false;
+dxo.liteRender=true;
+dxo.allowDragging=true;
+dxo.width=600;
+dxo.minWidth=270;
+dxo.showOnPageLoad=true;
+dxo.panelUID='uvodnizprava';
+dxo.InlineInitialize();
+
+//-->
+</script>
+
+    
+
+    <input type="hidden" id="cphmain_dockukolyWS" name="cphmain_dockukolyWS" value="1:0:-1:-10000:-10000:0:0px:0px:1:0:0:0" /><input type="hidden" id="cphmain_dockukoly_SHF" name="cphmain_dockukoly_SHF" value="[&#39;RightZone&#39;,12,&#39;&#39;,0,0,0]" /><div id="cphmain_dockukoly_PW-1" class="dxdpLite dxpclW" style="height:0px;width:270px;z-index:10000;display:none;">
+	<div class="dxpc-mainDiv dxpc-shadow" style="cursor:default;">
+		<div class="dxpc-header" style="cursor:move;-khtml-user-select:none;">
+			<div class="dxpc-headerContent">
+				<a class="dxpc-link" href="prehled.aspx?s=621"><span class="dxpc-headerText">Dom&#225;c&#237; &#250;koly</span></a>
+			</div><b class="dx-clear"></b>
+		</div><div class="dxpc-contentWrapper">
+			<div class="dxpc-content">
+				
+                <div class="ukolaktpr">Matematika - domácí úkol na 6.3.</div><div class="ukolakttext">s evidencí odevzdání, Borská neodevzdá</div><div class="ukolaktpr">Matematika - domácí úkol na 10.3.</div><div class="ukolakttext">s evidencí vypracování - Borská už odevzdala</div>
+          
+			</div>
+		</div>
+	</div>
+</div><table id="cphmain_dockukoly_LP" class="dxdpLoadingPanel" cellspacing="0" cellpadding="0" style="border-collapse:collapse;left:0px;top:0px;z-index:30000;display:none;">
+	<tr>
+		<td class="dx" style="padding-right:8px;"><img src="/bakaweb/DXR.axd?r=1_51-Hsjh7" alt="" align="middle" /></td><td class="dx" style="padding-left:0px;"><span id="cphmain_dockukoly_TL">Loading&hellip;</span></td>
+	</tr>
+</table><div id="cphmain_dockukoly_LD" class="dxdpLoadingDiv" style="left:0px;top:0px;z-index:29999;display:none;position:absolute;">
+
+</div><script id="dxss_210356954" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientDockPanel('cphmain_dockukoly');
+window['domaciukolyPanel'] = dxo;
+dxo.callBack = function(arg) { WebForm_DoCallback('ctl00$cphmain$dockukoly',arg,aspxCallback,'cphmain_dockukoly',aspxCallbackError,true); };
+dxo.uniqueID = 'ctl00$cphmain$dockukoly';
+dxo.popupAnimationType='slide';
+dxo.closeAction='CloseButton';
+dxo.isPopupPositionCorrectionOn=false;
+dxo.liteRender=true;
+dxo.allowDragging=true;
+dxo.minWidth=270;
+dxo.showOnPageLoad=true;
+dxo.panelUID='domaciukolyzprava';
+dxo.InlineInitialize();
+
+//-->
+</script>
+
+     <div class="dxdzControlVert leftZone" id="cphmain_ASPxDockZone1" style="width:310px;">
+	<div class="dxdz-pnlPlcHolder">
+
+	</div>
+</div><script id="dxss_783991296" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientDockZone('cphmain_ASPxDockZone1');
+window['cphmain_ASPxDockZone1'] = dxo;
+dxo.uniqueID = 'ctl00$cphmain$ASPxDockZone1';
+dxo.zoneUID='LeftZone';
+dxo.initialWidth=310;
+dxo.panelSpacing=10;
+dxo.InlineInitialize();
+
+//-->
+</script>
+    <div class="dxdzControlVert rightZone" id="cphmain_ASPxDockZone2" style="width:590px;">
+	<div class="dxdz-pnlPlcHolder">
+
+	</div>
+</div><script id="dxss_375721115" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientDockZone('cphmain_ASPxDockZone2');
+window['cphmain_ASPxDockZone2'] = dxo;
+dxo.uniqueID = 'ctl00$cphmain$ASPxDockZone2';
+dxo.zoneUID='RightZone';
+dxo.initialWidth=590;
+dxo.panelSpacing=18;
+dxo.InlineInitialize();
+
+//-->
+</script>
+    <div class="dxdzControlVert sideZone" id="cphmain_ASPxDockZone3" style="width:290px;">
+	<div class="dxdz-pnlPlcHolder">
+
+	</div>
+</div><script id="dxss_1664142542" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientDockZone('cphmain_ASPxDockZone3');
+window['cphmain_ASPxDockZone3'] = dxo;
+dxo.uniqueID = 'ctl00$cphmain$ASPxDockZone3';
+dxo.zoneUID='SideZone';
+dxo.initialWidth=290;
+dxo.panelSpacing=18;
+dxo.InlineInitialize();
+
+//-->
+</script>
+
+    <script id="dxss_479379091" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientCallback('cphmain_ASPxCallback1');
+window['ClientCallback'] = dxo;
+dxo.callBack = function(arg) { WebForm_DoCallback('ctl00$cphmain$ASPxCallback1',arg,aspxCallback,'cphmain_ASPxCallback1',aspxCallbackError,true); };
+dxo.uniqueID = 'ctl00$cphmain$ASPxCallback1';
+dxo.CallbackComplete.AddHandler(ClientCallback_CallbackComplete);
+dxo.InlineInitialize();
+
+//-->
+</script>
+
+    <input type="hidden" id="cphmain_ASPxPopupControl1WS" name="cphmain_ASPxPopupControl1WS" value="0:0:-1:-10000:-10000:0:222px:-10000:1:0:0:0" /><div id="cphmain_ASPxPopupControl1_PW-1" style="position:absolute;left:0px;top:0px;z-index:10000;visibility:hidden;display:none;">
+	<table id="cphmain_ASPxPopupControl1_PWST-1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border-collapse:separate;position:relative;">
+		<tr>
+			<td class="dxpcControl" onmousedown="aspxPWMDown(event,&#39;cphmain_ASPxPopupControl1&#39;,-1,false)" style="width:222px;cursor:default;"><table id="cphmain_ASPxPopupControl1_CLW-1" cellspacing="0" cellpadding="0" style="width:222px;border-collapse:collapse;border-collapse:separate;">
+				<tr>
+					<td id="cphmain_ASPxPopupControl1_PWH-1" class="dxpcHeader" style="padding-left:12px;padding-right:2px;padding-top:2px;padding-bottom:2px;"><table cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;border-collapse:separate;">
+						<tr>
+							<td id="cphmain_ASPxPopupControl1_PWH-1T" class="dxpc" style="width:100%;">Header</td><td class="dxpcHBCell dxpcHBCellSys"><table cellspacing="0" cellpadding="0" style="border-collapse:collapse;border-collapse:separate;">
+								<tr>
+									<td id="cphmain_ASPxPopupControl1_HCB-1" class="dxpcCloseButton" onclick="aspxPWCBClick(event, &#39;cphmain_ASPxPopupControl1&#39;,-1)" onmousedown="return aspxPWHMDown(event);" style="cursor:pointer;"><img id="cphmain_ASPxPopupControl1_HCB-1Img" class="dxWeb_pcCloseButton" src="/bakaweb/DXR.axd?r=1_10-Hsjh7" alt="[Close]" /></td>
+								</tr>
+							</table></td>
+						</tr>
+					</table></td>
+				</tr><tr>
+					<td id="cphmain_ASPxPopupControl1_PWC-1" class="dxpcContent" style="height:100%;border-top-width:0px;"><div id="cphmain_ASPxPopupControl1_CSD-1" class="dxpcContentPaddings">
+						&nbsp;&nbsp;
+					</div></td>
+				</tr>
+			</table></td><td style="background:url('/bakaweb/DXR.axd?r=1_65-Hsjh7') no-repeat left top;"></td>
+		</tr><tr>
+			<td style="background:url('/bakaweb/DXR.axd?r=1_64-Hsjh7') no-repeat left top;"></td><td style="background:url('/bakaweb/DXR.axd?r=1_66-Hsjh7') no-repeat left top;"><div style="height:5px;width:5px;">
+
+			</div></td>
+		</tr>
+	</table>
+</div><table id="cphmain_ASPxPopupControl1_LP" class="dxpcLoadingPanel" cellspacing="0" cellpadding="0" style="border-collapse:collapse;left:0px;top:0px;z-index:30000;display:none;">
+	<tr>
+		<td class="dx" style="padding-right:8px;"><img src="/bakaweb/DXR.axd?r=1_51-Hsjh7" alt="" align="middle" /></td><td class="dx" style="padding-left:0px;"><span id="cphmain_ASPxPopupControl1_TL">Loading&hellip;</span></td>
+	</tr>
+</table><div id="cphmain_ASPxPopupControl1_LD" class="dxpcLoadingDiv" style="left:0px;top:0px;z-index:29999;display:none;position:absolute;">
+
+</div><script id="dxss_947166838" type="text/javascript">
+<!--
+aspxAddHoverItems('cphmain_ASPxPopupControl1',[[['dxpcCloseButtonHover'],[''],['HCB-1'],,[['']],['Img']]]);
+
+var dxo = new ASPxClientPopupControl('cphmain_ASPxPopupControl1');
+window['ClientPopup'] = dxo;
+dxo.callBack = function(arg) { WebForm_DoCallback('ctl00$cphmain$ASPxPopupControl1',arg,aspxCallback,'cphmain_ASPxPopupControl1',aspxCallbackError,true); };
+dxo.uniqueID = 'ctl00$cphmain$ASPxPopupControl1';
+dxo.popupAnimationType='slide';
+dxo.popupAction='None';
+dxo.closeAction='CloseButton';
+dxo.isPopupPositionCorrectionOn=false;
+dxo.width=222;
+dxo.height=0;
+dxo.defaultWindowPopupElementIDList=['popupAnchor'];
+dxo.InlineInitialize();
+
+//-->
+</script>
+
+    </div>
+
+
+         
+
+</div> 
+</div>
+
+<input type="hidden" id="popupWS" name="popupWS" value="0:0:-1:-10000:-10000:0:200px:100px:1:0:0:0" /><div id="popup_PW-1" style="position:absolute;left:0px;top:0px;z-index:10000;visibility:hidden;display:none;">
+	<table id="popup_PWST-1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border-collapse:separate;position:relative;">
+		<tr>
+			<td tabindex="900" class="dxpcControl" onmousedown="aspxPWMDown(event,&#39;popup&#39;,-1,false)" style="background-color:Silver;height:100px;width:200px;cursor:default;"><table id="popup_CLW-1" cellspacing="0" cellpadding="0" style="height:100px;width:200px;border-collapse:collapse;border-collapse:separate;">
+				<tr>
+					<td id="popup_PWH-1" class="dxpcHeader" onmousedown="aspxPWDGMDown(event,&#39;popup&#39;,-1)" style="cursor:move;padding-left:12px;padding-right:2px;padding-top:2px;padding-bottom:2px;-khtml-user-select:none;"><table cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;border-collapse:separate;">
+						<tr>
+							<td id="popup_PWH-1T" class="dxpc" style="width:100%;">Změna jazyka</td><td class="dxpcHBCell dxpcHBCellSys"><table cellspacing="0" cellpadding="0" style="border-collapse:collapse;border-collapse:separate;">
+								<tr>
+									<td id="popup_HCB-1" class="dxpcCloseButton" onclick="aspxPWCBClick(event, &#39;popup&#39;,-1)" onmousedown="return aspxPWHMDown(event);" style="cursor:pointer;"><img id="popup_HCB-1Img" class="dxWeb_pcCloseButton" src="/bakaweb/DXR.axd?r=1_10-Hsjh7" alt="[Close]" /></td>
+								</tr>
+							</table></td>
+						</tr>
+					</table></td>
+				</tr><tr>
+					<td id="popup_PWC-1" class="dxpcContent" style="height:100%;border-top-width:0px;"><div id="popup_CSD-1" class="dxpcContentPaddings">
+						
+            <table cellspacing="12" cellpadding="12">
+            <tr>
+            <td>
+                <input type="image" name="ctl00$popup$imgcs" id="popup_imgcs" tabindex="991" class="imglang" src="images/cs.png" /> 
+            </td>
+            <td>
+                <input type="image" name="ctl00$popup$imgen" id="popup_imgen" tabindex="992" class="imglang" src="images/en.png" /> 
+            </td>
+            <td>
+                <input type="image" name="ctl00$popup$imgfr" id="popup_imgfr" tabindex="993" class="imglang" src="images/fr.png" /> 
+            </td>
+            </tr>
+            </table>
+            <br />
+            <table class="dxeBase" cellspacing="0" cellpadding="0" id="popup_checklexpredmety" style="height:15px;border-collapse:collapse;">
+							<tr>
+								<td style="padding-left:3px;padding-right:3px;padding-top:3px;padding-bottom:3px;"><span class="dxWeb_edtCheckBoxUnchecked dxICheckBox"><span class="dxKBSW"><input id="popup_checklexpredmety_S" name="ctl00$popup$checklexpredmety" value="U" type="text" readonly="readonly" style="opacity:0;width:1px;height:1px;position:relative;background-color:transparent;display:block;margin:0;padding:0;border-width:0;font-size:0pt;" /></span></span></td><td style="padding-left:0px;padding-right:0px;padding-top:0px;padding-bottom:1px;"><label style="margin-left:2px;">překl&#225;dat n&#225;zvy předmětů</label></td>
+							</tr>
+						</table><script id="dxss_1486261995" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientCheckBox('popup_checklexpredmety');
+window['popup_checklexpredmety'] = dxo;
+dxo.autoPostBack = true;
+dxo.uniqueID = 'ctl00$popup$checklexpredmety';
+dxo.imageProperties = {'4':['dxWeb_edtCheckBoxChecked','dxWeb_edtCheckBoxUnchecked'],'8':['dxWeb_edtCheckBoxCheckedDisabled','dxWeb_edtCheckBoxUncheckedDisabled']};
+dxo.icbFocusedStyle = ['dxICBFocused',''];
+dxo.InlineInitialize();
+
+//-->
+</script>
+            
+					</div></td>
+				</tr>
+			</table></td><td style="background:url('/bakaweb/DXR.axd?r=1_65-Hsjh7') no-repeat left top;"></td>
+		</tr><tr>
+			<td style="background:url('/bakaweb/DXR.axd?r=1_64-Hsjh7') no-repeat left top;"></td><td style="background:url('/bakaweb/DXR.axd?r=1_66-Hsjh7') no-repeat left top;"><div style="height:5px;width:5px;">
+
+			</div></td>
+		</tr>
+	</table>
+</div><table id="popup_LP" class="dxpcLoadingPanel" cellspacing="0" cellpadding="0" style="border-collapse:collapse;left:0px;top:0px;z-index:30000;display:none;">
+	<tr>
+		<td class="dx" style="padding-right:8px;"><img src="/bakaweb/DXR.axd?r=1_51-Hsjh7" alt="" align="middle" /></td><td class="dx" style="padding-left:0px;"><span id="popup_TL">Loading&hellip;</span></td>
+	</tr>
+</table><div id="popup_LD" class="dxpcLoadingDiv" style="left:0px;top:0px;z-index:29999;display:none;position:absolute;">
+
+</div><script id="dxss_646712574" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientPopupControl('popup');
+window['popup'] = dxo;
+dxo.callBack = function(arg) { WebForm_DoCallback('ctl00$popup',arg,aspxCallback,'popup',aspxCallbackError,true); };
+dxo.uniqueID = 'ctl00$popup';
+dxo.appearAfter=0;
+dxo.popupAnimationType='fade';
+dxo.popupHorizontalAlign='OutsideRight';
+dxo.popupVerticalAlign='Below';
+dxo.isPopupPositionCorrectionOn=false;
+dxo.allowDragging=true;
+dxo.width=200;
+dxo.height=100;
+dxo.InlineInitialize();
+
+//-->
+</script>
+
+
+
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+WebForm_InitCallback();//]]>
+</script>
+</form>
+
+</body>
+</html>
