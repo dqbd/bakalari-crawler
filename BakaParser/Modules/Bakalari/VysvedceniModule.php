@@ -25,7 +25,7 @@ class VysvedceniModule extends \BakaParser\Modules\BaseModule {
     public function parse($request) {
 
         $rows = $request->filterXPath("//*[@class='dxrp dxrpcontent']//tr");
-        $data = array('vysvedceni' => array(), '');
+        $data = array('vysvedceni' => array());
 
         $data['rocniky'] = $rows->eq(0)->filterXPath("./*/td[@class='polonadpis2']")->extract("_text");
         $data['predmety'] = array();

@@ -1,0 +1,628 @@
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"><html xmlns="http://www.w3.org/1999/xhtml" >
+<head><link rel="stylesheet" type="text/css" href="/bakaweb/DXR.axd?r=1_7-Hsjh7" /><link rel="stylesheet" type="text/css" href="/bakaweb/DXR.axd?r=1_8-Hsjh7" /><link rel="stylesheet" type="text/css" href="/bakaweb/DXR.axd?r=1_1-Hsjh7" /><link rel="stylesheet" type="text/css" href="/bakaweb/DXR.axd?r=1_4-Hsjh7" /><link rel="stylesheet" type="text/css" href="/bakaweb/DXR.axd?r=1_2-Hsjh7" /><link rel="stylesheet" type="text/css" href="/bakaweb/DXR.axd?r=1_3-Hsjh7" /><title>
+	WEB Bakaláři
+</title><meta http-equiv="X-UA-Compatible" content="IE=edge" /><meta content="Bakaláři - webová aplikace pro školy" name="description" /><meta content="Bakalari, Bakaláři, matrika, rodiče, žáci, známky, klasifikace, rozvrh, webrodiče, webučitelé, komunikace, škola" name="keywords" /><link rel="stylesheet" href="master.css" type="text/css" media="screen" /><link rel="stylesheet" href="bakastyl.css" type="text/css" media="screen" /><link rel="stylesheet" href="ptstyl.css" type="text/css" media="print" /><link rel="stylesheet" href="nasstyl.css" type="text/css" media="screen" /><link rel="stylesheet" href="bakaznam.css" type="text/css" media="screen" /><link rel="stylesheet" href="bakastyl12.css" type="text/css" media="screen" /><meta http-equiv="Expires" content="0" /><meta http-equiv="Pragma" content="no-cache" /><meta http-equiv="Cache-control" content="no-cache" /> 
+
+    <script type="text/javascript">
+
+
+        var RepWin = window.RepWin;
+
+        function OpenRWin(link, winName, wi, he) {
+            var retValue = true;
+            if (RepWin != null && !RepWin.closed) {
+                RepWin.focus();
+                RepWin.location.href = link.href;
+            }
+            else {
+                RepWin = window.open(link.href, winName, 'toolbar=no, menubar=no, location=no, directories=no, scrollbars=yes, resizable=yes, status=no, width=' + wi + ', height=' + he + '');
+                if (RepWin == null || typeof (RepWin) == "undefined")
+                    retValue = false;
+                else {
+                    link.target = winName;
+                    RepWin.focus();
+                }
+            }
+            return retValue;
+        } 
+
+</script>
+
+
+<link href="App_Themes/tyrkysTheme/tyrkysstyl.css" type="text/css" rel="stylesheet" /></head>
+<body>
+<form method="post" action="prehled.aspx?s=7" id="formbaka">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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ZBYCZg9kFgJmD2QWAmYPZBYCZg9kFgJmD2QWBAIBD2QWAgIBD2QWAmYPZBYCZg9kFgJmD2QWAmYPZBYCZg9kFgJmD2QWAmYPZBYCAgEPPCsABAEADxYCHwlnZGQCAg9kFgICAQ9kFgJmD2QWAgIBDzwrABgCAA8WAh8LBcQBQndNSEFnSUVSR0YwWVFjaEFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUhBQWNBQWdWVGRHRjBaUWRPQndZSEFBSUFCd0VDQVFjQ0FnRUhBd0lCQndRQ0FRY0ZBZ0VIQUFjQUJ3QUhBQUlBQlFBQUFJQUpBZ2hyYm1sb1gydGtYd2NBQ1FJQUFnQURCd1FDQUFjQUFnRUhBQWNBQWdFSEFBY0FBZ2hRWVdkbFUybDZaUU1ISGc9PWQVPCsABgEFFCsAAmRkZAJBDw8WAh8DaGQWAgIBD2QWAmYPZBYCZg9kFgJmD2QWAmYPZBYCZg9kFgQCAQ9kFgICAQ9kFgJmD2QWAmYPZBYCZg9kFgJmD2QWAmYPZBYCZg9kFgJmD2QWAgIBDzwrAAQBAA8WAh8JZ2RkAgIPZBYCAgEPZBYCZg9kFgICAQ88KwAYAgAPFgIfCwW8AUJ3TUhBZ0lFUkdGMFlRY2hBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFIQUFjQUFnVlRkR0YwWlFkS0J3VUhBQUlBQndFQ0FRY0NBZ0VIQXdJQkJ3UUNBUWNBQndBSEFBY0FBZ0FGQUFBQWdBa0NDR3R1YVdoZmEyUmZCd0FKQWdBQ0FBTUhCQUlBQndBQ0FRY0FCd0FDQVFjQUJ3QUNDRkJoWjJWVGFYcGxBd2NlZBU8KwAGAQUUKwACZGRkAkMPDxYCHwNoZBYCAgEPZBYCZg9kFgJmD2QWAmYPZBYCZg9kFgJmD2QWBAIBD2QWAgIBD2QWAmYPZBYCZg9kFgJmD2QWAmYPZBYCZg9kFgJmD2QWAmYPZBYCAgEPPCsABAEADxYCHwlnZGQCAg9kFgICAQ9kFgJmD2QWAgIBDzwrABgCAA8WAh8LBZgBQndNSEFnSUVSR0YwWVFjaEFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUhBQWNBQWdWVGRHRjBaUWN1QndBSEFBY0FCd0FIQUFJQUJRQUFBSUFKQWdBSEFBa0NBQUlBQXdjRUFnQUhBQUlCQndBSEFBSUJCd0FIQUFJSVVHRm5aVk5wZW1VREJ4ND1kFTwrAAYBBRQrAAJkZGQCRQ8PFgIfA2hkFgICAQ9kFgJmD2QWAmYPZBYCZg9kFgJmD2QWAmYPZBYCAgEPZBYCAgEPZBYCZg9kFgJmD2QWAmYPZBYCZg9kFgJmD2QWAmYPZBYCZg9kFgICAQ88KwAEAQAPFgIfCWdkZAJHDxYCHwNoFgQCAQ8QDxYEHwIFE3pvYnJheml0IHDFmWVkbcSbdHkfAQU3em9icmF6aXQgemtyYXRreSBwxZllZG3Em3TFrywgdmUga3RlcsO9Y2ggxb7DoWsgY2h5YsSbbGRkZGQCAw8QDxYEHwIFE3bFoWVjaG55IHDFmWVkbcSbdHkfAQUsem9icmF6aXQgdsWhZWNobnkgcMWZZWRtxJt0eSBjZWzDqWhvIHJvenZyaHVkZGRkAkkPFgIfA2gWAgIBD2QWDgIBDw8WAh8CBQxWeXN2xJt0bGl2a3lkZAIDDw8WAh8CBQ5hYnNlbmNlIMW+w6FrYWRkAgUPDxYCHwIFEW9tbHV2ZW7DoSBhYnNlbmNlZGQCBw8PFgIfAgUTbmVvbWx1dmVuw6EgYWJzZW5jZWRkAgkPDxYCHwIFMG5lemFwb8SNdGVuw6EgYWJzZW5jZSAobmFwxZkuIHByZXplbnRhY2UgxaFrb2x5KWRkAgsPDxYCHwIFO3BvemRuw60gcMWZw61jaG9kIChuZXphcG/EjcOtdMOhdsOhIHNlIGRvIGNlbGtvdsOpIGFic2VuY2UpZGQCDQ8PFgIfAgU3YnJ6a8O9IG9kY2hvZCAobmV6YXBvxI3DrXTDoXbDoSBzZSBkbyBjZWxrb3bDqSBhYnNlbmNlKWRkAgcPPCsACAEGPCsAEgEAFgIeCkhlYWRlclRleHQFDVptxJtuYSBqYXp5a2FkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYIBRBjdGwwMCRobGF2bmltZW51BRZjdGwwMCRjcGhtYWluJHBvcHVwa25pBRVjdGwwMCRjcGhtYWluJHBvcHVwdGsFLGN0bDAwJGNwaG1haW4kcG9wdXB0ayRUUENGbTEkVEMkemF2cml0YnV0dG9uBQtjdGwwMCRwb3B1cAURY3RsMDAkcG9wdXAkaW1nY3MFEWN0bDAwJHBvcHVwJGltZ2VuBRFjdGwwMCRwb3B1cCRpbWdmcgjuBPk6Lgim2spV7B/1tYb4RzsaFEt0esBrw8nRJ2g2" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['formbaka'];
+if (!theForm) {
+    theForm = document.formbaka;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/bakaweb/WebResource.axd?d=iUXbn_HQq9ZP3OEf91AhoEX73YtB0Z5rEtP8sN5g9Vyed75Fj4wvv5AKqqsisNDH8xji6ZzOaetmi3pD8WmDt3AQkr8QqjidGXuUgGT36FQ1&amp;t=634943681361674181" type="text/javascript"></script>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWBwL/qcrBCAL0loCSDAL5luDmCAKu14csAvLVp5sHAuXV/+QFAvHVw9MLYZJPZS4GSl7YIvfMa+LPjBX84m1vHhLHyduMwdp6x0o=" />
+</div>
+
+ 
+<div id="stranka"> 
+<div id="hlavicka">
+ 
+<table class="hlavickatable">
+<tr><td valign="top" >
+    
+ <div id="lang" onclick="popup.Show();"> 
+   <div id="panellang" title="Změna jazyka">
+	
+     <img id="imagelang" title="Změna jazyka" src="images/cs.png" />
+   
+</div>
+ </div>
+<div class="hlavickaleva">
+ <a href="prehled.aspx" >
+<img alt="" src="images/nilogo.gif" style="border-width:0px;"/>
+</a>
+</div> 
+</td>
+ <td valign="top">
+  <div class="hlavickaprava"> 
+    <div class="nazevskoly">Wichterlovo gymnázium, Ostrava-Poruba, příspěvková organizace</div>
+    <div class="pololetinadpis">2. pololetí šk. roku 2013/14</div>
+    <div class="globlogjmeno" >
+      <table class="logtable">
+        <tr>
+          <td>
+              <span id="labeluzivatel">uživatel:</span></td><td style="width:100%;">rodič</td>
+          <td class="logout"><a id="linklogout" href="login.aspx?s=-1">odhlásit</a></td>
+        </tr>
+        <tr><td><span id="labeljmeno">jméno:</span></td><td style="width:100%;" class="logjmeno" colspan="2"> 
+          Duong Tat Dat, 5.A</td></tr>
+      </table>
+     </div>
+   </div>
+ </td>
+</tr></table>
+</div> 
+<div id="hlavni"> 
+    <div id="panelmenu" class="pmenu">
+	
+
+    <input type="hidden" id="hlavnimenuSI" name="hlavnimenuSI" value="3i5" /><script id="dxis_2108608518" src="/bakaweb/DXR.axd?r=1_145-Hsjh7" type="text/javascript"></script><script id="dxis_1352716566" src="/bakaweb/DXR.axd?r=1_81-Hsjh7" type="text/javascript"></script><script id="dxis_1120288001" src="/bakaweb/DXR.axd?r=1_137-Hsjh7" type="text/javascript"></script><script id="dxis_1904295169" src="/bakaweb/DXR.axd?r=1_130-Hsjh7" type="text/javascript"></script><script id="dxis_841990911" src="/bakaweb/DXR.axd?r=1_135-Hsjh7" type="text/javascript"></script><script id="dxis_803823580" src="/bakaweb/DXR.axd?r=1_121-Hsjh7" type="text/javascript"></script><script id="dxis_1742465469" src="/bakaweb/DXR.axd?r=1_78-Hsjh7" type="text/javascript"></script><script id="dxis_1572053028" src="/bakaweb/DXR.axd?r=1_128-Hsjh7" type="text/javascript"></script><script id="dxis_618210578" src="/bakaweb/DXR.axd?r=1_99-Hsjh7" type="text/javascript"></script><script id="dxis_1621708774" src="/bakaweb/DXR.axd?r=1_105-Hsjh7" type="text/javascript"></script><script id="dxis_531034075" src="/bakaweb/DXR.axd?r=1_92-Hsjh7" type="text/javascript"></script><script id="dxis_1182860582" src="/bakaweb/DXR.axd?r=1_95-Hsjh7" type="text/javascript"></script><div class="dxmLite dxm-ltr">
+		<div class="dxm-main dxm-horizontal phmenu" id="hlavnimenu" style="font-size:9pt;">
+			<ul class="dx dxm-image-l dxm-noImages dxm-gutter">
+				<li class="dxm-item" style="border-width:0px;"><div class="dxm-content dxm-hasText">
+					<a class="dx" href="uvod.aspx" style="font-size:9pt;">&#218;vod</a>
+				</div></li><li class="dxm-spacing"></li><li class="dxm-item" style="border-width:0px;"><div class="dxm-content dxm-hasText">
+					<a class="dx" href="osob.aspx" style="font-size:9pt;">Osobn&#237; &#250;daje</a>
+				</div></li><li class="dxm-spacing"></li><li class="dxm-item" style="border-width:0px;font-size:9pt;"><div class="dxm-content dxm-hasText">
+					Klasifikace
+				</div></li><li class="dxm-spacing"></li><li class="dxm-item" style="border-width:0px;font-size:9pt;"><div class="dxm-content dxm-hasText">
+					V&#253;uka
+				</div></li><li class="dxm-spacing"></li><li class="dxm-item" style="border-width:0px;font-size:9pt;"><div class="dxm-content dxm-hasText">
+					Absence
+				</div></li><li class="dxm-spacing"></li><li class="dxm-item" style="border-width:0px;"><div class="dxm-content dxm-hasText">
+					<a class="dx" href="prehled.aspx?s=17" style="font-size:9pt;">Pl&#225;n akc&#237;</a>
+				</div></li><li class="dxm-spacing"></li><li class="dxm-item" style="border-width:0px;font-size:9pt;"><div class="dxm-content dxm-hasText">
+					N&#225;stroje
+				</div></li><li class="dxm-spacing"></li><li class="dxm-item" style="border-width:0px;"><div class="dxm-content dxm-hasText">
+					<a class="dx" href="prehled.aspx?s=-1" style="font-size:9pt;">Odhl&#225;sit</a>
+				</div></li>
+			</ul>
+		</div><b class="dx-clear"></b><div id="hlavnimenu_DXM1_" style="z-index:20000;display:none;">
+			<div class="dxm-shadow dxm-popup pimenu" style="font-size:9pt;">
+				<ul class="dx dxm-noImages">
+					<li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="osob.aspx" style="font-size:9pt;">Přehled osobn&#237;ch &#250;dajů</a>
+					</div><b class="dx-clear"></b></li>
+				</ul>
+			</div>
+		</div><div id="hlavnimenu_DXM2_" style="z-index:20000;display:none;">
+			<div class="dxm-shadow dxm-popup pimenu" style="font-size:9pt;">
+				<ul class="dx dxm-noImages">
+					<li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=1351" style="font-size:9pt;">Průběžn&#225; klasifikace</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=4" style="font-size:9pt;">Pololetn&#237; klasifikace</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=5" style="font-size:9pt;">V&#253;chovn&#225; opatřen&#237;</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=26" style="font-size:9pt;">Opravn&#233; zkoušky</a>
+					</div><b class="dx-clear"></b></li>
+				</ul>
+			</div>
+		</div><div id="hlavnimenu_DXM3_" style="z-index:20000;display:none;">
+			<div class="dxm-shadow dxm-popup pimenu" style="font-size:9pt;">
+				<ul class="dx dxm-noImages">
+					<li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=2351" style="font-size:9pt;">Rozvrh</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=601" style="font-size:9pt;">Suplov&#225;n&#237;</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=621" style="font-size:9pt;">Dom&#225;c&#237; &#250;koly</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=7" style="font-size:9pt;">Přehled předmětů</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="baktk2.aspx" style="font-size:9pt;">Přehled v&#253;uky</a>
+					</div><b class="dx-clear"></b></li>
+				</ul>
+			</div>
+		</div><div id="hlavnimenu_DXM4_" style="z-index:20000;display:none;">
+			<div class="dxm-shadow dxm-popup pimenu" style="font-size:9pt;">
+				<ul class="dx dxm-noImages">
+					<li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=3" style="font-size:9pt;">Průběžn&#225; absence</a>
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="prehled.aspx?s=9" style="font-size:9pt;">Zameškanost v předmětech</a>
+					</div><b class="dx-clear"></b></li>
+				</ul>
+			</div>
+		</div><div id="hlavnimenu_DXM10_" style="z-index:20000;display:none;">
+			<div class="dxm-shadow dxm-popup pimenu" style="font-size:9pt;">
+				<ul class="dx dxm-noImages">
+					<li class="dxm-item dxm-subMenu" style="font-size:9pt;"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						Přehledy přihl&#225;šen&#237;
+					</div><div class="dxm-popOut">
+						<img class="dxWeb_mVerticalPopOut dxm-pImage" src="/bakaweb/DXR.axd?r=1_10-Hsjh7" alt=">" />
+					</div><b class="dx-clear"></b></li><li class="dxm-spacing"></li><li class="dxm-item dxm-noSubMenu"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="servis.aspx?s=0" style="font-size:9pt;">Nastaven&#237;</a>
+					</div><b class="dx-clear"></b></li>
+				</ul>
+			</div>
+		</div><div id="hlavnimenu_DXM10i1_" style="z-index:20002;display:none;">
+			<div class="dxm-shadow dxm-popup pimenu" style="font-size:9pt;">
+				<ul class="dx dxm-noImages">
+					<li class="dxm-item"><div class="dxm-content dxm-hasText" style="padding-left:8pt;">
+						<a class="dx" href="servis.aspx?s=10" style="font-size:9pt;">Moje přihl&#225;šen&#237;</a>
+					</div><b class="dx-clear"></b></li>
+				</ul>
+			</div>
+		</div>
+	</div><script id="dxss_1511537154" type="text/javascript">
+<!--
+aspxAddHoverItems('hlavnimenu',[[['dxm-hovered',''],['border-width:0px;',''],['DXI0_','DXI1_','DXI2_','DXI3_','DXI4_','DXI5_','DXI10_','DXI11_'],['','T'],[[''],[''],[''],[''],[''],[''],[''],['']],['Img','PImg']],[[''],[''],['DXME1_','DXMBC1_','DXME2_','DXMBC2_','DXME3_','DXMBC3_','DXME4_','DXMBC4_','DXME10_','DXMBC10_','DXME10i1_','DXMBC10i1_']],[['dxm-hovered',''],['','padding-left:8pt;'],['DXI1i0_','DXI2i0_','DXI2i1_','DXI2i2_','DXI2i3_','DXI3i0_','DXI3i3_','DXI3i4_','DXI3i5_','DXI3i7_','DXI4i0_','DXI4i1_','DXI10i1i0_'],['','T'],[[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],['']],['Img','PImg']],[['dxm-hovered','',''],['','padding-left:8pt;','padding-left:8pt;'],['DXI10i1_','DXI10i2_'],['','P','T'],[['',''],['','']],['Img','PImg']]]);
+aspxAddSelectedItems('hlavnimenu',[[['dxm-selected',''],['border-width:0px;',''],['DXI0_','DXI1_','DXI2_','DXI3_','DXI4_','DXI5_','DXI10_','DXI11_'],['','T'],[[''],[''],[''],[''],[''],[''],[''],['']],['Img','PImg']],[['dxm-selected',''],['','padding-left:8pt;'],['DXI1i0_','DXI2i0_','DXI2i1_','DXI2i2_','DXI2i3_','DXI3i0_','DXI3i3_','DXI3i4_','DXI3i5_','DXI3i7_','DXI4i0_','DXI4i1_','DXI10i1i0_'],['','T'],[[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],['']],['Img','PImg']],[['dxm-selected','',''],['','padding-left:8pt;','padding-left:8pt;'],['DXI10i1_','DXI10i2_'],['','P','T'],[['',''],['','']],['Img','PImg']]]);
+
+var dxo = new ASPxClientMenu('hlavnimenu');
+window['hlavnimenu'] = dxo;
+dxo.uniqueID = 'ctl00$hlavnimenu';
+dxo.liteRender=true;
+dxo.liteRenderData={'':[[0],[1],[2],[3],[4],[5],[10],[11]],'1':[[0]],'2':[[0],[1],[2],[3]],'3':[[0],[3],[4],[5],[7]],'4':[[0],[1]],'10':[[1],[2]],'10i1':[[0]]};
+dxo.appearAfter=10;
+dxo.allowSelectItem=true;
+dxo.shadowVisible=false;
+dxo.InlineInitialize();
+
+//-->
+</script>
+        
+</div>
+
+
+    
+    <script type="text/javascript">
+
+
+     // <![CDATA[
+        // var keyValue;
+        function OnMoreInfoClick(element, key) {
+            popupkni.SetContentUrl("bakkni.aspx?id=" + key);
+            try {
+                popupkni.Show();
+            } catch (ee) { alert("chyba kni: " + ee.Message); }
+        }
+
+    
+        // ]]> 
+
+
+        function popup_Popup(s, e) {
+            var popupElement = s.GetCurrentPopupElement();
+            
+            s.SetContentUrl("baktk.aspx?h="+popupElement.id);
+        }
+
+
+
+        function printPartOfPage(elementId) {
+            var printContent = document.getElementById(elementId);
+            var windowUrl = 'about:blank';
+            var uniqueName = new Date();
+            var windowName = 'Print' + uniqueName.getTime();
+            var printWindow = window.open(windowUrl, windowName, 'left=50000,top=50000,width=0,height=0');
+            printWindow.document.write('<link rel="stylesheet" href="ptstylbig.css" type="text/css" />');  
+
+            printWindow.document.write(printContent.innerHTML);
+            printWindow.document.close();
+            printWindow.focus();
+            printWindow.print();
+            printWindow.close();
+            return false;
+        }
+
+
+
+
+        </script>
+    <div>
+
+
+     <input type="hidden" id="cphmain_popupkniWS" name="cphmain_popupkniWS" value="0:0:-1:-10000:-10000:0:600px:455px:1:0:0:0" /><div id="cphmain_popupkni_PW-1" style="position:absolute;left:0px;top:0px;z-index:10000;visibility:hidden;display:none;">
+	<table id="cphmain_popupkni_PWST-1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border-collapse:separate;position:relative;">
+		<tr>
+			<td class="dxpcControl" onmousedown="aspxPWMDown(event,&#39;cphmain_popupkni&#39;,-1,false)" style="background-color:White;height:455px;width:600px;cursor:default;"><table id="cphmain_popupkni_CLW-1" cellspacing="0" cellpadding="0" style="height:455px;width:600px;border-collapse:collapse;border-collapse:separate;">
+				<tr>
+					<td id="cphmain_popupkni_PWH-1" class="dxpcHeader" onmousedown="aspxPWDGMDown(event,&#39;cphmain_popupkni&#39;,-1)" style="cursor:move;padding-left:12px;padding-right:2px;padding-top:2px;padding-bottom:2px;-khtml-user-select:none;"><table cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;border-collapse:separate;">
+						<tr>
+							<td id="cphmain_popupkni_PWH-1T" class="dxpc" style="width:100%;">Informace o knize</td><td class="dxpcHBCell dxpcHBCellSys"><table cellspacing="0" cellpadding="0" style="border-collapse:collapse;border-collapse:separate;">
+								<tr>
+									<td id="cphmain_popupkni_HCB-1" class="dxpcCloseButton" onclick="aspxPWCBClick(event, &#39;cphmain_popupkni&#39;,-1)" onmousedown="return aspxPWHMDown(event);" style="cursor:pointer;"><img id="cphmain_popupkni_HCB-1Img" class="dxWeb_pcCloseButton" src="/bakaweb/DXR.axd?r=1_10-Hsjh7" alt="[Close]" /></td>
+								</tr>
+							</table></td>
+						</tr>
+					</table></td>
+				</tr><tr>
+					<td id="cphmain_popupkni_PWC-1" class="dxpcContent" style="height:100%;border-top-width:0px;"><div id="cphmain_popupkni_CSD-1" class="dxpcContentPaddings">
+						&nbsp;
+					</div></td>
+				</tr>
+			</table></td><td style="background:url('/bakaweb/DXR.axd?r=1_65-Hsjh7') no-repeat left top;"></td>
+		</tr><tr>
+			<td style="background:url('/bakaweb/DXR.axd?r=1_64-Hsjh7') no-repeat left top;"></td><td style="background:url('/bakaweb/DXR.axd?r=1_66-Hsjh7') no-repeat left top;"><div style="height:5px;width:5px;">
+
+			</div></td>
+		</tr>
+	</table>
+</div><table id="cphmain_popupkni_LP" class="dxpcLoadingPanel" cellspacing="0" cellpadding="0" style="border-collapse:collapse;left:0px;top:0px;z-index:30000;display:none;">
+	<tr>
+		<td class="dx" style="padding-right:8px;"><img src="/bakaweb/DXR.axd?r=1_51-Hsjh7" alt="" align="middle" /></td><td class="dx" style="padding-left:0px;"><span id="cphmain_popupkni_TL">Loading&hellip;</span></td>
+	</tr>
+</table><div id="cphmain_popupkni_LD" class="dxpcLoadingDiv" style="left:0px;top:0px;z-index:29999;display:none;position:absolute;">
+
+</div><script id="dxss_1990610756" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientPopupControl('cphmain_popupkni');
+window['popupkni'] = dxo;
+dxo.callBack = function(arg) { WebForm_DoCallback('ctl00$cphmain$popupkni',arg,aspxCallback,'cphmain_popupkni',aspxCallbackError,true); };
+dxo.uniqueID = 'ctl00$cphmain$popupkni';
+dxo.appearAfter=0;
+dxo.popupAnimationType='fade';
+dxo.popupHorizontalAlign='WindowCenter';
+dxo.popupVerticalAlign='WindowCenter';
+dxo.isPopupPositionCorrectionOn=false;
+dxo.allowDragging=true;
+dxo.width=600;
+dxo.height=455;
+dxo.autoUpdatePosition = true;
+dxo.InlineInitialize();
+
+//-->
+</script>
+
+
+        
+        
+        
+        
+        
+        
+        
+        
+
+
+        
+        
+        
+        
+        
+       
+       
+
+
+    </div>
+ 
+
+     
+
+
+
+    
+
+    
+
+    
+
+    <div id="cphmain_Panelrozvrh">
+	
+    <div class="outround">
+        <table class="dxrpControl" cellspacing="0" cellpadding="0" id="cphmain_roundrozvrh" style="border-collapse:collapse;border-collapse:separate;">
+		<tr>
+			<td valign="top"><table cellspacing="0" cellpadding="0" style="border-collapse:collapse;border-collapse:separate;">
+				<tr>
+					<td style="width:5px;height:5px;"><img class="dxrpCI" src="App_Themes/tyrkysTheme/TopLeftCorner.png" alt="" style="height:5px;width:5px;" /></td><td class="dxrpTE" style="background-color:#5DE7F0;border-top-color:#8B8B8B;border-top-style:Solid;border-top-width:1px;"><div style="height:1px;width:1px;overflow:hidden;">
+
+					</div></td><td style="width:5px;height:5px;"><img class="dxrpCI" src="App_Themes/tyrkysTheme/TopRightCorner.png" alt="" style="height:5px;width:5px;" /></td>
+				</tr><tr>
+					<td class="dxrpHLE" style="background-color:#5DE7F0;background-image:url(App_Themes/tyrkysTheme/HeaderLeftEdge.png);background-repeat:no-repeat;background-position:left bottom;border-left-color:#8B8B8B;border-left-style:None;border-left-width:1px;border-bottom-style:None;"><div style="height:1px;width:1px;overflow:hidden;">
+
+					</div></td><td class="dxrpHeader" style="background-color:#5DE7F0;font-weight:bold;height:1%;border-bottom-style:None;padding-left:6px;padding-right:6px;padding-top:1px;padding-bottom:5px;background-image:url(App_Themes/tyrkysTheme/HeaderContent.png);background-repeat:repeat-x;background-position:left bottom;"><table cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;border-collapse:separate;">
+						<tr>
+							<td class="dxrp" style="font-weight:bold;width:100%;">
+            <span class="dxeBase roundnadpis" id="cphmain_roundrozvrh_HTC_labelnadpisrozvrh_0">Přehled předmětů</span><script id="dxss_1177497683" type="text/javascript">
+<!--
+aspxAddDisabledItems('cphmain_roundrozvrh_HTC_labelnadpisrozvrh_0',[[['dxeDisabled'],[''],['']]]);
+
+var dxo = new ASPxClientLabel('cphmain_roundrozvrh_HTC_labelnadpisrozvrh_0');
+window['labelnadpisrozvrh'] = dxo;
+dxo.uniqueID = 'ctl00$cphmain$roundrozvrh$HTC$TC$labelnadpisrozvrh';
+dxo.InlineInitialize();
+
+//-->
+</script>  
+        </td>
+						</tr>
+					</table></td><td class="dxrpHRE" style="background-color:#5DE7F0;background-image:url(App_Themes/tyrkysTheme/HeaderRightEdge.png);background-repeat:no-repeat;background-position:right bottom;border-right-color:#8B8B8B;border-right-style:None;border-right-width:1px;border-bottom-style:None;"><div style="height:1px;width:1px;overflow:hidden;">
+
+					</div></td>
+				</tr><tr>
+					<td class="dxrpLE" style="background-color:WhiteSmoke;border-left-color:#8B8B8B;border-left-style:Solid;border-left-width:1px;"><div style="height:1px;width:1px;overflow:hidden;">
+
+					</div></td><td id="cphmain_roundrozvrh_RPC" class="dxrp dxrpcontent" style="background-color:WhiteSmoke;padding-left:6px;padding-right:6px;padding-top:9px;padding-bottom:6px;">
+              <div id="trozvrh">
+                <div align="center"><table class="rozseznamhlava" cellpadding="0" cellspacing="0"><tbody><tr><td>Předmět</td><td>Učitel</td></tr><tr><td class="rozseznampred">Český jazyk a literatura</td><td class="rozseznamucit" nowrap="nowrap">PhDr. Lukáš Průša Ph.D.</td></tr><tr><td class="rozseznampred">Anglický jazyk</td><td class="rozseznamucit" nowrap="nowrap">Mgr. Tomáš Klein</td></tr><tr><td class="rozseznampred">Německý jazyk</td><td class="rozseznamucit" nowrap="nowrap">PhDr. Ilona Zaorálková</td></tr><tr><td class="rozseznampred">Základy společenských věd</td><td class="rozseznamucit" nowrap="nowrap">PhDr. Petr Nezdařil</td></tr><tr><td class="rozseznampred">Dějepis</td><td class="rozseznamucit" nowrap="nowrap">PhDr. Petr Smolák</td></tr><tr><td class="rozseznampred">Zeměpis</td><td class="rozseznamucit" nowrap="nowrap">PaedDr. Josef Hlavatý</td></tr><tr><td class="rozseznampred">Matematika</td><td class="rozseznamucit" nowrap="nowrap">RNDr. Michal Vavroš Ph.D.</td></tr><tr><td class="rozseznampred">Fyzika</td><td class="rozseznamucit" nowrap="nowrap">Mgr. Jarmila Kučová</td></tr><tr><td class="rozseznampred">Chemie</td><td class="rozseznamucit" nowrap="nowrap">Mgr. Pavel Czernek</td></tr><tr><td class="rozseznampred">Biologie</td><td class="rozseznamucit" nowrap="nowrap">PhDr. Hana Nováčková</td></tr><tr><td class="rozseznampred">Informatika a výp. technika</td><td class="rozseznamucit" nowrap="nowrap">Mgr. Lada Stachovcová</td></tr><tr><td class="rozseznampred">Estetická výchova - výtvarná</td><td class="rozseznamucit" nowrap="nowrap">Mgr. Tereza Šimonková</td></tr><tr><td class="rozseznampred">Tělesná výchova</td><td class="rozseznamucit" nowrap="nowrap">Mgr. Lubomír Bardaševský</td></tr></tbody></table></div>
+                   </div>
+                </td><td class="dxrpRE" style="background-color:WhiteSmoke;border-right-color:#8B8B8B;border-right-style:Solid;border-right-width:1px;"><div style="height:1px;width:1px;overflow:hidden;">
+
+					</div></td>
+				</tr><tr>
+					<td style="width:5px;height:5px;"><img class="dxrpCI" src="App_Themes/tyrkysTheme/BottomLeftCorner.png" alt="" style="height:5px;width:5px;" /></td><td class="dxrpBE" style="background-color:WhiteSmoke;border-bottom-color:#8B8B8B;border-bottom-style:Solid;border-bottom-width:1px;"><div style="height:1px;width:1px;overflow:hidden;">
+
+					</div></td><td style="width:5px;height:5px;"><img class="dxrpCI" src="App_Themes/tyrkysTheme/BottomRightCorner.png" alt="" style="height:5px;width:5px;" /></td>
+				</tr>
+			</table></td>
+		</tr>
+	</table>
+
+
+
+        
+
+             <input type="hidden" id="cphmain_popuptkWS" name="cphmain_popuptkWS" value="0:0:-1:-10000:-10000:0:400px:500px:1:0:0:0" /><div id="cphmain_popuptk_PW-1" class="dxpcLite dxpclW dxpc-mainDiv dxpc-shadow" style="height:500px;width:400px;cursor:default;z-index:10000;display:none;">
+		<div class="dxpc-header dxpc-withBtn" style="cursor:move;-khtml-user-select:none;">
+			<div class="dxpc-closeBtn" style="cursor:pointer;">
+				<img class="dxWeb_pcCloseButton" src="/bakaweb/DXR.axd?r=1_10-Hsjh7" alt="[Close]" />
+			</div><div class="dxpc-headerContent">
+				<span class="dxpc-headerText">Informace o vyučovac&#237; hodině</span>
+			</div><b class="dx-clear"></b>
+		</div><div class="dxpc-contentWrapper" style="overflow:auto;">
+			<div class="dxpc-content" style="padding-left:2px;padding-right:2px;padding-top:2px;padding-bottom:2px;">
+				<iframe class="dxpc-iFrame" title="" src="" scrolling="auto" frameborder="0" style="height:100%;width:100%;">
+
+				</iframe>
+			</div>
+		</div><div class="dxpc-footer">
+			
+            <div style="float: right; margin: 3px;">
+                <table cellspacing="0" cellpadding="0" id="cphmain_popuptk_TPCFm1_zavritbutton" style="border-collapse:collapse;border-collapse:separate;-khtml-user-select:none;">
+				<tr>
+					<td id="cphmain_popuptk_TPCFm1_zavritbutton_B" class="dxbButton" align="center"><div style="border-width:0;width:0;height:0;opacity:0;padding:0;margin:0;overflow:hidden;">
+						<input value="" onfocus="aspxBGotFocus(&#39;cphmain_popuptk_TPCFm1_zavritbutton&#39;)" type="submit" name="ctl00$cphmain$popuptk$TPCFm1$TC$zavritbutton" readonly="readonly" style="border-width:0px;height:0px;width:0px;padding:0;border-width:0;width:1px;height:1px;opacity:0;margin:0;position:relative;" />
+					</div><div id="cphmain_popuptk_TPCFm1_zavritbutton_CD" class="dxb">
+						<span>zavř&#237;t</span>
+					</div></td>
+				</tr>
+			</table><script id="dxss_1632329454" type="text/javascript">
+<!--
+aspxAddHoverItems('cphmain_popuptk_TPCFm1_zavritbutton',[[['dxbButtonHover'],[''],['B'],['','TC'],[['']],['Img']]]);
+aspxAddPressedItems('cphmain_popuptk_TPCFm1_zavritbutton',[[['dxbButtonPressed'],[''],['B'],['','TC'],[['']],['Img']]]);
+aspxAddDisabledItems('cphmain_popuptk_TPCFm1_zavritbutton',[[['dxbDisabled'],[''],['B'],['','TC'],[['']],['Img']]]);
+
+var dxo = new ASPxClientButton('cphmain_popuptk_TPCFm1_zavritbutton');
+window['zavributton'] = dxo;
+dxo.uniqueID = 'ctl00$cphmain$popuptk$TPCFm1$TC$zavritbutton';
+dxo.Click.AddHandler(function(s, e) { popuptk2.Hide(); });
+aspxAddSelectedItems('cphmain_popuptk_TPCFm1_zavritbutton',[[['dxbf'],[''],['CD']]]);
+dxo.InlineInitialize();
+
+//-->
+</script>
+            </div>
+        
+		</div>
+	</div><table id="cphmain_popuptk_LP" class="dxpcLoadingPanel" cellspacing="0" cellpadding="0" style="border-collapse:collapse;left:0px;top:0px;z-index:30000;display:none;">
+		<tr>
+			<td class="dx" style="padding-right:8px;"><img src="/bakaweb/DXR.axd?r=1_51-Hsjh7" alt="" align="middle" /></td><td class="dx" style="padding-left:0px;"><span id="cphmain_popuptk_TL">Loading&hellip;</span></td>
+		</tr>
+	</table><div id="cphmain_popuptk_LD" class="dxpcLoadingDiv" style="left:0px;top:0px;z-index:29999;display:none;position:absolute;">
+
+	</div><script id="dxss_1498534361" type="text/javascript">
+<!--
+aspxAddHoverItems('cphmain_popuptk',[[['dxpc-closeBtnHover'],[''],['HCB-1'],,[['']],['Img']]]);
+
+var dxo = new ASPxClientPopupControl('cphmain_popuptk');
+window['popuptk2'] = dxo;
+dxo.callBack = function(arg) { WebForm_DoCallback('ctl00$cphmain$popuptk',arg,aspxCallback,'cphmain_popuptk',aspxCallbackError,true); };
+dxo.uniqueID = 'ctl00$cphmain$popuptk';
+dxo.PopUp.AddHandler(popup_Popup);
+dxo.appearAfter=0;
+dxo.disappearAfter=0;
+dxo.enableAnimation=false;
+dxo.allowResize=true;
+dxo.closeAction='CloseButton';
+dxo.popupHorizontalAlign='Center';
+dxo.popupVerticalAlign='Below';
+dxo.popupVerticalOffset=10;
+dxo.isPopupPositionCorrectionOn=false;
+dxo.liteRender=true;
+dxo.allowDragging=true;
+dxo.width=400;
+dxo.height=500;
+dxo.contentUrl='/bakaweb/baktk.aspx';
+dxo.InlineInitialize();
+
+//-->
+</script>
+
+    
+            </div>
+    
+</div>
+
+    
+
+    
+
+   
+
+    
+
+    
+ 
+    
+
+    
+
+    
+  
+    
+
+      
+ 
+    
+
+
+ 
+    
+
+    
+ 
+    
+  
+    
+
+                    
+                       
+
+
+</div> 
+</div>
+
+<input type="hidden" id="popupWS" name="popupWS" value="0:0:-1:-10000:-10000:0:200px:100px:1:0:0:0" /><div id="popup_PW-1" style="position:absolute;left:0px;top:0px;z-index:10000;visibility:hidden;display:none;">
+	<table id="popup_PWST-1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border-collapse:separate;position:relative;">
+		<tr>
+			<td tabindex="900" class="dxpcControl" onmousedown="aspxPWMDown(event,&#39;popup&#39;,-1,false)" style="background-color:Silver;height:100px;width:200px;cursor:default;"><table id="popup_CLW-1" cellspacing="0" cellpadding="0" style="height:100px;width:200px;border-collapse:collapse;border-collapse:separate;">
+				<tr>
+					<td id="popup_PWH-1" class="dxpcHeader" onmousedown="aspxPWDGMDown(event,&#39;popup&#39;,-1)" style="cursor:move;padding-left:12px;padding-right:2px;padding-top:2px;padding-bottom:2px;-khtml-user-select:none;"><table cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;border-collapse:separate;">
+						<tr>
+							<td id="popup_PWH-1T" class="dxpc" style="width:100%;">Změna jazyka</td><td class="dxpcHBCell dxpcHBCellSys"><table cellspacing="0" cellpadding="0" style="border-collapse:collapse;border-collapse:separate;">
+								<tr>
+									<td id="popup_HCB-1" class="dxpcCloseButton" onclick="aspxPWCBClick(event, &#39;popup&#39;,-1)" onmousedown="return aspxPWHMDown(event);" style="cursor:pointer;"><img id="popup_HCB-1Img" class="dxWeb_pcCloseButton" src="/bakaweb/DXR.axd?r=1_10-Hsjh7" alt="[Close]" /></td>
+								</tr>
+							</table></td>
+						</tr>
+					</table></td>
+				</tr><tr>
+					<td id="popup_PWC-1" class="dxpcContent" style="height:100%;border-top-width:0px;"><div id="popup_CSD-1" class="dxpcContentPaddings">
+						
+            <table cellspacing="12" cellpadding="12">
+            <tr>
+            <td>
+                <input type="image" name="ctl00$popup$imgcs" id="popup_imgcs" tabindex="991" class="imglang" src="images/cs.png" /> 
+            </td>
+            <td>
+                <input type="image" name="ctl00$popup$imgen" id="popup_imgen" tabindex="992" class="imglang" src="images/en.png" /> 
+            </td>
+            <td>
+                <input type="image" name="ctl00$popup$imgfr" id="popup_imgfr" tabindex="993" class="imglang" src="images/fr.png" /> 
+            </td>
+            </tr>
+            </table>
+            <br />
+            <table class="dxeBase" cellspacing="0" cellpadding="0" id="popup_checklexpredmety" style="height:15px;border-collapse:collapse;">
+							<tr>
+								<td style="padding-left:3px;padding-right:3px;padding-top:3px;padding-bottom:3px;"><span class="dxWeb_edtCheckBoxUnchecked dxICheckBox"><span class="dxKBSW"><input id="popup_checklexpredmety_S" name="ctl00$popup$checklexpredmety" value="U" type="text" readonly="readonly" style="width:1px;height:1px;position:relative;background-color:transparent;display:block;opacity:0;margin:0;padding:0;border-width:0;font-size:0pt;" /></span></span></td><td style="padding-left:0px;padding-right:0px;padding-top:0px;padding-bottom:1px;"><label style="margin-left:2px;">překl&#225;dat n&#225;zvy předmětů</label></td>
+							</tr>
+						</table><script id="dxss_1486261995" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientCheckBox('popup_checklexpredmety');
+window['popup_checklexpredmety'] = dxo;
+dxo.autoPostBack = true;
+dxo.uniqueID = 'ctl00$popup$checklexpredmety';
+dxo.imageProperties = {'4':['dxWeb_edtCheckBoxChecked','dxWeb_edtCheckBoxUnchecked'],'8':['dxWeb_edtCheckBoxCheckedDisabled','dxWeb_edtCheckBoxUncheckedDisabled']};
+dxo.icbFocusedStyle = ['dxICBFocused',''];
+dxo.InlineInitialize();
+
+//-->
+</script>
+            
+					</div></td>
+				</tr>
+			</table></td><td style="background:url('/bakaweb/DXR.axd?r=1_65-Hsjh7') no-repeat left top;"></td>
+		</tr><tr>
+			<td style="background:url('/bakaweb/DXR.axd?r=1_64-Hsjh7') no-repeat left top;"></td><td style="background:url('/bakaweb/DXR.axd?r=1_66-Hsjh7') no-repeat left top;"><div style="height:5px;width:5px;">
+
+			</div></td>
+		</tr>
+	</table>
+</div><table id="popup_LP" class="dxpcLoadingPanel" cellspacing="0" cellpadding="0" style="border-collapse:collapse;left:0px;top:0px;z-index:30000;display:none;">
+	<tr>
+		<td class="dx" style="padding-right:8px;"><img src="/bakaweb/DXR.axd?r=1_51-Hsjh7" alt="" align="middle" /></td><td class="dx" style="padding-left:0px;"><span id="popup_TL">Loading&hellip;</span></td>
+	</tr>
+</table><div id="popup_LD" class="dxpcLoadingDiv" style="left:0px;top:0px;z-index:29999;display:none;position:absolute;">
+
+</div><script id="dxss_646712574" type="text/javascript">
+<!--
+
+var dxo = new ASPxClientPopupControl('popup');
+window['popup'] = dxo;
+dxo.callBack = function(arg) { WebForm_DoCallback('ctl00$popup',arg,aspxCallback,'popup',aspxCallbackError,true); };
+dxo.uniqueID = 'ctl00$popup';
+dxo.appearAfter=0;
+dxo.popupAnimationType='fade';
+dxo.popupHorizontalAlign='OutsideRight';
+dxo.popupVerticalAlign='Below';
+dxo.isPopupPositionCorrectionOn=false;
+dxo.allowDragging=true;
+dxo.width=200;
+dxo.height=100;
+dxo.InlineInitialize();
+
+//-->
+</script>
+
+
+
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+WebForm_InitCallback();//]]>
+</script>
+</form>
+
+</body>
+</html>

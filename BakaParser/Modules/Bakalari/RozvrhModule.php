@@ -30,6 +30,8 @@ class RozvrhModule extends \BakaParser\Modules\BaseModule {
         return $this->parameters;
     }
 
+
+
     /**
      * 
      * @param \Symfony\Component\DomCrawler\Crawler $request
@@ -139,7 +141,7 @@ class RozvrhModule extends \BakaParser\Modules\BaseModule {
                                                 $skip = $x - 1 + ($y + 1);
                                             }
                                         }
-                                    } else if (($length = count($rozvrh['timetable']) - $hour['lesson']) > 1) {
+                                    } else if (($length = count($rozvrh['casy']) - $hour['lesson']) > 1) {
                                         $hour['lesson'] = array("begin" => $hour['lesson'], "length" => $length);
                                     }
 

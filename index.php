@@ -17,11 +17,11 @@ $klein = new \Klein\Klein();
 //TODO: nějaký lepší způsob jak implementovat tohle
 $klein->respond(\dirname($_SERVER['PHP_SELF']) . "/[" . $methods . ":action]/?", function($request, $response) use ($klein, $config) {
 
-    $klein->onError(function() {
-        $response = new \BakaParser\Response();
-        echo json_encode($response->setError("Server error", func_get_arg(3)->getMessage()));
-        die();
-    });
+    // $klein->onError(function() {
+    //     $response = new \BakaParser\Response();
+    //     echo json_encode($response->setError("Server error", func_get_arg(3)->getMessage()));
+    //     die();
+    // });
     
 
     $response->json((new \BakaParser\Handler())->output($request, $config));

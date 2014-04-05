@@ -12,7 +12,7 @@ class AbsenceModule extends \BakaParser\Modules\BaseModule {
      * @return \BakaParser\Parameters
      */
     public function getParameters($request = null) {
-        $this->parameters->name = "Průběžná absence";
+        $this->parameters->name = "Zameškanost v předmětech";
         return $this->parameters;
     }
 

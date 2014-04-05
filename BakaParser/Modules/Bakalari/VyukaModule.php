@@ -43,7 +43,10 @@ class VyukaModule extends \BakaParser\Modules\BaseModule {
         foreach ($data as $n => $row) {
             $cells = (new Crawler($row))->filterXPath("./*/td");
 
-            $lesson = array_combine(array("date", "lesson", "topic", "detail", "number"), $cells->extract("_text"));
+            $lesson = array_filter(array_combine(array("date", "lesson", "topic", "detail", "number"), $cells->extract("_text")), function($item) {
+                $item = trim($item);
+                return !empty($item);
+            });
             $lesson['lesson'] = str_replace(". hod", "", $lesson['lesson']);
 
             $vyuka['vyuka'][] = $lesson;
@@ -56,7 +59,9 @@ class VyukaModule extends \BakaParser\Modules\BaseModule {
 
         //get lessons
         if (count($lessons = $request->filterXPath('//select[@name="ctl00$cphmain$droppredmety"]/option')) > 0) {
-            $vyuka['predmety'] = $lessons->extract("value");
+            $vyuka['predmety'] = $lessons->extract(array("_text", "value"));
+
+            array_walk($vyuka['predmety'], function(&$item) { $item = array_combine(array("long", "short"), $item); });
         }
 
         return $this->response->setResult($vyuka);
