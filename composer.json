@@ -1,16 +1,16 @@
 {
-	"repositories": [{
-		"type": "vcs",
-		"url": "https://github.com/Delold/DomCrawler"
-	}],
+    "repositories": [{
+        "type": "vcs",
+        "url": "https://github.com/Delold/DomCrawler"
+    }],
     "require": {
-		"dg/dibi": "dev-master",
-		"guzzle/guzzle": "3.8.*@dev",
-		"symfony/dom-crawler": "dev-master",
-        "monolog/monolog": "1.7.*@dev", 
-		"klein/klein": "dev-master"
+        "dg/dibi": "dev-master",
+        "guzzle/guzzle": "3.8.*@dev",
+        "symfony/dom-crawler": "dev-master",
+        "monolog/monolog": "1.7.*@dev",
+        "klein/klein": "dev-master"
     },
-	"autoload": {
-		"psr-0": { "BakaParser\\": "" }
-	}
+    "autoload": {
+        "psr-0": {"Skolar\\": ""}
+    }
 }

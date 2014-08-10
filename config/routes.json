@@ -1,0 +1,31 @@
+{
+    "handlers": {
+        "bakalari": {
+            "modules": [
+                { "name": "absence" },
+                { "name": "akce", "uri": "[a:view]?" },
+                { "name": "login" },
+                { "name": "navigace" },
+                { "name": "predmety" },
+                { "name": "rozvrh", "uri": "[a:view]?" },
+                { "name": "suplovani", "uri": "[a:view]?" },
+                { "name": "ukoly" },
+                { "name": "vysvedceni" },
+                { "name": "vyuka", "uri": "[a:subject]?/[i:page]?" },
+                { "name": "znamky" },
+                { "name": "batch", "required": ["requests"] }
+            ],
+            "required": [
+                ["user", "pass", "url"],
+                ["file"]
+            ]
+        },
+        "server": {
+            "modules": [
+                { "name": "schoollist", "uri": "[:northeast]/[:southwest]/?[i:limit]?" },
+                { "name": "msg" },
+                { "name": "testfiles", "uri": "[bakalari:system]/?" }
+            ]
+        }
+    }
+}
