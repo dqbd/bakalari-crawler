@@ -12,8 +12,6 @@ class Configuration {
 	public static function setConfig($config) {
 		self::$config = $config;
 	}
-
-
 }
 
 ?>

@@ -8,8 +8,7 @@ class BakalariHandler implements \Skolar\Handlers\BaseHandler {
 	protected $module = null;
 	protected $params = null;
 
-	private $client = null;
-	private $cache = null;
+	private $browser = null;
 
 	private $base_flow = array("login", "navigace");
 
@@ -27,46 +26,25 @@ class BakalariHandler implements \Skolar\Handlers\BaseHandler {
 				$module = sprintf("\\%s\\Modules\\Bakalari\\%sModule", dirname(__NAMESPACE__), $module);
 				$module = new $module($this->params); //tady by bylo bezpečnější stripnout pouze ty parametry, které modul potřebuje...
 			}
-			$this->initHttp();	
+
+			$url = Skolar\Utils::getFixedUrl($this->params->get('url'));
+			$user = $this->params->get('user');
+			$pass = $this->params->get('pass');
+
+			$this->browser = new \Skolar\Browser($url, $this->getCookieCachePath($user, $pass, $url), array($this, "receiveData"));
 
 			if($module->defineParameters() === false) { 
 				if($module->getUrl() !== false) {
 				}
 			}
-
 		}
-		// print_r($flow);
-		// if($this->module->getName() == "batch") {
-		// }
-
-		// echo $this->module->getName();
 	}
 
-	public function receiveContent() {
+	public function receiveData($data) {
 
 	}
 
-	public function outputHttp() {
-		$url = Skolar\Utils::getFixedUrl($this->params->get('url'));
-		$username = $this->params->get('user');
-		$password = $this->params->get('pass');
-
-		$this->initHttp($username, $password, $url);
-	}
-
-	public function initHttp($user, $pass, $url) {
-		$this->client = new \Guzzle\Http\Client($url);
-		
-		$cookiePath = $this->getCookieCachePath($user, $pass, $url);
-
-		$this->cache = new \Skolar\CacheStorage($cookiePath);
-		$this->client->addSubscriber((new \Guzzle\Plugin\Cookie\CookiePlugin($this->cache)));
-	}
-
-	public function outputLocal() {
-
-	}
-
+	
 	public function wantsLocal() {
 		return !empty($this->params["file"]);
 	}
@@ -90,13 +68,6 @@ class BakalariHandler implements \Skolar\Handlers\BaseHandler {
 	    $crawler->addHtmlContent($request->send()->getBody(true));
 	    
 	    return $crawler;
-	}
-
-
-	private function destroyCookieCache($user, $pass, $url) {
-		$path = $this->getCookieCachePath($user, $pass, $url);
-
-		unset($path);
 	}
 
 	/**

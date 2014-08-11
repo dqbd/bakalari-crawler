@@ -5,7 +5,7 @@
     }],
     "require": {
         "dg/dibi": "dev-master",
-        "guzzle/guzzle": "3.8.*@dev",
+        "guzzlehttp/guzzle": "4.1.*@dev",
         "symfony/dom-crawler": "dev-master",
         "monolog/monolog": "1.7.*@dev",
         "klein/klein": "dev-master"

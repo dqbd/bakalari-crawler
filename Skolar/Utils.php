@@ -66,7 +66,7 @@ class Utils {
      * @return type
      * @throws \InvalidArgumentException
      */
-    public static function getFixedUrl($input) {
+    public static function getBaseUrl($input) {
         $url = parse_url($input);
 
         if (empty($url["host"])) {

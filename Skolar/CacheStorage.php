@@ -2,47 +2,59 @@
 
 namespace Skolar;
 
-use \Guzzle\Common\Exception\RuntimeException;
-
-class CacheStorage extends \Guzzle\Plugin\Cookie\CookieJar\ArrayCookieJar {
+class CacheStorage extends \GuzzleHttp\Cookie\FileCookieJar {
     protected $filename;
 
     protected $navdom = false;
     protected $permanent = false;
 
-    public function __construct($cacheFile) {
-        $this->filename = $cacheFile;
-        $this->load();
-    }
+    private $toDestroy = false;
 
-    public function __destruct() {
-        $this->persist();
-    }
+    public function save($filename) {
 
-    protected function persist() {
-        $cookies = $this->serialize();
+        if($toDestroy == false) {
+            $json = array("cookies" => array(), "navdom" => $this->getNavCache(), "permanent" => $this->isPermanentLogin());
 
-        $file = array("cookies" => $cookies, "navdom" => $navdom, "permament" => $permament);
+            foreach ($this as $cookie) {
+                if ($cookie->getExpires() && !$cookie->getDiscard()) {
+                    $json["cookies"][] = $cookie->toArray();
+                }
+            }
 
-        if (false === file_put_contents($this->filename, $file)) {
-            throw new RuntimeException('Unable to open file ' . $this->filename);
+            if (false === file_put_contents($filename, json_encode($json))) {
+                throw new \RuntimeException("Unable to save file {$filename}");
+            }
         }
     }
 
-    protected function load() {
-        $json = file_get_contents($this->filename);
-        if (false === $json) {
-            throw new RuntimeException('Unable to open file ' . $this->filename);
+    public function load($filename) {
+        $json = file_get_contents($filename);
+
+        if($json === false) {
+            throw new \RuntimeException("Unable to load file {$filename}");
         }
 
-        $json = json_decode($json);
+        $data = \GuzzleHttp\json_decode($json, true);
 
-        $this->unserialize($json["cookies"]);
-        $this->cookies = $this->cookies ?: array();
+        if (is_array($data) && is_array($data["cookies"])) {
+            foreach ($data["cookies"] as $cookie) {
+                $this->setCookie(new SetCookie($cookie));
+            }
 
-        $this->navdom = $json["navdom"] ?: false;
-        $this->permament = is_bool($json["permament"]) ? $json["permament"] : false;
+            $this->setNavCache($data["navdom"]);
+            $this->setPermanentLogin($data["permanent"]);
 
+        } else if(strlen($data) || strlen($data["cookies"])) {
+            throw new \RuntimeException("Invalid cache file: {$filename}");
+        }
+    }
+
+    public function setNavCache($navdom) {
+        $this->navdom = $navdom;
+    }
+
+    public function setPermanentLogin($permanent) {
+        $this->permanent = $permanent;
     }
 
     public function getNavCache() {
@@ -53,8 +65,10 @@ class CacheStorage extends \Guzzle\Plugin\Cookie\CookieJar\ArrayCookieJar {
         return $this->permament;
     }
 
-
-
+    public function removeCache() {
+        $this->toDestroy = true;
+        unset($this->filename);
+    }
 }
 
 ?>
