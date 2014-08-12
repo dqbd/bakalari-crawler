@@ -1,6 +1,6 @@
 <?php
 
-namespace Skolar;
+namespace Skolar\Browser;
 
 class CacheStorage extends \GuzzleHttp\Cookie\FileCookieJar {
     protected $filename;
@@ -12,7 +12,7 @@ class CacheStorage extends \GuzzleHttp\Cookie\FileCookieJar {
 
     public function save($filename) {
 
-        if($toDestroy == false) {
+        if($this->toDestroy == false) {
             $json = array("cookies" => array(), "navdom" => $this->getNavCache(), "permanent" => $this->isPermanentLogin());
 
             foreach ($this as $cookie) {
@@ -62,7 +62,7 @@ class CacheStorage extends \GuzzleHttp\Cookie\FileCookieJar {
     }
 
     public function isPermanentLogin() {
-        return $this->permament;
+        return $this->permanent;
     }
 
     public function removeCache() {

@@ -70,11 +70,6 @@ class Dispatcher {
     private static function output($request) {
         foreach(Configuration::get("handlers") as $handler => $desc) {
             if(($id = array_search($request->action, array_column($desc["modules"], "name"))) !== false) {
-                $module = ucfirst($request->action);
-                $handler = ucfirst($handler);
-
-                $module_name = sprintf('\\%s\\Modules\\%s\\%sModule', __NAMESPACE__, $handler, $module);
-                $handler_name = sprintf('\\%s\\Handlers\\%sHandler', __NAMESPACE__, $handler);
 
                 $post_params = self::getParameters($request->body());
 
@@ -112,7 +107,7 @@ class Dispatcher {
 
                 $parameters = $request->paramsNamed()->merge($post_params);
 
-                $handler = new $handler_name((new $module_name($parameters)), $parameters);
+                $handler = self::createHandler($handler, $request->action, $parameters);
                 return $handler->output();
             }
         }
@@ -132,6 +127,22 @@ class Dispatcher {
         $result = json_decode($content, true);
 
         return (is_array($result)) ? $result: array();
+    }
+
+    public static function createHandler($name, $module, $parameters = array()) {
+        $handler_name = sprintf('\\%s\\Handlers\\%sHandler', __NAMESPACE__, ucfirst($name));
+
+        if(is_string($module)) {
+            $module = self::createModule($module, $name, $parameters);
+        }
+
+        return new $handler_name($module, $parameters);
+    }
+
+    public static function createModule($name, $handler, $parameters = array()) {
+        $module_name = sprintf('\\%s\\Modules\\%s\\%sModule', __NAMESPACE__, ucfirst($handler), ucfirst($name));
+
+        return new $module_name($parameters);
     }
 }
 

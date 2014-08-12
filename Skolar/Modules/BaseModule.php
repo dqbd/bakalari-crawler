@@ -27,7 +27,6 @@ abstract class BaseModule {
         $this->defineParameters($request);
     }
 
-    // abstract public function getParameters($request = null);
     abstract public function parse($content = null);
 
     public function defineParameters($context = null) {

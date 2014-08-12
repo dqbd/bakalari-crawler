@@ -36,7 +36,7 @@ class LoginModule extends \Skolar\Modules\BaseModule {
                 $keys, array($arg['user'], $arg['pass'], true)
             );
         } else {
-            return "url";
+            return "dom";
         }
     }
 

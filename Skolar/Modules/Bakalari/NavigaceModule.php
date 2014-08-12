@@ -8,6 +8,8 @@ class NavigaceModule extends \Skolar\Modules\BaseModule {
     public function defineParameters($context = null) {
         parent::defineParameters();
         $this->parameters->url = "uvod.aspx";
+
+        return "url";
     }
 
     /**

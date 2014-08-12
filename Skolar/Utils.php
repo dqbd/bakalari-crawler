@@ -10,7 +10,7 @@ class Utils {
      * @param array $array
      * @return array
      */
-    public static function unflattenArray($array) {
+    public static function flattenArray($array) {
         $return = array();
         array_walk_recursive($array, function($a) use (&$return) { $return[] = $a; });
         return $return;
@@ -79,15 +79,18 @@ class Utils {
             $url['scheme'] = "http";
         }
 
-        if (empty($url['path'])) {
+        if(!empty($url['path'])) {
+            if (strpos($url["path"], ".") !== false) {
+                $exploded = explode("/", $url["path"]);
+                array_pop($exploded);
+                $url['path'] = implode("/", $exploded);
+            }
+
+            $url['path'] .= "/";
+        } else {
             $url['path'] = "/";
         }
 
-        if (strpos($url["path"], ".") !== false) {
-            $exploded = explode("/", $url["path"]);
-            $exploded[count($exploded) - 1] = "";
-            $url['path'] = implode("/", $exploded);
-        }
 
         return self::unparse_url($url);
     }
