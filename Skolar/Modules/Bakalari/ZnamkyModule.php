@@ -12,23 +12,15 @@ class ZnamkyModule extends \Skolar\Modules\BaseModule {
      * @return \Skolar\Parameters
      */
     public function defineParameters($context = null) {
-        parent::defineParameters();
+        parent::defineParameters($context);
 
         $this->parameters->url = BakalariToolkit::assignUrl("Průběžná klasifikace", $context["navigace"]);
 
-        if(isset($context["pagedata"]) && $context["pagedata"] instanceof \Skolar\Browser\PageData && $context["pass"] == 0) {
-            $this->parameters->formparams = BakalariToolkit::fillParameters($context["pagedata"]->getDom(), array(), array(
-                'ctl00$cphmain$Checkdetail' => true,
-                'ctl00$cphmain$Flyout2$Checkdatumy' => true,
-                'ctl00$cphmain$Flyout2$Checktypy' => true
-            ));
-        } else {
-            $this->parameters->formparams = array();
-        }
-    }
-
-    public function preParse($content = null) {
-        return (empty($this->getFormParams()));
+        $this->parameters->formparams = BakalariToolkit::getFormParams($context, array(
+            'ctl00$cphmain$Checkdetail' => true,
+            'ctl00$cphmain$Flyout2$Checkdatumy' => true,
+            'ctl00$cphmain$Flyout2$Checktypy' => true
+        ));
     }
 
     /**

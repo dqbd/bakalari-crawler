@@ -117,25 +117,29 @@ class Dispatcher {
     }
 
     private static function handleOutput($output) {
-        // if(is_array($output)) {
+        if(is_array($output)) {
+            if(count($output) == 1) {
+                return reset($output);
+            }
 
-        //     if(count($output) == 1) {
-        //         return reset($output);
-        //     }
+            $response = new \Skolar\Response();
 
-        //     $response = new \Skolar\Response();
+            $data = array();
+            foreach($output as $name => $content) {
 
-        //     $data = array();
-        //     foreach($output as $name => $content) {
-        //         if($content->getStatus() != "ok") {
-        //             $response->setStatus("fail");
-        //         }
+                if($content->getStatus() != true) {
+                    $response->setStatus(0);
+                }
 
-        //         $data = array_merge($data, $content->getData());
-        //     }
+                $data[$name] = $content->getData();
+                // $data = array_merge($data, );
+            }
 
-        //     $response->setResult($data);
-        // }
+
+            $output = $response->setResult($data);
+
+            
+        }
 
         return $output;
     }

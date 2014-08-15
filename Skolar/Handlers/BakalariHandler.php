@@ -60,7 +60,7 @@ class BakalariHandler implements \Skolar\Handlers\BaseHandler {
 		if($this->baseflow["navigace"]->preParse($data) === false) {
 			$login_data = $this->browser->loadSingle($this->baseflow["login"]->getUrl(), array(), true);
 
-			$this->baseflow["login"]->defineParameters(array("dom" => $login_data));
+			$this->baseflow["login"]->defineParameters(array("pagedata" => $login_data));
 
 			$data = $this->browser->loadSingle(
 				$this->baseflow["login"]->getUrl(), 

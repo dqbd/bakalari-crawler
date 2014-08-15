@@ -7,27 +7,29 @@ use \Skolar\Toolkits\BakalariToolkit;
 
 class VyukaModule extends \Skolar\Modules\BaseModule {
 
-    private $page = null;
-    private $subject = null;
-
-    /**
-     * 
-     * @param mixed[] $request
-     * @return \Skolar\Parameters
-     */
-    public function getParameters($request = null) {
+    public function defineParameters($context = null) {
+        parent::defineParameters($context);
         
-        $this->parameters->name = "Přehled výuky";
-        $this->parameters->optional = (!empty($request[0]['view'])) 
-            ? array('ctl00$cphmain$droppredmety' => $request[0]['view']) 
-            : array();
-        
-        $this->parameters->required = (!empty($request[0]['page']))
-            ? array('__CALLBACKID' => 'ctl00$cphmain$roundvyuka$repetk',
-                    '__CALLBACKPARAM' => 'c0:KV|2;[];GB|20;12|PAGERONCLICK3|PN' . $request[0]['page'] . ';') 
-            : array();
+        $this->parameters->url = BakalariToolkit::assignUrl("Přehled výuky", $context["navigace"]);
 
-        return $this->parameters;
+        if(!empty($this->getRequestParam("view")) || !empty($this->getRequestParam("page"))) {
+            $params = array("optional" => array(), "required" => array());
+
+            if(!empty($this->getRequestParam("view"))) {
+                $params["optional"] = array('ctl00$cphmain$droppredmety' => $this->getRequestParam("view"));
+            }
+
+            if(!empty($this->getRequestParam("page"))) {
+                $params["required"] = array(
+                    '__CALLBACKID' => 'ctl00$cphmain$roundvyuka$repetk',
+                    '__CALLBACKPARAM' => 'c0:KV|2;[];GB|20;12|PAGERONCLICK3|PN' . $this->getRequestParam("page") . ';'
+                ); 
+            }
+
+            $this->parameters->formparams = BakalariToolkit::getFormParams($context, $params);
+        } else {
+            $this->parameters->formparams = array();
+        }
     }
 
     /**
@@ -35,8 +37,10 @@ class VyukaModule extends \Skolar\Modules\BaseModule {
      * @param \Symfony\Component\DomCrawler\Crawler $request
      * @return \Skolar\Response
      */
-    public function parse($request) {
-        $data = $request->filterXPath("//table[@class='dxgvTable']//tr[@class='dxgvDataRow']");
+    public function parse($content = null) {
+        $dom = $content->getDom();
+        
+        $data = $dom->filterXPath("//table[@class='dxgvTable']//tr[@class='dxgvDataRow']");
         $vyuka = array("vyuka" => array());
 
 
@@ -53,12 +57,12 @@ class VyukaModule extends \Skolar\Modules\BaseModule {
         }
 
         //get pages
-        if (count($pages = $request->filterXPath('//*[@class="dxgvPagerBottomPanel"]//*[contains(@class, "dxp-num")]')) > 0) {
+        if (count($pages = $dom->filterXPath('//*[@class="dxgvPagerBottomPanel"]//*[contains(@class, "dxp-num")]')) > 0) {
             $vyuka['pages'] = str_replace(array("[", "]"), "", $pages->extract("_text"));
         }
 
         //get lessons
-        if (count($lessons = $request->filterXPath('//select[@name="ctl00$cphmain$droppredmety"]/option')) > 0) {
+        if (count($lessons = $dom->filterXPath('//select[@name="ctl00$cphmain$droppredmety"]/option')) > 0) {
             $vyuka['views'] = $lessons->extract(array("_text", "value"));
 
             array_walk($vyuka["views"], function(&$item) {

@@ -35,7 +35,7 @@ abstract class BaseModule {
     }
 
     public function preParse($content = null) {
-        return true;
+        return (empty($this->getFormParams()));
     }
 
     public function postParse($content = null) {
@@ -65,6 +65,12 @@ abstract class BaseModule {
     }
 
     public function getRequestParam($name) {
+        if(empty($this->request)) {
+            return null;
+        } else if (is_array($this->request)) {
+            return (isset($this->request[$name])) ? $this->request[$name] : null;
+        }
+
         return $this->request->get($name);
     }
 

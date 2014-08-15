@@ -12,9 +12,10 @@ class AbsenceModule extends \Skolar\Modules\BaseModule {
      * @param mixed[] $request
      * @return \Skolar\Parameters
      */
-    public function getParameters($request = null) {
-        $this->parameters->url = BakalariToolkit::assignUrl("Zameškanost v předmětech", $request);
-        return $this->parameters;
+    public function defineParameters($context = null) {
+        parent::defineParameters($context);
+        
+        $this->parameters->url = BakalariToolkit::assignUrl("Zameškanost v předmětech", $context["navigace"]);
     }
 
     /**
@@ -22,8 +23,8 @@ class AbsenceModule extends \Skolar\Modules\BaseModule {
      * @param \Symfony\Component\DomCrawler\Crawler $request
      * @return \Skolar\Response
      */
-    public function parse($request) {
-        $rows = $request->filterXPath("//*[@class='dxrp dxrpcontent']//tr");
+    public function parse($content = null) {
+        $rows = $request->getDom()->filterXPath("//*[@class='dxrp dxrpcontent']//tr");
 
         $absence = array();
         foreach ($rows as $n => $item) {
@@ -39,7 +40,6 @@ class AbsenceModule extends \Skolar\Modules\BaseModule {
                 $absence['absence'][] = $lesson;
             }
         }
-
 
         return $this->response->setResult($absence);
     }

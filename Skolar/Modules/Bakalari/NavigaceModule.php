@@ -8,7 +8,8 @@ use \Skolar\Toolkits\BakalariToolkit;
 class NavigaceModule extends \Skolar\Modules\BaseModule {
 
     public function defineParameters($context = null) {
-        parent::defineParameters();
+        parent::defineParameters($context);
+
         $this->parameters->url = "uvod.aspx";
     }
 

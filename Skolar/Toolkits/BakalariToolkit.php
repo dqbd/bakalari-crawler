@@ -12,6 +12,26 @@ class BakalariToolkit {
 		return array_flip(array_map("strtolower", $dataset))[strtolower($name)];
 	}
 
+	public static function getFormParams($context, $params = array()) {
+		if(count($params) == count($params, COUNT_RECURSIVE)) {
+			$params = array(
+				"optional" => $params,
+				"required" => array()
+			);
+		}
+
+		$wave = isset($context["pass"]) ? $context["pass"] : 0;
+
+		if($wave != 0 || 
+			!isset($context["pagedata"]) || 
+			!($context["pagedata"] instanceof \Skolar\Browser\PageData)) {
+
+			return array();
+		}
+
+		return self::fillParameters($context["pagedata"]->getDom(), $params["required"], $params["optional"]);
+	}
+
 	public static function fillParameters($dom, $required, $optional) {
 		$data = ($dom instanceof \Skolar\Browser\PageData) ? $dom->getDom() : $dom;
 

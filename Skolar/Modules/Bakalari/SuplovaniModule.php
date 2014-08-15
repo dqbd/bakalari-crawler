@@ -7,31 +7,24 @@ use \Skolar\Toolkits\BakalariToolkit;
 
 class SuplovaniModule extends \Skolar\Modules\BaseModule {
 
-    /**
-     * 
-     * @param mixed[] $request
-     * @return \Skolar\Parameters
-     */
-    public function getParameters($request = null) {
-        $optional = array();
-        if (!empty($request[0]['view'])) {
-            $optional['ctl00$cphmain$radiosuplov'] = $request[0]['view'];
-        }
-        $this->parameters->optional = $optional;
-        $this->parameters->name = "Suplování";
+    public function defineParameters($context = null) {
+        parent::defineParameters($context);
+        
+        $this->parameters->url = BakalariToolkit::assignUrl("Suplování", $context["navigace"]);
 
-        return $this->parameters;
+        if(!empty($this->getRequestParam("view"))) {
+           $this->parameters->formparams = BakalariToolkit::getFormParams($context, array('ctl00$cphmain$radiosuplov' => $this->getRequestParam("view")));
+        } else {
+           $this->parameters->formparams = array();
+        }
     }
 
-    /**
-     * 
-     * @param \Symfony\Component\DomCrawler\Crawler $request
-     * @return \Skolar\Response
-     */
-    public function parse($request) {
-        $data = $request->filterXPath("//*[@class='dxrp dxrpcontent']//div[(@class='supden' or @class='suphod') and text() != 'Žádné změny']");
+    public function parse($content = null) {
+        $dom = $context->getDom();
 
-        $year = explode("/", substr($request->filterXPath("//*[@class='pololetinadpis']")->text(), -7));
+        $data = $dom->filterXPath("//*[@class='dxrp dxrpcontent']//div[(@class='supden' or @class='suphod') and text() != 'Žádné změny']");
+
+        $year = explode("/", substr($dom->filterXPath("//*[@class='pololetinadpis']")->text(), -7));
         $year[1] = "20" . $year[1];
 
         $suplovani = array("suplovani" => array());
@@ -60,7 +53,7 @@ class SuplovaniModule extends \Skolar\Modules\BaseModule {
             $suplovani["suplovani"][] = $last;
         }
         
-        $suplovani["views"] = $request->filterXPath('//select[@name="ctl00$cphmain$radiosuplov"]/option')->extract(["_text", "value"]);
+        $suplovani["views"] = $dom->filterXPath('//select[@name="ctl00$cphmain$radiosuplov"]/option')->extract(["_text", "value"]);
 
         array_walk($suplovani["views"], function(&$item) {
             $item = array_combine(["label", "value"], $item);

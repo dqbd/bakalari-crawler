@@ -7,29 +7,22 @@ use \Skolar\Toolkits\BakalariToolkit;
 
 class UkolyModule extends \Skolar\Modules\BaseModule {
 
-    /**
-     * 
-     * @param mixed[] $request
-     * @return \Skolar\Parameters
-     */
-    public function getParameters($request = null) {
-        $this->parameters->name = "Domácí úkoly";
-        return $this->parameters;
+    public function getParameters($context = null) {
+        parent::defineParameters($context);
+
+        $this->parameters->url = BakalariToolkit::assignUrl("Domácí úkoly", $context["navigace"]);
     }
 
-    /**
-     * 
-     * @param \Symfony\Component\DomCrawler\Crawler $request
-     * @return \Skolar\Response
-     */
-    public function parse($request) {
+    public function parse($content = null) {
         
+        $dom = $content->getDom();
 
-        $data = $request->filterXPath("//*[@class='ukoltab']//tr");
+
+        $data = $dom->filterXPath("//*[@class='ukoltab']//tr");
 
         $ukoly = array("ukoly" => array());
 
-        $year = explode("/", substr(trim($request->filterXPath("//*[@class='pololetinadpis']")->text()), -7));
+        $year = explode("/", substr(trim($dom->filterXPath("//*[@class='pololetinadpis']")->text()), -7));
         $year[1] = "20" . $year[1];
        
 

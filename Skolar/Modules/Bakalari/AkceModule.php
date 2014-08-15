@@ -12,12 +12,16 @@ class AkceModule extends \Skolar\Modules\BaseModule {
      * @param mixed[] $request
      * @return \Skolar\Parameters
      */
-    public function getParameters($request = null) {
-        $this->parameters->name = "Plán akcí";
-        if(!empty($request[0]["view"])) {
-            $this->parameters->optional = array('ctl00$cphmain$dropplan' => $request[0]["view"]);
+    public function defineParameters($context = null) {
+        parent::defineParameters($context);
+        
+        $this->parameters->url = BakalariToolkit::assignUrl("Plán akcí", $context["navigace"]);
+
+        if(!empty($this->getRequestParam("view"))) {
+            $this->parameters->formparams = BakalariToolkit::getFormParams($context, array('ctl00$cphmain$dropplan' => $this->getRequestParam("view")));
+        } else {
+            $this->parameters->formparams = array();
         }
-        return $this->parameters;
     }
 
     /**
@@ -25,7 +29,9 @@ class AkceModule extends \Skolar\Modules\BaseModule {
      * @param \Symfony\Component\DomCrawler\Crawler $request
      * @return \Skolar\Response
      */
-    public function parse($request) {
+    public function parse($content = null) {
+
+        $dom = $content->getDom();
 
         $types = array(
             "pro učitele:" => 'teacher',
@@ -37,9 +43,9 @@ class AkceModule extends \Skolar\Modules\BaseModule {
 
         $events = array("akce" => array());
 
-        $data = $request->filterXPath("//*[@class='dxrp dxrpcontent']//*[@class='planinfo']"); //wow, tohle bylo sakra lehké
+        $data = $dom->filterXPath("//*[@class='dxrp dxrpcontent']//*[@class='planinfo']"); //wow, tohle bylo sakra lehké
 
-        $year = explode("/", substr($request->filterXPath("//*[@class='pololetinadpis']")->text(), -7));
+        $year = explode("/", substr($dom->filterXPath("//*[@class='pololetinadpis']")->text(), -7));
         $year[1] = "20" . $year[1];
 
         foreach ($data as $item) {
@@ -81,7 +87,7 @@ class AkceModule extends \Skolar\Modules\BaseModule {
         }
         
         $events["views"] = array_slice(
-                $request->filterXPath('//select[@name="ctl00$cphmain$dropplan"]/option')
+                $dom->filterXPath('//select[@name="ctl00$cphmain$dropplan"]/option')
                 ->extract(["_text", "value"]), 0, 5);
         
         array_walk($events["views"], function(&$item) {

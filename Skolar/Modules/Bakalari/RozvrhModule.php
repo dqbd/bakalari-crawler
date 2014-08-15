@@ -6,38 +6,28 @@ use \Skolar\Toolkits\BakalariToolkit;
 
 class RozvrhModule extends \Skolar\Modules\BaseModule {
 
-    /**
-     * 
-     * @param mixed[] $request
-     * @return \Skolar\Parameters
-     */
-    public function getParameters($request = null) {
-        
-        $optional = array();
+    public function defineParameters($context = null) {
+        parent::defineParameters($context);
 
-        if (!empty($request[0]['view'])) {
-            $optional['ctl00$cphmain$radiorozvrh'] = $request[0]['view'];
+        $this->parameters->url = BakalariToolkit::assignUrl("Rozvrh", $context["navigace"]);
+
+        if(!empty($this->getRequestParam("view"))) {
+           $this->parameters->formparams = BakalariToolkit::getFormParams($context, array('ctl00$cphmain$radiorozvrh' => $this->getRequestParam("view")));
+        } else {
+           $this->parameters->formparams = array();
         }
-        
-        $this->parameters->name = "Rozvrh";
-        $this->parameters->optional = $optional;
-
-        return $this->parameters;
     }
 
-    /**
-     * 
-     * @param \Symfony\Component\DomCrawler\Crawler $request
-     * @return \Skolar\Response
-     */
-    public function parse($request) {
-        $rozvrh = (count($request->filterXPath("//*[@class='r_roztable']")) == 1) ? 
-            $this->parse_new($request) : //nový syntax
-            $this->parse_old($request); //starý syntax
+    public function parse($content = null) {
+        $dom = $content->getDom();
+
+        $rozvrh = (count($dom->filterXPath("//*[@class='r_roztable']")) == 1) ? 
+            $this->parse_new($dom) : //nový syntax
+            $this->parse_old($dom); //starý syntax
 
         //TODO: kalendář
         $rozvrh["views"] = array_slice(
-                $request->filterXPath('//select[@name="ctl00$cphmain$radiorozvrh"]/option')
+                $dom->filterXPath('//select[@name="ctl00$cphmain$radiorozvrh"]/option')
                 ->extract(["_text", "value"]), 0, 3);
         
         array_walk($rozvrh["views"], function(&$item) {

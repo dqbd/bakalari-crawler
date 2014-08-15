@@ -3,9 +3,7 @@ namespace Skolar\Modules\Bakalari;
 
 class BatchModule extends \Skolar\Modules\BaseModule {
 
-	
-
-	public function postParse($content) {
+	public function postParse($content = null) {
 		$modules_list = explode(",", $content->get("requests"));
 
 		$modules = array();

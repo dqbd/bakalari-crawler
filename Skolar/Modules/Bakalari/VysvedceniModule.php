@@ -7,25 +7,16 @@ use \Skolar\Toolkits\BakalariToolkit;
 
 class VysvedceniModule extends \Skolar\Modules\BaseModule {
 
-    /**
-     * 
-     * @param mixed[] $request
-     * @return \Skolar\Response
-     */
-    public function getParameters($request = null) {
-        $this->parameters->name = "Pololetní klasifikace";
-        
-        return $this->parameters;
+    public function defineParameters($context = null) {
+        parent::defineParameters($context);
+            
+        $this->parameters->url = BakalariToolkit::assignUrl("Pololetní klasifikace", $context["navigace"]);
     }
     
-    /**
-     * 
-     * @param \Symfony\Component\DomCrawler\Crawler $request
-     * @return \Skolar\Response
-     */
-    public function parse($request) {
 
-        $rows = $request->filterXPath("//*[@class='dxrp dxrpcontent']//tr");
+    public function parse($content = null) {
+
+        $rows = $request->getDom()->filterXPath("//*[@class='dxrp dxrpcontent']//tr");
         $data = array('vysvedceni' => array());
 
         $data['rocniky'] = $rows->eq(0)->filterXPath("./*/td[@class='polonadpis2']")->extract("_text");

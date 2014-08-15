@@ -7,23 +7,18 @@ use \Skolar\Toolkits\BakalariToolkit;
 
 class LoginModule extends \Skolar\Modules\BaseModule {
 
-    /**
-     * 
-     * @param \Symfony\Component\DomCrawler\Crawler $context
-     * @return \Skolar\Parameters
-     */
     public function defineParameters($context = null) {
-        parent::defineParameters();
+        parent::defineParameters($context);
 
         $this->parameters->url = "login.aspx";
 
-        if(isset($context["dom"]) && $context["dom"] instanceof \Skolar\Browser\PageData) {
+        if(isset($context["pagedata"]) && $context["pagedata"] instanceof \Skolar\Browser\PageData) {
             $keys = array('ctl00$cphmain$TextBoxjmeno', 
                 'ctl00$cphmain$TextBoxHeslo', 
                 'ctl00$cphmain$checkstale');
 
             
-            $new_syntax = $context["dom"]->getDom()->filterXPath("//*[contains(@id, 'dxss') and "
+            $new_syntax = $context["pagedata"]->getDom()->filterXPath("//*[contains(@id, 'dxss') and "
                     . "text()[contains(.,'ASPxClientTextBox')]]");
 
             if(count($new_syntax) == 2) {
@@ -34,7 +29,7 @@ class LoginModule extends \Skolar\Modules\BaseModule {
                 }, $new_syntax->extract(array("_text"))));
             } 
 
-            $this->parameters->formparams = BakalariToolkit::fillParameters($context["dom"]->getDom(), array(), array_combine(
+            $this->parameters->formparams = BakalariToolkit::fillParameters($context["pagedata"]->getDom(), array(), array_combine(
                 $keys, array(
                     $this->getRequestParam('user'), 
                     $this->getRequestParam('pass'), 
@@ -84,7 +79,7 @@ class LoginModule extends \Skolar\Modules\BaseModule {
             $result['name'] = $name;
             $result['type'] = $content->filterXPath("//table[@class='logtable']//tr[1]/td[2]")->text();
 
-            $this->response->setResult($result);
+            $this->response->setResult(array("login" => $result));
         }
 
         return $this->response;
