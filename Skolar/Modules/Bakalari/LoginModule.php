@@ -3,6 +3,7 @@
 namespace Skolar\Modules\Bakalari;
 
 use \Symfony\Component\DomCrawler\Crawler;
+use \Skolar\Toolkits\BakalariToolkit;
 
 class LoginModule extends \Skolar\Modules\BaseModule {
 
@@ -16,12 +17,13 @@ class LoginModule extends \Skolar\Modules\BaseModule {
 
         $this->parameters->url = "login.aspx";
 
-        if($context instanceof Crawler && $this->isLogin($context)) {
+        if(isset($context["dom"]) && $context["dom"] instanceof \Skolar\Browser\PageData) {
             $keys = array('ctl00$cphmain$TextBoxjmeno', 
                 'ctl00$cphmain$TextBoxHeslo', 
                 'ctl00$cphmain$checkstale');
+
             
-            $new_syntax = $context->filterXPath("//*[contains(@id, 'dxss') and "
+            $new_syntax = $context["dom"]->getDom()->filterXPath("//*[contains(@id, 'dxss') and "
                     . "text()[contains(.,'ASPxClientTextBox')]]");
 
             if(count($new_syntax) == 2) {
@@ -32,20 +34,39 @@ class LoginModule extends \Skolar\Modules\BaseModule {
                 }, $new_syntax->extract(array("_text"))));
             } 
 
-            $this->parameters->optional = array_combine(
-                $keys, array($arg['user'], $arg['pass'], true)
-            );
-        } else {
-            return "dom";
-        }
+            $this->parameters->formparams = BakalariToolkit::fillParameters($context["dom"]->getDom(), array(), array_combine(
+                $keys, array(
+                    $this->getRequestParam('user'), 
+                    $this->getRequestParam('pass'), 
+                    true
+                )
+            ));
+
+        } 
+
+    }
+
+    public function preParse($content = null) {
+        $dom = $content->getDom();
+
+        $login_el = $dom->filterXPath('//*[@name="ctl00$cphmain$TextBoxjmeno" or @name="ctl00$cphmain$TextBoxHeslo" or @name="ctl00$cphmain$ButtonPrihlas"]');
+        
+        if(count($login_el) < 3) {
+            $login_el = $dom->filterXPath("//*[contains(@id, 'dxss') and (text()[contains(.,'ASPxClientTextBox')] or text()[contains(., 'ASPxClientButton')])]");
+            return count($login_el) == 3;
+        } 
+        
+        return count($login_el) == 3;
     }
 
     /**
      * 
-     * @param \Symfony\Component\DomCrawler\Crawler $content
+     * @param \Skolar\Browser\PageData $content
      * @return \Skolar\Response
      */
     public function parse($content = null) {
+        $content = $content->getDom();
+
         $name = trim($content->filterXPath("//*[@class='logjmeno']")->text());
 
         if (strtolower($name) == "nepřihlášen") {
@@ -69,19 +90,10 @@ class LoginModule extends \Skolar\Modules\BaseModule {
         return $this->response;
     }
 
-    public function isLogin(Crawler $dom) {
-        $login_el = $dom->filterXPath('//*[@name="ctl00$cphmain$TextBoxjmeno" or @name="ctl00$cphmain$TextBoxHeslo" or @name="ctl00$cphmain$ButtonPrihlas"]');
-        
-        if(count($login_el) < 3) {
-            $login_el = $dom->filterXPath("//*[contains(@id, 'dxss') and (text()[contains(.,'ASPxClientTextBox')] or text()[contains(., 'ASPxClientButton')])]");
-            return count($login_el) == 3;
-        } 
-        
-        return count($login_el) == 3;
-    }
+    public function postParse($content = null) {
+        $content = parent::postParse($content);
 
-    public function postParse($content) {
-
+        return $content->getStatus() == true;
     }
 
 }

@@ -2,14 +2,10 @@
 namespace Skolar;
 
 class Browser {
-	private $client = null;
-	public $cache = true;
+	protected $client = null;
+	protected $cache = true;
 
-	public $baseurl = "";
-
-	private $callback = null;
-
-	private $results;
+	protected $results;
 
 	public function __construct($baseurl = "", $cookiepath = null) {
 		$this->cache = ($cookiepath === null) ?: new \Skolar\Browser\CacheStorage($cookiepath);
@@ -25,16 +21,22 @@ class Browser {
 		$this->results = new \Skolar\Browser\PageStorage();
 	}
 
-	public function load($urls, $parameters = array()) {
-		$requests = $this->getRequests($urls, $parameters);
+	public function load($urls, $parameters = array(), $cached = false) {
+		$requests = $this->getRequests($urls, $parameters, $cached);
 		$responses = \GuzzleHttp\batch($this->client, $requests);
 
 		foreach($responses as $request) {
-			$this->results[] = $this->handleResponse($request, $responses[$request]);
+			$response = $this->handleResponse($request, $responses[$request]);
+			$this->results[$response->getUrl("begin")] = $response;
 		}
 
 		return $this->results;
 	}
+
+	public function loadSingle($url, $parameters = array(), $cached = false) {
+		return $this->load($url, $parameters, $cached)->get($url);;
+	}
+
 
 	public function handleResponse($request, $class) {
 		$response = !($class instanceof \GuzzleHttp\Message\ResponseInterface) ? $class->getResponse() : $class;
@@ -49,47 +51,49 @@ class Browser {
 		);
 	}
 
-	public function getRequests($urls, $parameters, $send_local = false) {
+	public function getRequests($urls, $parameters, $load_cached) {
 		$urls = (is_array($urls)) ? $urls : array($urls);
 		$requests = array();
 
 		foreach($urls as $url) {
-			// if(($path = $this->checkFileExists($url)) !== false) {
-			// 	$local = array(
-			// 		"code" => 0,
-			// 		"body" => file_get_contents($path),
-			// 		"final_url" => $path,
-			// 		"error" => false
-			// 	);
-
-			// 	if($send_local == false) {
-			// 		$this->local_results[$url] = $local;
-			// 	} else {
-			// 		$this->runCallback($local);
-			// 	}
-
-			// 	continue;
-			// }
-
 			$requestparams = null;
 
-			if (count($parameters) == count($parameters, COUNT_RECURSIVE) && isset($parameters[$url])) {
+
+			if (count($parameters) != count($parameters, COUNT_RECURSIVE) && isset($parameters[$url])) {
 				$requestparams = $parameters[$url];
 			} else {
 				$requestparams = $parameters;
 			}
 
+
+			if($this->tryInterceptRequest($url, $requestparams, $load_cached)) {
+				continue;	
+			}
+
 			$method = empty($requestparams) ? "GET" : "POST";
-			$requests[] = $this->client->createRequest($method, $url, array("body" => $requestparams));
+
+			$requests[] = $this->client->createRequest($method, $url, array("body" => $requestparams, "cookies" => $this->cache));
 		}
 
 		return $requests;
 	}
 
-	private function tryInterceptRequest($target, $parameters) {
+	private function tryInterceptRequest($target, $parameters, $load_cached) {
 		if(($path = $this->checkFileExists($target)) !== false) {
+			$this->results[$target] = new \Skolar\Browser\PageData(
+				dirname($path["full_path"]), $path["filename"], file_get_contents($path["full_path"]), 300, $path["filename"], false
+			);
 
-		} 
+			return true;
+		} else if ($load_cached == true && ($cached = $this->results->search($target)) !== false) {
+			$this->results[$target] = $cached;
+
+			return true;
+		} else if ($target === false) {
+			return true;
+		}
+
+		return false;
 	}
 
 
@@ -98,7 +102,10 @@ class Browser {
 			if(is_dir(SKOLAR_TESTFILES_DIR . DIRECTORY_SEPARATOR . $dir)) {
 				foreach(scandir(SKOLAR_TESTFILES_DIR . DIRECTORY_SEPARATOR . $dir) as $file) {
 					if($file == $target) {
-						return join(DIRECTORY_SEPARATOR, array(SKOLAR_TESTFILES_DIR, $dir, $file));
+						return array(
+							"full_path" => join(DIRECTORY_SEPARATOR, array(SKOLAR_TESTFILES_DIR, $dir, $file)),
+							"filename" => $file
+						);
 					}
 				}
 			}
@@ -107,12 +114,16 @@ class Browser {
 		return false;
 	}
 
+	public function getStorage() {
+		return $this->results;
+	}
+
 	public function getCache() {
 		return ($this->cache != false) ? $this->cache : null;
 	}
 
 	public function getFullUrl($part) {
-		return $this->clinet->getBaseUrl() . "/" . $part;
+		return $this->client->getBaseUrl() . "/" . $part;
 	}
 }
 

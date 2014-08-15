@@ -24,7 +24,7 @@ abstract class BaseModule {
 
         $this->request = $request;
 
-        $this->defineParameters($request);
+        $this->defineParameters();
     }
 
     abstract public function parse($content = null);
@@ -34,12 +34,17 @@ abstract class BaseModule {
         $this->parameters->name = end($name);
     }
 
-    public function preParse($content) {
-        return null;
+    public function preParse($content = null) {
+        return true;
     }
 
-    public function postParse($content) {
-        return null;
+    public function postParse($content = null) {
+
+        if(!($content instanceof \Skolar\Response)) {
+            $content = $this->parse($content);
+        }
+
+        return $content;
     }
 
     public function getRequirements() {
@@ -61,6 +66,14 @@ abstract class BaseModule {
 
     public function getRequestParam($name) {
         return $this->request->get($name);
+    }
+
+    public function getFormParams($type = null) {
+        if(!empty($type)) {
+            return (isset($this->parameters->formparams[$type])) ? $this->parameters->formparams[$type] : array();
+        }
+
+        return $this->parameters->formparams;
     }
     
     public function getParameters() {

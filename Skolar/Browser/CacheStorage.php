@@ -5,7 +5,6 @@ namespace Skolar\Browser;
 class CacheStorage extends \GuzzleHttp\Cookie\FileCookieJar {
     protected $filename;
 
-    protected $navdom = false;
     protected $permanent = false;
 
     private $toDestroy = false;
@@ -13,7 +12,7 @@ class CacheStorage extends \GuzzleHttp\Cookie\FileCookieJar {
     public function save($filename) {
 
         if($this->toDestroy == false) {
-            $json = array("cookies" => array(), "navdom" => $this->getNavCache(), "permanent" => $this->isPermanentLogin());
+            $json = array("cookies" => array(), "permanent" => $this->isPermanentLogin());
 
             foreach ($this as $cookie) {
                 if ($cookie->getExpires() && !$cookie->getDiscard()) {
@@ -38,10 +37,9 @@ class CacheStorage extends \GuzzleHttp\Cookie\FileCookieJar {
 
         if (is_array($data) && is_array($data["cookies"])) {
             foreach ($data["cookies"] as $cookie) {
-                $this->setCookie(new SetCookie($cookie));
+                $this->setCookie(new \GuzzleHttp\Cookie\SetCookie($cookie));
             }
 
-            $this->setNavCache($data["navdom"]);
             $this->setPermanentLogin($data["permanent"]);
 
         } else if(strlen($data) || strlen($data["cookies"])) {
@@ -49,16 +47,8 @@ class CacheStorage extends \GuzzleHttp\Cookie\FileCookieJar {
         }
     }
 
-    public function setNavCache($navdom) {
-        $this->navdom = $navdom;
-    }
-
     public function setPermanentLogin($permanent) {
         $this->permanent = $permanent;
-    }
-
-    public function getNavCache() {
-        return $this->navdom;
     }
 
     public function isPermanentLogin() {

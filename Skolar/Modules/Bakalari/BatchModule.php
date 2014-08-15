@@ -22,13 +22,7 @@ class BatchModule extends \Skolar\Modules\BaseModule {
 				}
 			}
 
-			$module_namespace = sprintf("%s\\%sModule", __NAMESPACE__, ucfirst($module_name));
-			
-			if(!class_exists($module_namespace)) {
-				throw new \Exception("Invalid parameters");
-			}
-
-			$modules[] = new $module_namespace($requestparams);
+			$modules[] = \Skolar\Dispatcher::createModule($module_name, "bakalari", $requestparams);
 		}
 		
 		return $modules;

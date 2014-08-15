@@ -3,6 +3,7 @@
 namespace Skolar\Modules\Bakalari;
 
 use \Symfony\Component\DomCrawler\Crawler;
+use \Skolar\Toolkits\BakalariToolkit;
 
 class AbsenceModule extends \Skolar\Modules\BaseModule {
 
@@ -12,7 +13,7 @@ class AbsenceModule extends \Skolar\Modules\BaseModule {
      * @return \Skolar\Parameters
      */
     public function getParameters($request = null) {
-        $this->parameters->name = "Zameškanost v předmětech";
+        $this->parameters->url = BakalariToolkit::assignUrl("Zameškanost v předmětech", $request);
         return $this->parameters;
     }
 

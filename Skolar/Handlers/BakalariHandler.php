@@ -2,6 +2,7 @@
 namespace Skolar\Handlers;
 
 use \Symfony\Component\DomCrawler\Crawler;
+use \Skolar\Toolkits\BakalariToolkit;
 
 class BakalariHandler implements \Skolar\Handlers\BaseHandler {
 
@@ -10,11 +11,10 @@ class BakalariHandler implements \Skolar\Handlers\BaseHandler {
 
 	private $browser = null;
 
-	private $base_flow = array("login", "navigace");
+	private $baseflow = array("login", "navigace");
 
-
-	private $queue = array();
-	protected $postparse_cache = array();
+	protected $dataflow = array();
+	protected $max_passes = 2;
 
 	public function __construct(\Skolar\Modules\BaseModule $module, $parameters) {
 		$this->module = $module;
@@ -25,99 +25,134 @@ class BakalariHandler implements \Skolar\Handlers\BaseHandler {
 
 		$this->initBrowser();
 
-		$module_requests = ($this->module->getName() == "batch") ? $this->module->postParse($this->params) : $this->module;
+		$module_requests = $input = ($this->module->getName() == "batch") ? $this->module->postParse($this->params) : $this->module;
 
 		//detect dupes in $module_request
 		if(is_array($module_requests)) {
 			$module_requests = array_filter($module_requests, function($module) {
-				return !(in_array((string)$module, $this->base_flow));
+				return !(in_array((string)$module, $this->baseflow));
 			});
+		} else  {
+			$input = array($module_requests);
 
-
-			$module_requests = (!empty($module_requests)) ? $module_requests : null;
-		} else if (in_array($module_requests, $this->base_flow)) {
-			$module_requests = null;
+			if (!in_array($module_requests, $this->baseflow)) {
+				$module_requests = array($module_requests);
+			} else {
+				$module_requests = array();
+			}
 		}
-		
 
-		$flow = array_filter(array_merge($this->base_flow, array($module_requests)));
-		$this->queue = \Skolar\Utils::flattenArray($flow);
+		foreach($this->baseflow as $module_name) {
+			$this->baseflow[$module_name] = \Skolar\Dispatcher::createModule($module_name, "bakalari", $this->params);
+		} 
+
+		$results = array();
+
+		/*
+		* 1. Najeď na uvod.aspx a ověř, zda máme k dispozici navigaci (nepříhlašený nemá navigace), pokud ANO -> PŘESKOČ NA 5
+		* 2. Pokud NE -> vytáhni login.aspx (vytáhne cache když byl prohlížeč přesměrován z uvod.aspx do login.aspx) a získaň parametry
+		* 3. Proveď přihlášení a ověř, zda jsi tentokrát přihláš + máme k dispozici tu navigaci, pokud ANO -> PŘESKOČ NA 5
+		* 4. Pokud NE -> vypiš rovnou a KONEC
+		* 5. Vlož do dataflow navigaci a i do bufferu pro výsledky (results) -> KONEC
+		*/
+		$data = $this->browser->loadSingle($this->baseflow["navigace"]->getUrl());
+
+		if($this->baseflow["navigace"]->preParse($data) === false) {
+			$login_data = $this->browser->loadSingle($this->baseflow["login"]->getUrl(), array(), true);
+
+			$this->baseflow["login"]->defineParameters(array("dom" => $login_data));
+
+			$data = $this->browser->loadSingle(
+				$this->baseflow["login"]->getUrl(), 
+				$this->baseflow["login"]->getFormParams()
+			);
+
+			//check if logged in now
+			$login_status = $this->baseflow["login"]->parse($data);
+
+			if( $this->baseflow["login"]->postParse($login_status) === false || 
+				$this->baseflow["navigace"]->preParse($data) === false) {
+				return $login_status;
+			} else {
+				$results["login"] = $login_status;
+			}
+		} else {
+			$results["login"] = $this->baseflow["login"]->parse($data);
+		}
 
 
-		foreach($flow as $part) {
-			if(!is_array($part)) {
-				if(is_string($part)) {
-					$part = \Skolar\Dispatcher::createModule($part, "bakalari", $this->params);
-				} 
+		$this->dataflow["navigace"] = $this->baseflow["navigace"]->postParse($data);
+	
+		//jedna výjimka, jelikož je děsně neefektivní načítat všechny moduly, když nakonec to vyfiltrujeme později.
+		if(in_array("navigace", $input)) {
+			$results["navigace"] = $this->baseflow["navigace"]->parse($data);
+		}
 
-				if($part->defineParameters() !== null) {
+		$urls = array();
+		$params = array();
 
-					switch($part->defineParameters()) {
-						case "dom":
-							$this->browser->load($part->getUrl(), array(), function($data) {
-								print_r($data);
-							});
-							break;
-						case "url":
-							break;
+		foreach($module_requests as $key => $module) {
+			$module->defineParameters($this->dataflow);        
+
+			if($module->getUrl() === false) {
+				$results[] = (new \Skolar\Response())->setError("No existing URL");
+				unset($module_requests[$key]);
+				continue;
+			}
+
+			$urls[] = $module->getUrl();
+		}
+
+		/*
+		* 1. Proveď požadavek
+		* 2. Získej ekvivalentní kus, který modul by chtěl
+		* 3. Zjisti pokud můžu už vytáhnout data ze stránky pomocí funkce preParse, pokud ano -> KONEC
+		* 4. Pokud ne a máme ještě příležitost stáhnout další data -> vlož parametry pro další vlnu
+		* 5. Pokud už je konec, vypiš chybný požadavek
+		*/
+		for($this->dataflow["pass"] = 0; $this->dataflow["pass"] < $this->max_passes; $this->dataflow["pass"]++) {
+			$downloaded = $this->browser->load($urls, $params);
+
+			foreach($module_requests as $key => $module) {
+				$result = $downloaded->get($module->getUrl());
+
+				$tempflow = array_merge(array("pagedata" => $result), $this->dataflow);
+				$module->defineParameters($tempflow);
+
+				if($module->preParse($result)) {
+					$parsed = $module->parse($result);
+
+					if(($postparsed = $module->postParse($parsed)) !== $parsed) {
+						$this->dataflow[$module->getName()] = $postparsed; 
 					}
 
+					$results[$module->getName()] = $parsed;
+
+					//unset all other things
+					unset($module_requests[$key]);
+					if(isset($params[$module->getUrl()])) {
+						unset($params[$module->getUrl()]);
+					}
+
+					if(($url_key = array_search($module->getUrl(), $urls)) !== false) {
+					    unset($urls[$url_key]);
+					}
+				} else if (!empty($module->getFormParams()) && $this->dataflow["pass"]+1 < $this->max_passes) {
+					$params[$module->getUrl()] = $module->getFormParams();
+				} else {
+					$results[$module->getName()] = (new \Skolar\Response())->setError("Parser failed to parse");
 				}
 			}
 		}
-		//cycle through modules
-		// for($i = 0; $i < count($flow); $i++) {
-		// 	$module = $flow[$i];
 
-		// 	if(is_string($module)) {
-		// 		//figure batch requests
-		// 		$batch = array(\Skolar\Dispatcher::createModule($module, "bakalari", $this->params));
+		//Filtrujeme to, co nechceme
+		foreach($results as $key => $result) {
+			if(!in_array($key, $input)) {
+				unset($results[$key]);
+			}
+		}
 
-		// 		for(;$i < count($flow);$i++) {
-		// 			if(!is_string($flow[$i])) {
-		// 				$i--;
-		// 				break;
-		// 			} else if ($module != $flow[$i]) {
-		// 				$batch[] = \Skolar\Dispatcher::createModule($flow[$i], "bakalari", $this->params);
-		// 			}
-		// 		}
-
-		// 		$links = array();
-
-		// 		foreach($batch as $module) {
-		// 			if($module->getUrl() !== false) {
-		// 				$links[] = $module->getUrl();
-		// 			}
-		// 		}
-
-		// 		$this->browser->loadBatch($links);
-				
-		// 	} else {
-
-		// 	}
-		// }
-
-		// foreach($flow as $modules) {
-		// 	if(is_string($modules)) {
-		// 		$modules = sprintf("\\%s\\Modules\\Bakalari\\%sModule", dirname(__NAMESPACE__), $modules);
-		// 		$modules = array(new $modules($this->params)); //tady by bylo bezpečnější stripnout pouze ty parametry, které modul potřebuje...
-		// 	}
-
-		// 	foreach($modules as $module) {
-		// 	}
-
-		// 	if($module->defineParameters() !== null) { 
-		// 		if(!isset($module_params[$module->defineParameters()])) {
-
-		// 		}
-		// 	}
-		// }
-	}
-
-
-
-	public function receiveData($data) {
-		print_r($data);
+		return $results;
 	}
 
 	public function initBrowser() {
@@ -131,28 +166,7 @@ class BakalariHandler implements \Skolar\Handlers\BaseHandler {
 			$cachepath = true;
 		}
 
-		$this->browser = new \Skolar\Browser($url, $cachepath, array($this, "receiveData"));
-	}
-
-	/**
-	 * Načti webovou stránku
-	 * 
-	 * @param string $page
-	 * @param mixed[] $arguments
-	 * @return \Symfony\Component\DomCrawler\Crawler
-	 */
-	private function loadPage($baseurl, $page, $arguments = array()) {
-	    $crawler = new Crawler("", $baseurl);
-	    
-	    if(empty($arguments)) { //is a GET
-	        $request = $this->client->get($page);
-	    } else {
-	        $request = $this->client->post($page, array(), $arguments);
-	    }
-	    
-	    $crawler->addHtmlContent($request->send()->getBody(true));
-	    
-	    return $crawler;
+		$this->browser = new \Skolar\Browser($url, $cachepath);
 	}
 
 	/**

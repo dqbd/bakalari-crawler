@@ -3,6 +3,7 @@
 namespace Skolar\Modules\Bakalari;
 
 use \Symfony\Component\DomCrawler\Crawler;
+use \Skolar\Toolkits\BakalariToolkit;
 
 class PredmetyModule extends \Skolar\Modules\BaseModule {
 

@@ -2,6 +2,7 @@
 namespace Skolar\Modules\Bakalari;
 
 use \Symfony\Component\DomCrawler\Crawler;
+use \Skolar\Toolkits\BakalariToolkit;
 
 class RozvrhModule extends \Skolar\Modules\BaseModule {
 

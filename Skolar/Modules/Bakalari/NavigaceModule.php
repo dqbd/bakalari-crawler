@@ -3,37 +3,51 @@
 namespace Skolar\Modules\Bakalari;
 
 use \Symfony\Component\DomCrawler\Crawler;
+use \Skolar\Toolkits\BakalariToolkit;
 
 class NavigaceModule extends \Skolar\Modules\BaseModule {
+
     public function defineParameters($context = null) {
         parent::defineParameters();
         $this->parameters->url = "uvod.aspx";
+    }
 
-        return "url";
+    public function preParse($content = null) {
+        return (count($this->postParse($content)) > 0);
     }
 
     /**
      * 
-     * @param \Symfony\Component\DomCrawler\Crawler $request
+     * @param \Skolar\Browser\PageData $content
      * @return \Skolar\Response
      */
     public function parse($content = null) {
-        $odkazy = $content->filterXPath("//*[contains(@id, 'hlavnimenu')]//a");
-        $odkazy = array_combine($odkazy->extract(array("href")), $odkazy->extract(array("_text")));
+        $links = $this->scrapNavigaction($content);
+
+        $result = array();
+
+        //load all modules to get their name
+        foreach(\Skolar\Configuration::get("handlers")["bakalari"]["modules"] as $module_info) {
+            $module = \Skolar\Dispatcher::createModule($module_info["name"], "bakalari");
+            $module->defineParameters(array("navigace" => $links));
+
+            if(!empty($url = $module->getUrl())) {
+                $result[] = $module->getName();
+            }
+        }
         
-        $this->response->setResult(array("navigace" => $odkazy));
+        $this->response->setResult(array("navigace" => $result));
         
         return $this->response;
     }
 
     public function postParse($content = null) {
-        $data = $this->parse($content)->getData();
+        return $this->scrapNavigaction($content);
+    }
 
-        if(array_key_exists("navigace", $data)) {
-            return $data["navigace"];
-        }
-
-        return null;
+    private function scrapNavigaction($content = null) {
+        $odkazy = $content->getDom()->filterXPath("//*[contains(@id, 'hlavnimenu')]//a");
+        return array_combine($odkazy->extract(array("href")), $odkazy->extract(array("_text")));
     }
 }
 

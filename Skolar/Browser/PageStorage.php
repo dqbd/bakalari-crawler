@@ -5,15 +5,17 @@ namespace Skolar\Browser;
 class PageStorage implements \ArrayAccess, \Countable, \JsonSerializable {
 	private $storage = array();
 
-	public function get($query, $all = false) {
+
+	public function get($name) {
+		return $this->storage[(string)$name];
+	}
+
+	public function search($query, $all = false) {
 		foreach($this->storage as $page) {
 
 			$urls = $page->getUrls();
 
-			$combinations = array(
-				$urls["end"],
-				$urls["base"].$urls["end"]
-			);
+			$combinations = array($urls["end"], $urls["base"].$urls["end"]);
 
 			if($all) {
 				$combinations = array_merge($combinations, array($urls["begin"], $urls["base"].$urls["begin"]));

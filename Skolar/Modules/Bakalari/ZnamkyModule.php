@@ -3,6 +3,7 @@
 namespace Skolar\Modules\Bakalari;
 
 use \Symfony\Component\DomCrawler\Crawler;
+use \Skolar\Toolkits\BakalariToolkit;
 
 class ZnamkyModule extends \Skolar\Modules\BaseModule {
 
@@ -13,12 +14,21 @@ class ZnamkyModule extends \Skolar\Modules\BaseModule {
     public function defineParameters($context = null) {
         parent::defineParameters();
 
-        $this->parameters->label = "Průběžná klasifikace";
-        $this->parameters->optional = array(
-            'ctl00$cphmain$Checkdetail' => true,
-            'ctl00$cphmain$Flyout2$Checkdatumy' => true,
-            'ctl00$cphmain$Flyout2$Checktypy' => true
-        );
+        $this->parameters->url = BakalariToolkit::assignUrl("Průběžná klasifikace", $context["navigace"]);
+
+        if(isset($context["pagedata"]) && $context["pagedata"] instanceof \Skolar\Browser\PageData && $context["pass"] == 0) {
+            $this->parameters->formparams = BakalariToolkit::fillParameters($context["pagedata"]->getDom(), array(), array(
+                'ctl00$cphmain$Checkdetail' => true,
+                'ctl00$cphmain$Flyout2$Checkdatumy' => true,
+                'ctl00$cphmain$Flyout2$Checktypy' => true
+            ));
+        } else {
+            $this->parameters->formparams = array();
+        }
+    }
+
+    public function preParse($content = null) {
+        return (empty($this->getFormParams()));
     }
 
     /**
@@ -28,8 +38,7 @@ class ZnamkyModule extends \Skolar\Modules\BaseModule {
      * 
      */
     public function parse($content = null) {
-        
-        $rows = $content->filterXPath("//*[@class='dxrp dxrpcontent']//tr");
+        $rows = $content->getDom()->filterXPath("//*[@class='dxrp dxrpcontent']//tr");
         $znamky = array();
         
         $last = "";
@@ -60,12 +69,14 @@ class ZnamkyModule extends \Skolar\Modules\BaseModule {
 
             $date = $row->filterXPath("./*/td[@class='detdatum']");
             $weight = $row->filterXPath("./*/td[@class='detvaha']");
+
+            $note = $row->filterXPath("./*/td[@class='detpozn2']");
             
             $znamky[$name][] = array(
                 "mark" => $mark,
                 "caption" => $this->reformat($fields->eq(2)->text()),
                 "date" => (count($date) > 0) ? $date->text() : "", //optional, ne všechny školy zobrazují datum
-                "note" => $this->reformat($row->filterXPath("./*/td[@class='detpozn2']")->text()),
+                "note" => (count($note) > 0) ? $this->reformat($note->text()) : "",
                 "weight" => (count($weight) > 0) ? $this->reformat($weight->text(), ["váha"]) : "1"
             );
         }

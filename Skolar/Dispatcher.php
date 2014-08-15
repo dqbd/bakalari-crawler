@@ -38,12 +38,12 @@ class Dispatcher {
                 });
             }
         }
-        self::$klein->onError(function($router, $msg, $type, $exception) {
-            $answer = new \Skolar\Response();
-            $answer->setError("Server error", $exception->getMessage());
-            $router->response()->json($answer);
-            die();
-        });
+        // self::$klein->onError(function($router, $msg, $type, $exception) {
+        //     $answer = new \Skolar\Response();
+        //     $answer->setError("Server error", $exception->getMessage());
+        //     $router->response()->json($answer);
+        //     die();
+        // });
 
         self::$klein->onHttpError(function($code, $router) {
             $answer = new \Skolar\Response();
@@ -108,11 +108,36 @@ class Dispatcher {
                 $parameters = $request->paramsNamed()->merge($post_params);
 
                 $handler = self::createHandler($handler, $request->action, $parameters);
-                return $handler->output();
+
+                return self::handleOutput($handler->output());
             }
         }
 
         throw new \Exception("Failed configuration");
+    }
+
+    private static function handleOutput($output) {
+        // if(is_array($output)) {
+
+        //     if(count($output) == 1) {
+        //         return reset($output);
+        //     }
+
+        //     $response = new \Skolar\Response();
+
+        //     $data = array();
+        //     foreach($output as $name => $content) {
+        //         if($content->getStatus() != "ok") {
+        //             $response->setStatus("fail");
+        //         }
+
+        //         $data = array_merge($data, $content->getData());
+        //     }
+
+        //     $response->setResult($data);
+        // }
+
+        return $output;
     }
 
     private static function getParameters($content) {
@@ -131,6 +156,11 @@ class Dispatcher {
 
     public static function createHandler($name, $module, $parameters = array()) {
         $handler_name = sprintf('\\%s\\Handlers\\%sHandler', __NAMESPACE__, ucfirst($name));
+
+        if(class_exists($handler_name) == false) {
+            throw new \Exception("Invalid request");
+        }
+
 
         if(is_string($module)) {
             $module = self::createModule($module, $name, $parameters);
