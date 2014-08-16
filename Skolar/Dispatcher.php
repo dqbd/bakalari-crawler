@@ -34,7 +34,7 @@ class Dispatcher {
 
                 $module["uri"] = (!empty($module["uri"])) ? $module["uri"] : "";
 
-                $url = sprintf('%s/[%s:action]/?%s', dirname($_SERVER["PHP_SELF"]), $module["name"], $module["uri"]);
+                $url = sprintf('%s/[%s:action]/?%s', dirname($_SERVER["REQUEST_URI"]), $module["name"], $module["uri"]);
 
                 self::$klein->respond($url, function($request, $response) {
                     $response->json(self::output($request));
