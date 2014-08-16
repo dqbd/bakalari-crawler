@@ -7,28 +7,18 @@ use \Skolar\Toolkits\BakalariToolkit;
 
 class AkceModule extends \Skolar\Modules\BaseModule {
 
-    /**
-     * 
-     * @param mixed[] $request
-     * @return \Skolar\Parameters
-     */
     public function defineParameters($context = null) {
         parent::defineParameters($context);
         
         $this->parameters->url = BakalariToolkit::assignUrl("Plán akcí", $context["navigace"]);
 
-        if(!empty($this->getRequestParam("view"))) {
+        if($this->getRequestParam("view")) {
             $this->parameters->formparams = BakalariToolkit::getFormParams($context, array('ctl00$cphmain$dropplan' => $this->getRequestParam("view")));
         } else {
             $this->parameters->formparams = array();
         }
     }
 
-    /**
-     * 
-     * @param \Symfony\Component\DomCrawler\Crawler $request
-     * @return \Skolar\Response
-     */
     public function parse($content = null) {
 
         $dom = $content->getDom();
@@ -44,9 +34,6 @@ class AkceModule extends \Skolar\Modules\BaseModule {
         $events = array("akce" => array());
 
         $data = $dom->filterXPath("//*[@class='dxrp dxrpcontent']//*[@class='planinfo']"); //wow, tohle bylo sakra lehké
-
-        $year = explode("/", substr($dom->filterXPath("//*[@class='pololetinadpis']")->text(), -7));
-        $year[1] = "20" . $year[1];
 
         foreach ($data as $item) {
             $event = array();
@@ -66,11 +53,10 @@ class AkceModule extends \Skolar\Modules\BaseModule {
 
                     if ($type == "time") {
                         list($date, $time) = array_pad(array_slice(explode(" ", $value, 3), 1), 2, null); //rozkládáme na array, dále vyberem bez dnu a pokud chybí, dodáme null
-                        $value = array();
 
-                        $date = explode(".", substr($date, 0, strlen($date) - 1)); //extrakce data z formátu dd.mm
-                        $date[] = ($date[1] >= 9) ? $year[0] : $year[1]; //zjišťujeme rok
-                        $value['date'] = strtotime(implode(".", $date)); //skládáme zpět a konvertujeme na unix
+                        $value = array(
+                            "date" => BakalariToolkit::getDate($date)
+                        );
 
                         if (!empty($time)) {
                             $value['time'] = explode(" - ", trim($time, "() \t\n\r\0\x0B"));
@@ -94,7 +80,7 @@ class AkceModule extends \Skolar\Modules\BaseModule {
             $item = array_combine(["label", "value"], $item);
         });
         
-        return $this->response->setResult($events);
+        return $this->getResponse()->setResult($events);
     }
 
 }

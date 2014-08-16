@@ -35,7 +35,7 @@ abstract class BaseModule {
     }
 
     public function preParse($content = null) {
-        return (empty($this->getFormParams()));
+        return (!$this->getFormParams());
     }
 
     public function postParse($content = null) {

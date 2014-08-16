@@ -3,15 +3,15 @@
         "bakalari": {
             "modules": [
                 { "name": "absence" },
-                { "name": "akce", "uri": "[a:view]?" },
+                { "name": "akce", "uri": "[:view]?" },
                 { "name": "login" },
                 { "name": "navigace" },
                 { "name": "predmety" },
-                { "name": "rozvrh", "uri": "[a:view]?" },
-                { "name": "suplovani", "uri": "[a:view]?" },
+                { "name": "rozvrh", "uri": "[:view]?" },
+                { "name": "suplovani", "uri": "[:view]?" },
                 { "name": "ukoly" },
                 { "name": "vysvedceni" },
-                { "name": "vyuka", "uri": "[a:subject]?/[i:page]?" },
+                { "name": "vyuka", "uri": "[:subject]?/[i:page]?" },
                 { "name": "znamky" },
                 { "name": "batch", "required": ["requests"] }
             ],

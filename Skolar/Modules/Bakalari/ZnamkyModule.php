@@ -7,30 +7,35 @@ use \Skolar\Toolkits\BakalariToolkit;
 
 class ZnamkyModule extends \Skolar\Modules\BaseModule {
 
-    /**
-     * 
-     * @return \Skolar\Parameters
-     */
     public function defineParameters($context = null) {
         parent::defineParameters($context);
 
         $this->parameters->url = BakalariToolkit::assignUrl("Průběžná klasifikace", $context["navigace"]);
 
-        $this->parameters->formparams = BakalariToolkit::getFormParams($context, array(
-            'ctl00$cphmain$Checkdetail' => true,
-            'ctl00$cphmain$Flyout2$Checkdatumy' => true,
-            'ctl00$cphmain$Flyout2$Checktypy' => true
-        ));
+        if(isset($context["pagedata"]) && $context["pagedata"] instanceof \Skolar\Browser\PageData) {
+            $keys = array('ctl00$cphmain$Checkdetail', 'ctl00$cphmain$Flyout2$Checkdatumy', 'ctl00$cphmain$Flyout2$Checktypy');
+            $values = array();
+
+            //novější verze Bakaláří mají jiný checkbox
+            foreach($keys as $item) {
+                if(count($context["pagedata"]->getDom()->filterXPath(sprintf('//*[@name="%s" and @type="text"]', $item))) > 0) {
+                    $values[] = "C";
+                } else {
+                    $values[] = true;
+                }
+            }
+
+            $this->parameters->formparams = BakalariToolkit::getFormParams($context, array_combine($keys, $values));
+        } 
     }
 
-    /**
-     * 
-     * @param \Symfony\Component\DomCrawler\Crawler $request
-     * @return \Skolar\Response
-     * 
-     */
     public function parse($content = null) {
-        $rows = $content->getDom()->filterXPath("//*[@class='dxrp dxrpcontent']//tr");
+        $rows = $content->getDom()->filterXPath("//*[@class='dettable']//tr");
+
+        if(count($rows) == 0) {
+            $rows = $content->getDom()->filterXPath("//*[@class='dxrp dxrpcontent']//tr");
+        }
+
         $znamky = array();
         
         $last = "";
@@ -41,6 +46,7 @@ class ZnamkyModule extends \Skolar\Modules\BaseModule {
 
             $name = trim($fields->eq(0)->text());
             $last = ($last != $name && !empty($name)) ? $name : $last;
+
             $name = (empty($name)) ? $last : $name;
             
             
@@ -51,7 +57,6 @@ class ZnamkyModule extends \Skolar\Modules\BaseModule {
                 $max_points = $this->reformat($max_points->text());
                 
                 $gain = substr($mark, 0, strlen($mark) - strlen($max_points)); 
-                
                 
                 $mark = array(
                     "gain" => $gain,
@@ -67,7 +72,7 @@ class ZnamkyModule extends \Skolar\Modules\BaseModule {
             $znamky[$name][] = array(
                 "mark" => $mark,
                 "caption" => $this->reformat($fields->eq(2)->text()),
-                "date" => (count($date) > 0) ? $date->text() : "", //optional, ne všechny školy zobrazují datum
+                "date" => (count($date) > 0) ? BakalariToolkit::getDate($date->text()) : "", //optional, ne všechny školy zobrazují datum
                 "note" => (count($note) > 0) ? $this->reformat($note->text()) : "",
                 "weight" => (count($weight) > 0) ? $this->reformat($weight->text(), ["váha"]) : "1"
             );
@@ -78,7 +83,7 @@ class ZnamkyModule extends \Skolar\Modules\BaseModule {
             $temp = $predmet; //hacky, ale nějak to nejde
 
             usort($predmet, function($a, $b) {
-                return strtotime($a["date"]) - strtotime($b["date"]);
+                return $a["date"] - $b["date"];
             });
 
             $predmet = $temp;
@@ -90,7 +95,7 @@ class ZnamkyModule extends \Skolar\Modules\BaseModule {
         );
 
 
-        return $this->response->setResult($znamky);
+        return $this->getResponse()->setResult($znamky);
     }
 
     private function reformat($inp, $additional = array()) {

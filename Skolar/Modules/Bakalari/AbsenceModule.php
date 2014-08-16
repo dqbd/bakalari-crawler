@@ -7,22 +7,12 @@ use \Skolar\Toolkits\BakalariToolkit;
 
 class AbsenceModule extends \Skolar\Modules\BaseModule {
 
-    /**
-     * 
-     * @param mixed[] $request
-     * @return \Skolar\Parameters
-     */
     public function defineParameters($context = null) {
         parent::defineParameters($context);
         
         $this->parameters->url = BakalariToolkit::assignUrl("Zameškanost v předmětech", $context["navigace"]);
     }
 
-    /**
-     * 
-     * @param \Symfony\Component\DomCrawler\Crawler $request
-     * @return \Skolar\Response
-     */
     public function parse($content = null) {
         $rows = $request->getDom()->filterXPath("//*[@class='dxrp dxrpcontent']//tr");
 
@@ -41,7 +31,7 @@ class AbsenceModule extends \Skolar\Modules\BaseModule {
             }
         }
 
-        return $this->response->setResult($absence);
+        return $this->getResponse()->setResult($absence);
     }
 
 }

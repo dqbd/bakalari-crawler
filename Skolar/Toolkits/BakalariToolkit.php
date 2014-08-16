@@ -52,10 +52,25 @@ class BakalariToolkit {
 		return array_merge($arguments, $required);
 	}
 
-	public static function checkIfPermanentLogin($cache) {
-		
-	}
+	public static function getDate($input) {
+		date_default_timezone_set("Europe/Prague");
 
+		if(strtotime(str_replace(".", "-", $input)) !== false) {
+			return strtotime($input);
+		}
+
+		if(date("n") >= 9) {
+			$schoolyear = array("begin" => (int) date("Y"), "end" => (int)date("Y") + 1);
+		} else {
+			$schoolyear = array("begin" => (int) date("Y") - 1, "end" => (int)date("Y"));
+		}
+
+		preg_match("/([0-3]?[0-9])\.\s*([0-1]?[0-9])[\.]?/", $input, $parsed);
+		list($input, $day, $month) = $parsed; 
+		$year = ($month >= 9) ? $schoolyear["begin"] : $schoolyear["end"];
+
+		return strtotime(join("-", array($day, $month, $year)));
+	}
 }
 
 ?>

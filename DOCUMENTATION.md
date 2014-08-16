@@ -6,15 +6,13 @@ HOST: http://skolar.duong.cz/api/
 
 ## Technické informace
 
-Formátem pro příjem a odesílání dat je striktně JSON. JSONP zatím podporovaný není, zatím není potřeba počítat s Cross Site Scripting.
+Formátem pro příjem a odesílání dat je striktně JSON. JSONP zatím podporovaný není, zatím nepočítám s Cross Site Scripting.
 
 SSL/HTTPS je zatím ve fázi "nemám-peníze-čekám-na-financování," ale počítá se s tím a bude následně nezbytnou součástí, vzhledem k povaze celého systému.
 
 Každý požadavek může trvat maximálně 90 sekund, poté se bezprostředně přeruší, kvůli omezení hostingu. 
 
 > Je dost možné, že se tohle v budoucnu změní, třeba pokud přejdeme na jiný hosting atd.
-
-***POZOR: Dělám na rekonstrukci API, některé věci nefungují tak, jak jsem si představoval, zatím production nefunguje***
 
 # Group Obecné
 Příkazy, které jsem nemohl nikde jinde zařadit...
@@ -90,7 +88,7 @@ Někdy je třeba zobrazit zprávu ze serveru, třebaže něco nejede a už se to
 # Group Bakaláři
 Příkazy platné pro [IS Bakaláři](http://bakalari.cz/).
 
-*__POZNÁMKA__: Každý požadavek může trvat až několik sekund (dokonce i minut), proto je dobré nastavit vysoký HTTP timeout, cache a případný polling provádět pomocí Batch requestů*
+*__POZNÁMKA__: Každý požadavek může trvat až několik sekund (dokonce i minut), proto je dobré nastavit HTTP timeout na limit (90 sekund), cache a případný polling provádět pomocí Batch requestů*
 
 Mezi jednotlivými požadavky sezení (session) zaniká, proto je nutné provést s každým přikázem POST požadavek s přihlašovacími údaji v tomhle formátu:
 
@@ -111,6 +109,8 @@ Nebo pokud chceme pouze získat výstup ze zkušebního souboru (viz nahoře):
     }
 
 Někdy má daná kategorie možnost dalších zobrazení (třeba suplování na příští týden atd.), proto je možné najít ve výstupu množinu `views` se všemi možnými hodnotami zobrazení. Je dobré počítat s promněnlivostí těchto hodnot, proto se nedoporučuje natvrdo dosazovat hodnoty.
+
+`label` slouží jako název a `value` je to, co odesíláme na server jako parametr.
 
     {
         "status": "ok",
@@ -538,7 +538,7 @@ Podrobná tabulka výuky vybraného uživatele.
             "data": {
                 "vyuka": [
                     {
-                        "date": "23.1.",
+                        "date": 1446336000,
                         "lesson": "2",
                         "topic": "Mučení II",
                         "detail": "Studenti nic moc",

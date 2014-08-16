@@ -8,7 +8,7 @@ class Browser {
 	protected $results;
 
 	public function __construct($baseurl = "", $cookiepath = null) {
-		$this->cache = ($cookiepath === null) ?: new \Skolar\Browser\CacheStorage($cookiepath);
+		$this->cache = ($cookiepath === null) ? $cookiepath : new \Skolar\Browser\CacheStorage($cookiepath);
 
 		$this->client = new \GuzzleHttp\Client(array(
 			"base_url" => (!empty($baseurl)) ? Utils::getBaseUrl($baseurl) : "",

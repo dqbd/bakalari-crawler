@@ -20,7 +20,10 @@ class Dispatcher {
             }
         });
 
+
         Configuration::setConfig($config);
+
+        ini_set('max_execution_time', Configuration::get("timelimit"));
 
         \dibi::connect(Configuration::get("database"));
 
@@ -38,12 +41,13 @@ class Dispatcher {
                 });
             }
         }
-        // self::$klein->onError(function($router, $msg, $type, $exception) {
-        //     $answer = new \Skolar\Response();
-        //     $answer->setError("Server error", $exception->getMessage());
-        //     $router->response()->json($answer);
-        //     die();
-        // });
+
+        self::$klein->onError(function($router, $msg, $type, $exception) {
+            $answer = new \Skolar\Response();
+            $answer->setError("Server error", $exception->getMessage());
+            $router->response()->json($answer);
+            die();
+        });
 
         self::$klein->onHttpError(function($code, $router) {
             $answer = new \Skolar\Response();
@@ -126,19 +130,14 @@ class Dispatcher {
 
             $data = array();
             foreach($output as $name => $content) {
-
                 if($content->getStatus() != true) {
                     $response->setStatus(0);
                 }
 
                 $data[$name] = $content->getData();
-                // $data = array_merge($data, );
             }
 
-
             $output = $response->setResult($data);
-
-            
         }
 
         return $output;

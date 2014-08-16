@@ -17,11 +17,6 @@ class NavigaceModule extends \Skolar\Modules\BaseModule {
         return (count($this->postParse($content)) > 0);
     }
 
-    /**
-     * 
-     * @param \Skolar\Browser\PageData $content
-     * @return \Skolar\Response
-     */
     public function parse($content = null) {
         $links = $this->scrapNavigaction($content);
 
@@ -32,14 +27,13 @@ class NavigaceModule extends \Skolar\Modules\BaseModule {
             $module = \Skolar\Dispatcher::createModule($module_info["name"], "bakalari");
             $module->defineParameters(array("navigace" => $links));
 
-            if(!empty($url = $module->getUrl())) {
+            if(($url = $module->getUrl())) {
                 $result[] = $module->getName();
             }
         }
         
-        $this->response->setResult(array("navigace" => $result));
+        return $this->getResponse()->setResult(array("navigace" => $result));
         
-        return $this->response;
     }
 
     public function postParse($content = null) {

@@ -12,7 +12,7 @@ class SuplovaniModule extends \Skolar\Modules\BaseModule {
         
         $this->parameters->url = BakalariToolkit::assignUrl("Suplování", $context["navigace"]);
 
-        if(!empty($this->getRequestParam("view"))) {
+        if($this->getRequestParam("view")) {
            $this->parameters->formparams = BakalariToolkit::getFormParams($context, array('ctl00$cphmain$radiosuplov' => $this->getRequestParam("view")));
         } else {
            $this->parameters->formparams = array();
@@ -20,7 +20,7 @@ class SuplovaniModule extends \Skolar\Modules\BaseModule {
     }
 
     public function parse($content = null) {
-        $dom = $context->getDom();
+        $dom = $content->getDom();
 
         $data = $dom->filterXPath("//*[@class='dxrp dxrpcontent']//div[(@class='supden' or @class='suphod') and text() != 'Žádné změny']");
 
@@ -28,17 +28,17 @@ class SuplovaniModule extends \Skolar\Modules\BaseModule {
         $year[1] = "20" . $year[1];
 
         $suplovani = array("suplovani" => array());
-        $last = "";
+
+        $last = array();
 
         foreach ($data as $item) {
             $text = $item->nodeValue;
 
             if ($item->getAttribute("class") == "supden") {
-                $text .= (explode(".", $text)[1] >= 9) ? $year[0] : $year[1];
-                $text = strtotime(mb_substr($text, 2, mb_strlen($text), 'UTF-8'));
+                $text = BakalariToolkit::getDate($text);
 
                 if (empty($last) || $last["date"] != $text) {
-                    if ($last != null) {
+                    if(!empty($last)) {
                         $suplovani["suplovani"][] = $last;
                     }
 
@@ -59,7 +59,7 @@ class SuplovaniModule extends \Skolar\Modules\BaseModule {
             $item = array_combine(["label", "value"], $item);
         });
         
-        return $this->response->setResult($suplovani);
+        return $this->getResponse()->setResult($suplovani);
     }
 
 }

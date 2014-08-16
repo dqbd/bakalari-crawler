@@ -16,7 +16,7 @@ class VysvedceniModule extends \Skolar\Modules\BaseModule {
 
     public function parse($content = null) {
 
-        $rows = $request->getDom()->filterXPath("//*[@class='dxrp dxrpcontent']//tr");
+        $rows = $content->getDom()->filterXPath("//*[@class='dxrp dxrpcontent']//tr");
         $data = array('vysvedceni' => array());
 
         $data['rocniky'] = $rows->eq(0)->filterXPath("./*/td[@class='polonadpis2']")->extract("_text");
@@ -48,7 +48,7 @@ class VysvedceniModule extends \Skolar\Modules\BaseModule {
             }
         }
 
-        return $this->response->setResult($data);
+        return $this->getResponse()->setResult($data);
     }
 
 }

@@ -12,17 +12,17 @@ class VyukaModule extends \Skolar\Modules\BaseModule {
         
         $this->parameters->url = BakalariToolkit::assignUrl("Přehled výuky", $context["navigace"]);
 
-        if(!empty($this->getRequestParam("view")) || !empty($this->getRequestParam("page"))) {
+        if($this->getRequestParam("subject") || $this->getRequestParam("page")) {
             $params = array("optional" => array(), "required" => array());
 
-            if(!empty($this->getRequestParam("view"))) {
-                $params["optional"] = array('ctl00$cphmain$droppredmety' => $this->getRequestParam("view"));
+            if($this->getRequestParam("subject")) {
+                $params["optional"] = array('ctl00$cphmain$droppredmety' => $this->getRequestParam("subject"));
             }
 
-            if(!empty($this->getRequestParam("page"))) {
+            if($this->getRequestParam("page") && $this->getRequestParam("page") >= 1) {
                 $params["required"] = array(
                     '__CALLBACKID' => 'ctl00$cphmain$roundvyuka$repetk',
-                    '__CALLBACKPARAM' => 'c0:KV|2;[];GB|20;12|PAGERONCLICK3|PN' . $this->getRequestParam("page") . ';'
+                    '__CALLBACKPARAM' => 'c0:KV|2;[];GB|20;12|PAGERONCLICK3|PN' . ($this->getRequestParam("page") - 1) . ';'
                 ); 
             }
 
@@ -32,25 +32,22 @@ class VyukaModule extends \Skolar\Modules\BaseModule {
         }
     }
 
-    /**
-     * 
-     * @param \Symfony\Component\DomCrawler\Crawler $request
-     * @return \Skolar\Response
-     */
     public function parse($content = null) {
         $dom = $content->getDom();
         
         $data = $dom->filterXPath("//table[@class='dxgvTable']//tr[@class='dxgvDataRow']");
         $vyuka = array("vyuka" => array());
 
-
         foreach ($data as $n => $row) {
             $cells = (new Crawler($row))->filterXPath("./*/td");
 
-            $lesson = array_filter(array_combine(array("date", "lesson", "topic", "detail", "number"), $cells->extract("_text")), function($item) {
+            $extracted = $cells->extract("_text");
+            $lesson = array_filter(array_combine(array("date", "lesson", "topic", "detail", "number"), $extracted), function($item) {
                 $item = trim($item);
                 return !empty($item);
             });
+
+            $lesson["date"] = BakalariToolkit::getDate($lesson["date"]);
             $lesson['lesson'] = str_replace(". hod", "", $lesson['lesson']);
 
             $vyuka['vyuka'][] = $lesson;
@@ -70,7 +67,7 @@ class VyukaModule extends \Skolar\Modules\BaseModule {
             });
         }
 
-        return $this->response->setResult($vyuka);
+        return $this->getResponse()->setResult($vyuka);
     }
 
 }

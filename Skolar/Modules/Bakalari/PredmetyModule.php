@@ -33,7 +33,7 @@ class PredmetyModule extends \Skolar\Modules\BaseModule {
             }
         }
 
-        return $this->response->setResult($lessons);
+        return $this->getResponse()->setResult($lessons);
     }
 
 }

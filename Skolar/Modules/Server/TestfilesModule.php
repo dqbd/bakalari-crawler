@@ -7,7 +7,9 @@ class TestfilesModule extends \Skolar\Modules\BaseModule {
 		if($this->getRequestParam("system") == "bakalari") {
 			$files = array_values(array_diff(scandir(SKOLAR_TESTFILES_DIR . "/bakalari"), array(".", "..")));
 			return $this->getResponse()->setResult(array("testfiles" => $files));
-		}
+		} 
+		
+		return $this->getResponse()->setError("Invalid system");
 	}
 
 }

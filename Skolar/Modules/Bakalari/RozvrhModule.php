@@ -1,4 +1,5 @@
 <?php
+
 namespace Skolar\Modules\Bakalari;
 
 use \Symfony\Component\DomCrawler\Crawler;
@@ -11,7 +12,7 @@ class RozvrhModule extends \Skolar\Modules\BaseModule {
 
         $this->parameters->url = BakalariToolkit::assignUrl("Rozvrh", $context["navigace"]);
 
-        if(!empty($this->getRequestParam("view"))) {
+        if($this->getRequestParam("view")) {
            $this->parameters->formparams = BakalariToolkit::getFormParams($context, array('ctl00$cphmain$radiorozvrh' => $this->getRequestParam("view")));
         } else {
            $this->parameters->formparams = array();
@@ -34,7 +35,7 @@ class RozvrhModule extends \Skolar\Modules\BaseModule {
             $item = array_combine(["label", "value"], $item);
         });
         
-        return $this->response->setResult($rozvrh);
+        return $this->getResponse()->setResult($rozvrh);
     }
     
 

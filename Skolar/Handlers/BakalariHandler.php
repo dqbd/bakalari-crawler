@@ -25,6 +25,15 @@ class BakalariHandler implements \Skolar\Handlers\BaseHandler {
 
 		$this->initBrowser();
 
+		//check if local
+		if($this->params->get("file")) {
+			return $this->module->parse(
+				$this->browser->loadSingle(
+					$this->params->get("file")
+				)
+			);
+		}
+
 		$module_requests = $input = ($this->module->getName() == "batch") ? $this->module->postParse($this->params) : $this->module;
 
 		//detect dupes in $module_request
@@ -137,7 +146,7 @@ class BakalariHandler implements \Skolar\Handlers\BaseHandler {
 					if(($url_key = array_search($module->getUrl(), $urls)) !== false) {
 					    unset($urls[$url_key]);
 					}
-				} else if (!empty($module->getFormParams()) && $this->dataflow["pass"]+1 < $this->max_passes) {
+				} else if ($module->getFormParams() && $this->dataflow["pass"]+1 < $this->max_passes) {
 					$params[$module->getUrl()] = $module->getFormParams();
 				} else {
 					$results[$module->getName()] = (new \Skolar\Response())->setError("Parser failed to parse");
@@ -156,14 +165,15 @@ class BakalariHandler implements \Skolar\Handlers\BaseHandler {
 	}
 
 	public function initBrowser() {
-		if(empty($this->params["file"])) {
+		if(!$this->params->get("file")) {
 			$url = \Skolar\Utils::getBaseUrl($this->params->get('url'));
 			$user = $this->params->get('user');
 			$pass = $this->params->get('pass');
 
 			$cachepath = $this->getCookieCachePath($user, $pass, $url);
 		} else {
-			$cachepath = true;
+			$url = "";
+			$cachepath = false;
 		}
 
 		$this->browser = new \Skolar\Browser($url, $cachepath);

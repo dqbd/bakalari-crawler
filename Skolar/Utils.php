@@ -42,24 +42,6 @@ class Utils {
     }
 
     /**
-     * Opraví datum o rok
-     * 
-     * @param string $input
-     * @return string
-     */
-    public static function getFullDate($input) {
-        $lowyear = date("n") >= 9 ? date("Y") : date("Y") - 1;
-
-        preg_match("/([0-3]?[0-9])\.\s*([0-1]?[0-9])\./", $input, $parsed);
-
-        if (count($parsed) == 3) {
-            $input = $parsed[0] . (($parsed[2] >= 9) ? $lowyear : $lowyear + 1);
-        }
-
-        return $input;
-    }
-
-    /**
      * Opravit odkaz, naformátovat ho správně
      * 
      * @param type $input

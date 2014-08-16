@@ -10,8 +10,7 @@ class CacheStorage extends \GuzzleHttp\Cookie\FileCookieJar {
     private $toDestroy = false;
 
     public function save($filename) {
-
-        if($this->toDestroy == false) {
+        if($this->toDestroy == false && $this->filename) {
             $json = array("cookies" => array(), "permanent" => $this->isPermanentLogin());
 
             foreach ($this as $cookie) {

@@ -1,4 +1,5 @@
 <?php
+
 namespace Skolar\Modules\Bakalari;
 
 class BatchModule extends \Skolar\Modules\BaseModule {
@@ -27,8 +28,6 @@ class BatchModule extends \Skolar\Modules\BaseModule {
 	}
 
 	public function parse($content = null) { return null; }
-
-
 }
 
 ?>

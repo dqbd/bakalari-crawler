@@ -14,37 +14,20 @@ class UkolyModule extends \Skolar\Modules\BaseModule {
     }
 
     public function parse($content = null) {
-        
-        $dom = $content->getDom();
-
-
-        $data = $dom->filterXPath("//*[@class='ukoltab']//tr");
+        $data = $content->getDom()->filterXPath("//*[@class='ukoltab']//tr");
 
         $ukoly = array("ukoly" => array());
-
-        $year = explode("/", substr(trim($dom->filterXPath("//*[@class='pololetinadpis']")->text()), -7));
-        $year[1] = "20" . $year[1];
-       
-
         foreach ($data as $row) {
             $row = new Crawler($row);
 
-            $date = $row->filterXPath("//*[@class='ukoldatdo']")->text();
-            $date = explode(".", substr($date, 0, strlen($date) - 1)); //extrakce data z formátu dd.mm
-
-            $date[] = ($date[1] >= 9) ? $year[0] : $year[1]; //zjišťujeme rok
-
-            $date = strtotime(implode(".", $date)); //skládáme zpět a konvertujeme na unix
-
-            $subject = trim($row->filterXPath("//*[@class='ukoldatod']")->text());
-            $detail = trim($row->filterXPath("//td")->last()->text());
-
-            $ukoly["ukoly"][] = array("date" => $date, "subject" => $subject, "detail" => $detail);
+            $ukoly["ukoly"][] = array(
+                "date" => BakalariToolkit::getDate($row->filterXPath("//*[@class='ukoldatdo']")->text()), 
+                "subject" => trim($row->filterXPath("//*[@class='ukoldatod']")->text()), 
+                "detail" => trim($row->filterXPath("//td")->last()->text())
+            );
         }
 
-
-
-        return $this->response->setResult($ukoly);
+        return $this->getResponse()->setResult($ukoly);
     }
 
 }

@@ -72,17 +72,15 @@ class LoginModule extends \Skolar\Modules\BaseModule {
                 "long" => $error_dom->attr("title")
             ) : null;
 
-            $this->response->setError('Failed to login', $error);
+            return $this->getResponse()->setError('Failed to login', $error);
         } else {
             $result = array();
 
             $result['name'] = $name;
             $result['type'] = $content->filterXPath("//table[@class='logtable']//tr[1]/td[2]")->text();
 
-            $this->response->setResult(array("login" => $result));
+            return $this->getResponse()->setResult(array("login" => $result));
         }
-
-        return $this->response;
     }
 
     public function postParse($content = null) {

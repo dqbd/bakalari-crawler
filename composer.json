@@ -1,8 +1,4 @@
 {
-    "repositories": [{
-        "type": "vcs",
-        "url": "https://github.com/Delold/DomCrawler"
-    }],
     "require": {
         "dg/dibi": "dev-master",
         "guzzlehttp/guzzle": "4.*",
