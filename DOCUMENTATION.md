@@ -651,11 +651,15 @@ Jelikož nejsme si moc jistí, jak bude tabulka vypadat, nemám moc dat, proto j
 ## Batch request [/batch]
 Některé požadavky mohou trvat až desítky sekund, které se mohou hromadit když jsou prováděny seriárně. Pokud je třeba několik požadavků smrsknout do jednoho, můžeme použít batch request.
 
-Ne vždy je však batch request ta správná volba, jelikož ten požadavek je časově omezen (viz nahoře), proto pokud je to možné, je dobré spíše provádět několik požadavku *pararelně*. 
+Ne vždy je však batch request ta správná volba, jelikož ten požadavek je časově omezen (viz nahoře). Nejlepší volbou je sledovat čas požadavku a následně se rozhodnout, zda to vše hodit do jednoho batch požadavku, nebo spustit několik požadavků pararelně. Pokud ale nemáme čaš, upřímně stačí batch požadavek. 
+
+Doba požadavku je rovna: dobu požadavku loginu + nejdelší doba stahování z požadovaného požadavku. 
 
 Požadované požadavky (ha) se definují POST parametrem `requests`, oddělené čárkou. 
 
-Jednotlivé parametry se odesílají pomocí POST požadavku s prefixem `requestparam-{stránka}-{název parametru}`, viz příklad. Pokud `{název parametru}` není definován, automaticky se deklaruje jako `view`. 
+Jednotlivé parametry se odesílají pomocí POST požadavku s prefixem `requestparam-{stránka}-{název parametru}`, viz příklad.
+
+`file` parametry nejsou podporované a budou ignorovány, protože jsem líný a nevidím důvod. Možná někdy jindy?
 
 ### Provést batch požadavek [POST]
 
