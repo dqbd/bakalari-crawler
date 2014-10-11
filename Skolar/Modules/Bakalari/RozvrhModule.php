@@ -73,7 +73,7 @@ class RozvrhModule extends \Skolar\Modules\BaseModule {
                         $day['day']['label'] = $content->eq(0)->text();
 
                         if (count($content) > 1) {
-                            $day['day']['time'] = $content->eq(1)->text();
+                            $day['day']['time'] = BakalariToolkit::getDate($content->eq(1)->text());
                         }
                     } else {
 
@@ -202,7 +202,7 @@ class RozvrhModule extends \Skolar\Modules\BaseModule {
                         $current['day']['label'] = $cell->filterXPath("//text()")->text();
 
                         if (count($detail) == 1) {
-                            $current['day']['time'] = $detail->text();
+                            $current['day']['time'] = BakalariToolkit::getDate($detail->text());
                         }
                     } else {
 

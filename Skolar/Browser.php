@@ -7,11 +7,11 @@ class Browser {
 
 	protected $results;
 
-	public function __construct($baseurl = "", $cookiepath = null) {
-		$this->cache = ($cookiepath === null) ? $cookiepath : new \Skolar\Browser\CacheStorage($cookiepath);
+	public function __construct($baseurl = "", $cookiepath = true) {
+		$this->cache = is_string($cookiepath) ? new \Skolar\Browser\CacheStorage($cookiepath) : $cookiepath;
 
 		$this->client = new \GuzzleHttp\Client(array(
-			"base_url" => (!empty($baseurl)) ? Utils::getBaseUrl($baseurl) : "",
+			"base_url" => (!empty($baseurl)) ? $this->parseBaseUrl($baseurl) : "",
 			"defaults" => array(
 				"cookies" => $this->cache,
 				"headers" => Configuration::get("browser_headers")
@@ -94,6 +94,34 @@ class Browser {
 		}
 
 		return false;
+	}
+
+	private function parseBaseUrl($input) {
+	    $url = parse_url($input);
+
+	    if (empty($url["host"])) {
+	        throw new \InvalidArgumentException("Neplatný odkaz");
+	    }
+
+	    unset($url['query'], $url['fragment']);
+
+	    if (empty($url['scheme'])) {
+	        $url['scheme'] = "http";
+	    }
+
+	    if(!empty($url['path'])) {
+	        if (strpos($url["path"], ".") !== false) {
+	            $exploded = explode("/", $url["path"]);
+	            array_pop($exploded);
+	            $url['path'] = implode("/", $exploded);
+	        }
+
+	        $url['path'] .= "/";
+	    } else {
+	        $url['path'] = "/";
+	    }
+
+	    return \http_build_url($url);
 	}
 
 

@@ -4,22 +4,21 @@ namespace Skolar;
 
 class Dispatcher {    
 
-    protected static $klein = null;
+    public function __construct($config) {
+        $this->init($config);
+    }
 
     /**
     * Zahájí a vytvoří jednotlivé stránky + error logging
     *
     * @param string[] $config Configurační json soubor
     **/
-
-    public static function init($config) {
-
+    public function init($config) {
         register_shutdown_function(function() {
             if (connection_status() == 2) {
                 echo json_encode((new \Skolar\Response())->setError("Timeout"));
             }
         });
-
 
         Configuration::setConfig($config);
 
@@ -27,29 +26,34 @@ class Dispatcher {
 
         \dibi::connect(Configuration::get("database"));
 
-        self::$klein = new \Klein\Klein();
+        $this->createRoutes();
+    }
 
+    public function createRoutes() {
+        $klein = new \Klein\Klein();
+
+        $systemurl = $this->getSystemUrl();
+        
         foreach (Configuration::get("handlers") as $handler => $desc) {
             foreach($desc["modules"] as $module) {
-
                 $module["uri"] = (!empty($module["uri"])) ? $module["uri"] : "";
 
-                $url = sprintf('%s/[%s:action]/?%s', dirname($_SERVER["REQUEST_URI"]), $module["name"], $module["uri"]);
+                $url = sprintf('/%s/[%s:action]/?%s', $systemurl, $module["name"], $module["uri"]);
 
-                self::$klein->respond($url, function($request, $response) {
-                    $response->json(self::output($request));
+                $klein->respond($url, function($request, $response) {
+                    $response->json($this->output($request));
                 });
             }
         }
 
-        self::$klein->onError(function($router, $msg, $type, $exception) {
+        $klein->onError(function($router, $msg, $type, $exception) {
             $answer = new \Skolar\Response();
             $answer->setError("Server error", $exception->getMessage());
             $router->response()->json($answer);
             die();
         });
 
-        self::$klein->onHttpError(function($code, $router) {
+        $klein->onHttpError(function($code, $router) {
             $answer = new \Skolar\Response();
 
             if($code == 404) {
@@ -61,7 +65,7 @@ class Dispatcher {
             $router->response()->json($answer->setResult($code));
         });
 
-        self::$klein->dispatch();
+        $klein->dispatch();
 
     }
 
@@ -71,11 +75,11 @@ class Dispatcher {
     * @param string[] $request
     **/
 
-    private static function output($request) {
+    private function output($request) {
         foreach(Configuration::get("handlers") as $handler => $desc) {
             if(($id = array_search($request->action, array_column($desc["modules"], "name"))) !== false) {
 
-                $post_params = self::getParameters($request->body());
+                $post_params = $this->getParameters($request->body());
 
                 //check if all POST parameters are met
                 if(!empty($desc["required"]) || !empty($desc["modules"][$id]["required"])) {
@@ -113,14 +117,21 @@ class Dispatcher {
 
                 $handler = self::createHandler($handler, $request->action, $parameters);
 
-                return self::handleOutput($handler->output());
+                return $this->handleOutput($handler->output());
             }
         }
 
         throw new \Exception("Failed configuration");
     }
 
-    private static function handleOutput($output) {
+    public function getSystemUrl() {
+        return implode("/", array_intersect(
+            array_filter(explode("/", $_SERVER["SCRIPT_FILENAME"])), 
+            array_filter(explode("/", $_SERVER["REQUEST_URI"]))
+        ));
+    }
+
+    private function handleOutput($output) {
         if(is_array($output)) {
             if(count($output) == 1) {
                 return reset($output);
@@ -143,7 +154,7 @@ class Dispatcher {
         return $output;
     }
 
-    private static function getParameters($content) {
+    private function getParameters($content) {
         if(SKOLAR_LOCAL == true && !empty($_GET)) {
             return array_merge($_GET, $_POST);
         }

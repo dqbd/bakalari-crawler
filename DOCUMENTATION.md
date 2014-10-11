@@ -46,6 +46,33 @@ Vypíše všechny školy, které jsou v obdélníku vymezeném dvěma souřadnic
             }
         }
 
+## Najít školu [/findschool/{query}/{limit}]
+Vyhledá školu v databázi dle názvu školy či dle adresy. 
+
++ Parameters
+    + query (string) ... dotaz pro vyhledání
+    + limit = `60` (numeric, optional) ... Počet škol, maximálně 60
+
+### Najít školu v databázi [GET]
+
++ Response 200 (application/json) 
+
+        {
+            "status": "ok",
+            "data": {
+                "findschool": [
+                    {
+                        "id": 626,
+                        "name": "Obchodní akademie, Ostrava-Poruba, příspěvková organizace",
+                        "url": "https://85.135.105.187/",
+                        "address": "Polská 1543/6, 708 00 Ostrava-Poruba, Česká republika",
+                        "latitude": 49.821716,
+                        "longitude": 18.192359,
+                        "relevancy": "4.39212547238848331"
+                    }
+                ]
+            }
+        }
 
 ## Testovací soubory [/testfiles/{system}]
 Vypíše testovací soubory, které mohou být dosazeny místo přihlašovacích údajů.
@@ -204,14 +231,14 @@ Známky mohou být buď určeny jako číslo nebo jako množství dosažených b
                         {
                             "mark": "1",
                             "caption": "Titulek známky",
-                            "date": "18.2.14",
+                            "date": 1408792273,
                             "note": "Poznámka učitele",
                             "weight": "1"
                         },
                         {
                             "mark": "5",
                             "caption": "Čtvrtletní práce",
-                            "date": "21.3.14",
+                            "date": 1408792273,
                             "note": "Proletěl jsi!",
                             "weight": "3"
                         }
@@ -223,7 +250,7 @@ Známky mohou být buď určeny jako číslo nebo jako množství dosažených b
                                 "max": "10"
                             },
                             "caption": "Bodový způsob znákování",
-                            "date": "13.3.14",
+                            "date": 1408792273,
                             "note": "Je to divné, ale existují takové případy",
                             "weight": "1"
                         }
@@ -286,7 +313,7 @@ U volných hodin a u akcí jsou hodiny sdružené do jednoho políčka, které j
 + Parameters
     + view (string, optional) ... Další možné zobrazení, viz. nahoře.
 
-### Zobrazit rozvrh [GET]
+### Zobrazit rozvrh [POST]
 
 + Request (application/json)
 
@@ -445,7 +472,7 @@ Události a aktivity uživatele
 + Parameters
     + view (string, optional) ... Další možné zobrazení, viz. nahoře.
 
-### Vypsat akce [GET]
+### Vypsat akce [POST]
 
 + Request (application/json)
 

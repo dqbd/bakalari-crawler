@@ -20,9 +20,9 @@
 	- Vyuka -> subject, page
 - Nastavit timeout na 90 sekund
 - Opravit datum u rozvrhu - timestamp!
+- Publikovat opravené změny na production
 
 ## Není hotovo
-- Publikovat opravené změny na production
 - Udělej kód testovatelný
 	- Zbav se statických metod a užívej vždy instantizaci
 		- Configuration

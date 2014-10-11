@@ -26,7 +26,7 @@ class AkceModule extends \Skolar\Modules\BaseModule {
         $types = array(
             "pro učitele:" => 'teacher',
             "pro třídy:" => 'class',
-            "čas:" => 'time',
+            "čas:" => 'datetime',
             'místo:' => 'place',
             "popis:" => 'detail'
         );
@@ -51,7 +51,7 @@ class AkceModule extends \Skolar\Modules\BaseModule {
                     $type = $types[$type];
                     $value = trim($div->eq(1)->text());
 
-                    if ($type == "time") {
+                    if ($type == "datetime") {
                         list($date, $time) = array_pad(array_slice(explode(" ", $value, 3), 1), 2, null); //rozkládáme na array, dále vyberem bez dnu a pokud chybí, dodáme null
 
                         $value = array(

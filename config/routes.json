@@ -23,6 +23,7 @@
         "server": {
             "modules": [
                 { "name": "schoollist", "uri": "[:northeast]/[:southwest]/?[i:limit]?" },
+                { "name": "findschool", "uri": "[:query]/?[i:limit]?" },
                 { "name": "msg" },
                 { "name": "testfiles", "uri": "[bakalari:system]/?" }
             ]

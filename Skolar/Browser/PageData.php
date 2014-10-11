@@ -80,6 +80,10 @@ class PageData implements \JsonSerializable {
 	}
 
 	protected function fixUrls() {
+		if(empty($this->url["base"])) {
+			return;
+		}
+
 		if(!empty($this->url["base"]) && strpos($this->url["begin"], $this->url["base"]) !== false) {
 			$this->url["begin"] = str_replace($this->url["base"], "", $this->url["begin"]);
 		}

@@ -22,7 +22,6 @@ class BakalariHandler implements \Skolar\Handlers\BaseHandler {
 	}
 
 	public function output() {
-
 		$this->initBrowser();
 
 		//check if local
@@ -81,6 +80,9 @@ class BakalariHandler implements \Skolar\Handlers\BaseHandler {
 
 			if( $this->baseflow["login"]->postParse($login_status) === false || 
 				$this->baseflow["navigace"]->preParse($data) === false) {
+
+				$this->browser->getCache()->removeCache();
+
 				return $login_status;
 			} else {
 				$results["login"] = $login_status;
@@ -171,12 +173,11 @@ class BakalariHandler implements \Skolar\Handlers\BaseHandler {
 			$pass = $this->params->get('pass');
 
 			$cachepath = $this->getCookieCachePath($user, $pass, $url);
-		} else {
-			$url = "";
-			$cachepath = false;
-		}
 
-		$this->browser = new \Skolar\Browser($url, $cachepath);
+			$this->browser = new \Skolar\Browser($url, $cachepath);
+		} else {
+			$this->browser = new \Skolar\Browser();
+		}
 	}
 
 	/**
