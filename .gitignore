@@ -1,6 +1,8 @@
 **/vendor
 **/composer.lock
 
+config/config.php
+
 /dashboard
 /cache
 /nbproject
