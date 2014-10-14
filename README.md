@@ -9,3 +9,9 @@ Vyžadováno je `PHP 5.3`.
 
 #API dokumentace
 http://docs.skolar.apiary.io/
+
+#TODO
+- Přidat nový protokol z Mobilních Bakaláří 
+- Implementovat IS SAS
+- Instalační skript
+- Začít psát nějaké ty testy
